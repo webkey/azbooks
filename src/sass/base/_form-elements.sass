@@ -115,6 +115,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
 	@if $form-letter-spacing
 		letter-spacing: $form-letter-spacing
 	background: $form-bg-color
+	border-radius: 5px
 	box-shadow: none
 	border: #{$form-border-width} solid #{$form-border-color}
 	cursor: pointer
@@ -123,7 +124,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
 		margin: 0 0 $form-bottom-space
 
 	@at-root .select2-container--default .select2-selection .select2-selection__rendered, .#{$user-content} select, .select, &
-		+font-alt
+		+font-medium
 		+font($form-font-size, $form-line-height)
 		color: $form-text-color
 

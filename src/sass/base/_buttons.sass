@@ -23,55 +23,42 @@
 /* btn-default
 [class*="btn-default"]
 	position: relative
-	+font-bold
-	text-transform: uppercase
-	color: $btn-text-color
-	padding: 14px 38px
+	padding: 9px 78px 7px
 	border: 2px solid transparent
-	background: $btn-bg-color
-	box-shadow: none
+	border-radius: 10px
 	margin: 0
+	min-width: 210px
+	+font-alt
+	color: $text-color
+	text-transform: uppercase
+	background: $base-color-alt
+	box-shadow: 0 2px 3px rgba(black, 0.22)
 
 	&, & > span
-		+font(14px, 18px)
-		letter-spacing: 0.2em
+		+font(16px, 20px)
+		letter-spacing: normal
 
 	// hover
 	.no-touchevents &:hover
-		background-color: $btn-bg-hover-color
+		border-color: darken($base-color-alt, 8%)
 
 	// disabled
 	&:disabled, &.disabled, &[data-disabled]
 		cursor: default
 		background-color: $btn-disabled-color !important
-
-		&::before, &::after
-			display: none
+		border-color: transparent !important
+		box-shadow: none !important
+		color: #bfbfbf !important
 
 /* btn-default end
 
 /* btn-default-alt
 .btn-default-alt
-	color: $btn-bg-color
-	border: 2px solid $btn-bg-color
-	background: $btn-text-color
+	color: white
+	background-color: $base-color
 
 	.no-touchevents &:hover
-		background: $btn-bg-color
-		color: $btn-text-color
-
-	&:disabled, &.disabled, &[data-disabled]
-		cursor: default
-		background-color: white !important
-		border-color: $btn-disabled-color !important
-		color: $btn-disabled-color !important
-
-		&::before, &::after
-			display: none
-
-		& > i
-			&::before, &::after
-				border-color: $btn-disabled-color !important
+		border-color: darken($base-color, 8%)
 
 /* btn-default-alt end
 
@@ -102,7 +89,7 @@
 
 /* btn-with-arrow
 .btn-with-arrow
-	$arrow-width: 26px
+	$arrow-width: 18px
 	$arrow-space: 10px
 
 	& > i, & > span
@@ -117,11 +104,11 @@
 		&::before, &::after
 			+pseudo()
 			+position(50%)
-			border: 0 solid $btn-text-color
+			border: 0 solid currentColor
 			transform: none
 
 		&::before
-			+size(26px, 2px)
+			+size($arrow-width, 2px)
 			border-top-width: 2px
 			margin: -1px 0 0 round(-$arrow-width/2)
 
@@ -142,23 +129,10 @@
 			margin-left: $arrow-space
 
 			&::after
+				left: auto
+				right: 0
 				border-width: 0 2px 2px 0
 				margin: 3px 0 0 1px
-
-	// alt button
-	&.btn-default-alt
-
-		& > i
-			&::before, &::after
-				border-color: $btn-bg-color
-
-	// hover
-	.no-touchevents &.btn-default-alt:hover
-
-		& > i
-
-			&::before, &::after
-				border-color: $btn-text-color
 
 /* btn-with-arrow end
 

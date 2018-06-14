@@ -1,23 +1,23 @@
 <header class="header">
-	<div class="max-wrap layout">
-		<div class="header__holder">
-			<!--logo-->
-			<strong class="logo">
-				<@@if(currentItem == "Главная"){span}@@if(currentItem != "Главная"){a href="index.html" title="Project Name"}>Project Name</@@if(currentItem == "Главная"){span}@@if(currentItem != "Главная"){a}>
-				<img style="display: none;" src="img/logo.png" alt="Project Name">
-			</strong>
-			<!--logo end-->
-
-			<!--navigation-->
-			<div class="nav-wrap">
-				<nav class="nav">
-					@@include('_tpl_nav-constructor.html', {
-						"currentItem": "@@currentItem",
-						"bsKey": "nav"
-					})
-				</nav>
-			</div>
-		<!--navigation end-->
+	<div class="max-wrap layout header__holder">
+		<!--logo-->
+		<div class="logo">
+			@@if(!context.logoNoLink){<a href="index.html">}
+			@@if(context.logoNoLink){<span>}
+			<em>Azbooks</em>
+			@@if(context.logoNoLink){</span>}
+			@@if(!context.logoNoLink){</a>}
+			<img style="display: none;" class="logo-print" src="img/logo.png" alt="Azbooks">
 		</div>
+		<!--logo end-->
 	</div>
 </header>
+
+<nav class="nav">
+	<div class="nav__layout max-wrap layout">
+		@@include('_tpl_nav-constructor.html', {
+			"currentItem": "@@currentItem",
+			"bsKey": "nav"
+		})
+	</div>
+</nav>

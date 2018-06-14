@@ -14,6 +14,21 @@ $(window).resize(function () {
 });
 
 /**
+ * !debouncedresize only width
+ * */
+var debouncedresizeByWidth = true;
+
+var debouncedPrevWidth = -1;
+$(window).on('debouncedresize', function () {
+	var currentWidth = $('body').outerWidth();
+	debouncedresizeByWidth = debouncedPrevWidth !== currentWidth;
+	if (resizeByWidth) {
+		$(window).trigger('debouncedresizeByWidth');
+		debouncedPrevWidth = currentWidth;
+	}
+});
+
+/**
  * !device detected
  * */
 var DESKTOP = device.desktop();
@@ -128,54 +143,6 @@ function inputHasValueClass() {
 	}
 }
 
-function inputFilledClass() {
-	// use if the "focus" state and the "has-value" state are the same
-	var $fieldWrap = $('.field-effects-js');
-
-	if ($fieldWrap.length) {
-		var $inputsAll = $fieldWrap.find('input[type="email"], input[type="search"], :text, textarea, select');
-		var _classFilled = 'input--filled';
-
-		$inputsAll.focus(function () {
-			var $thisField = $(this);
-
-			$thisField
-				.closest($fieldWrap)
-				.addClass(_classFilled);
-
-		}).blur(function () {
-			var $thisField = $(this);
-
-			if ($thisField.val() === '') {
-				$thisField
-					.closest($fieldWrap)
-					.removeClass(_classFilled);
-			}
-		});
-
-		function switchHasValue() {
-			var $currentField = $(this);
-			var $currentFieldWrap = $currentField.closest($fieldWrap);
-
-			$currentFieldWrap.removeClass(_classFilled);
-
-			//first element of the select must have a value empty ("")
-			if ($currentField.val() !== '') {
-				$currentFieldWrap.addClass(_classFilled);
-			}
-		}
-
-		$.each($inputsAll, function () {
-			switchHasValue.call(this);
-		});
-
-		$inputsAll.on('change', function () {
-			switchHasValue.call(this);
-		});
-	}
-}
-/*toggle class for input on focus end*/
-
 /**
  * !Initial custom select for cross-browser styling
  * */
@@ -259,68 +226,11 @@ function fileInput() {
  * !Initial sliders on the project
  * */
 function slidersInit() {
-	//images carousel
-	var $imagesCarousel = $('.images-slider-js');
+	//slider
+	var $slider = $('.slider-js');
 
-	if($imagesCarousel.length){
-		var slideCounterTpl = '' +
-			'<div class="slider-counter">' +
-				'<span class="slide-curr">0</span>/<span class="slide-total">0</span>' +
-			'</div>';
-
-		var titleListTpl = $('<div class="flashes"></div>');
-
-		$imagesCarousel.each(function () {
-			var $curSlider = $(this);
-			var $imgList = $curSlider.find('.images-slider__list');
-			var $imgListItem = $imgList.find('.images-slider__item');
-			var dur = 200;
-
-			// create titles
-			$imgList.after(titleListTpl.clone());
-			var $titleList = $curSlider.find('.flashes');
-			$.each($imgListItem, function () {
-				var $this = $(this);
-				$titleList.append($('<div class="flashes__item">' + $this.find('.caption').html() + '</div>'));
-			});
-
-			// initialized slider of titles
-			$titleList.slick({
-				fade: true,
-				speed: dur,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				infinite: true,
-				asNavFor: $imgList,
-				dots: false,
-				arrows: false,
-
-				swipe: false,
-				touchMove: false,
-				draggable: false
-			});
-
-			// initialized slider of images
-			$imgList.on('init', function (event, slick) {
-				$(slick.$slider).append($(slideCounterTpl).clone());
-
-				$('.slide-total', $(slick.$slider)).text(slick.$slides.length);
-				$('.slide-curr', $(slick.$slider)).text(slick.currentSlide + 1);
-			}).slick({
-				fade: false,
-				speed: dur,
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				asNavFor: $titleList,
-				lazyLoad: 'ondemand',
-				infinite: true,
-				dots: true,
-				arrows: true
-			}).on('beforeChange', function (event, slick, currentSlide, nextSlider) {
-				$('.slide-curr', $(slick.$slider)).text(nextSlider + 1);
-			});
-
-		});
+	if($slider.length){
+		// {{slider}}
 	}
 }
 
@@ -328,7 +238,7 @@ function slidersInit() {
  * !Testing form validation (for example). Do not use on release!
  * */
 function formSuccessExample() {
-	var $form = $('.user-form form');
+	var $form = $('.user-form form, .subscription-form form');
 
 	if ( $form.length ) {
 
@@ -395,7 +305,6 @@ $(document).ready(function () {
 	printShow();
 	inputToggleFocusClass();
 	inputHasValueClass();
-	// inputFilledClass();
 	customSelect($('select.cselect'));
 	fileInput();
 	slidersInit();

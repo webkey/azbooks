@@ -62,27 +62,27 @@ $bottom-space--sm: round-float($font-size*$line-height*0.75, 1) !default
 
 // =======Цветовая схема========
 // цвет бренда
-$base-color: #ffa43f !default
-$base-color-alt: lightskyblue !default
+$base-color: #00abc5 !default
+$base-color-alt: #ffd400 !default
 // главные контрастные цвета (обычно, белый и черный)
 $text-color-base: black !default
 $bg-color-base: white !default
 // цвет фона страницы
-$bg-color: #e5e5e5 !default
+$bg-color: #e4e4e4 !default
 // цвет фона элементов выделяющихся на страницы
 $bg-color-alt: #f3f3f3 !default
 // цвет основного текста
-$text-color: #262626 !default
+$text-color: #333 !default
 // цвет основных заголовков
 $title-color: black !default
 // цвет текста светлее основного
 $text-color-light: gray !default
 // цвет ссылки
-$link-color: blue !default
+$link-color: #00abc5 !default
 // цвет линий и границ
-$border-color: lightgray !default
+$border-color: #ddd !default
 // цвет специальных элементов
-$mark-color: tomato !default
+$mark-color: #ff2301 !default
 
 // =======Класс текстовой страницы========
 // user content class
@@ -92,9 +92,11 @@ $user-content: user-content !default
 
 // =======Layout========
 // отступы для всего сайта
-$page-layout-space: 18px 20px !default // v h
+$page-layout-space: 18px 22px !default // v h
 // максимальная ширина сайта
-$page-layout-width: 1920px !default
+$page-layout-width: 1260px !default
+// минимальная ширина сайта
+$page-layout-min: 320px !default
 // минимальные отступы у текствого блока
 $text-layout-space: 50px 60px !default // v h
 $text-layout-space--md: 25px 30px !default // v h
@@ -111,30 +113,53 @@ $grid-space--sm: 8px 10px !default // v h
 // отступы в дефолтных списках
 $list-space: 30px
 
+// z-index
+$header-z: 15 !default
+$main-z: 10 !default
+$footer-z: 5 !default
+
 // sidebar
 $sidebar-width: 260px !default
 
 // aside
 $aside-width: 160px !default
 
+// header
+$header-height: 70px !default
+$header-height--sm: 50px !default
+$header-bg: #fff !default
+$header-shadow: 0 3px 6px rgba(black, 0.16) !default
+
+// logo
+$logo-size: 165px 50px !default
+
 // footer
 $footer-grid-space: 30px 0 !default // v h
 
+// social color
+$facebook-color: #3a589e !default
+$vkontakte-color: #4b73a4 !default
+$twitter-color: #1da0f2 !default
+$odnoklassniki-color: #f2822e !default
+$youtube-color: #e62117 !default
+$instagram-color-start: #de4f5a !default
+$instagram-color-end: #a43b97 !default
+
 // =======Form========
-$form-text-color: $text-color !default
-$form-placeholder-color: lightgray !default
-$form-bg-color: white !default
-$form-border-color: lightgray !default
+$form-text-color: #333 !default
+$form-placeholder-color: #333 !default
+$form-bg-color: #f3f3f3 !default
+$form-border-color: #ccc !default
 $form-border-focus-color: darken($form-border-color, 20%) !default
-$form-error-color: red !default
-$form-success-color: lightseagreen !default
+$form-error-color: #ef5350 !default
+$form-success-color: #ffd400 !default
 $form-bottom-space: 3rem !default
 $form-bottom-space--sm: 1.5em !default
 $form-gap: 40px !default
 // ========checkbox&radio==========
 $checkbox-color: blue
 // =========form font=========
-$form-font-size: 16px !default
+$form-font-size: 18px !default
 $form-line-height: 24px !default
 $form-input-height: 50px !default
 $form-letter-spacing: null !default
@@ -142,7 +167,7 @@ $form-letter-spacing: null !default
 $form-border-width: 2px !default
 $form-input-space-vt: floor(($form-input-height - $form-line-height - $form-border-width*2)/2) !default // верхний паддинг округляем в нижнюю сторону
 $form-input-space-vb: ceil(($form-input-height - $form-line-height - $form-border-width*2)/2) !default // нижний паддинг округляем в верхнюю сторону
-$form-input-space-h: 18px !default
+$form-input-space-h: 6px !default
 // =========select=========
 $select-space-v: 12px !default
 $select-space-h: $form-input-space-h !default
@@ -151,10 +176,7 @@ $select-arrow-height: 100% !default
 $multiple-item-space: 3px
 
 // =========Buttons=========
-$btn-bg-color: $base-color !default
-$btn-bg-hover-color: darken($btn-bg-color, 20%) !default
-$btn-text-color: white !default
-$btn-disabled-color: #ccc !default
+$btn-disabled-color: #ddd !default
 
 // =========Animation=========
 $animation-speed: 0.2s !default

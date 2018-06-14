@@ -2,27 +2,6 @@
 @import ../utils/mixins
 @import ../../libs/include-media/dist/include-media
 
-html
-	font-size: 62.5%
-
-	// блокировка скролла
-	&.css-scroll-fixed
-		+scroll-blocked()
-
-body
-	position: relative
-	+font-normal
-	+font($font-size, $line-height)
-	color: $text-color
-	height: 100%
-	min-width: 320px
-	background: $bg-color url(../../img/empty.png) no-repeat left top fixed
-
-	// выделение текста
-	*::selection
-		background-color: $base-color
-		color: white
-
 h1, h2, h3, h4, h5, h6
 	padding: 0
 	+font-alt-bold

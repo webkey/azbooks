@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 9]>      <html class="no-js old-ie" lang="ru"> <![endif]-->
-<!--[if IE 9]>         <html class="no-js ie9" lang="ru"> <![endif]-->
+<!--[if lt IE 9]>      <html class="no-js old-ie" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
-<html class="no-js" lang="ru">
+<html class="no-js" lang="en">
 <!--<![endif]-->
 
 <head>
@@ -11,7 +11,7 @@
 	<!--Mobile optimized-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
 	<!--Theme color-->
-	<meta name="theme-color" content="#fff">
+	<meta name="theme-color" content="#00abc5">
 	<!--SEO-->
 	<meta name="description" content="описание">
 	<meta name="keywords" content="ключевые слова">
@@ -160,8 +160,38 @@
 						<div class="content user-content">
 							<div class="layout-article">
 								<h1>Тестирование элементов форм</h1>
+								<div class="layout-text" style="background-color: #fff; padding: 20px;">
+									<!--===================================================-->
+									<h3><a href="#hash-fdInputFloatLabel" id="hash-fdInputFloatLabel" class="hashAnchor"><span class="mark">Float label</span></a></h3>
+									<form action="">
+										<!--===================================================-->
+										<div class="input-wrap type--float-label">
+											<div class="label-holder">
+												<label for="fll_01">Name*</label>
+											</div>
+											<div class="input-holder">
+												<input class="field-effects-js" type="text" id="fll_01" />
+												<div class="error-note">Required field</div>
+												<div class="success-note">Confirmed</div>
+											</div>
+										</div>
+										<!--===================================================-->
+										<div class="input-wrap type--float-label">
+											<div class="label-holder">
+												<label class="error" for="fll_02">E-mail*</label>
+											</div>
+											<div class="input-holder">
+												<input class="field-effects-js error" type="text" id="fll_02" />
+												<div class="error-note">Required field</div>
+												<div class="success-note">Confirmed</div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--===================================================-->
+								<!--===================================================-->
 								<!--===============form clear===============-->
-								<h3><a href="#hash-formElementClearExample" id="hash-formElementClearExample" class="hashAnchor"><span class="mark">Поля форм без оберток. Элементы идут один за другим. (рекомендуем)</span></a></h3>
+								<h3 class="hashTitle"><a href="#hash-formElementClearExample" id="hash-formElementClearExample" class="hashAnchor"><span class="mark">Поля форм без оберток. Элементы идут один за другим. (рекомендуем)</span></a></h3>
 								<style>
 									form.form-clear>div {
 										padding-top: 20px;
@@ -179,7 +209,7 @@
 								<form action="#" method="post" class="form-clear">
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcInputTypeText" id="hash-fcInputTypeText" class="hashAnchor"><span class="mark">input type=text</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcInputTypeText" id="hash-fcInputTypeText" class="hashAnchor"><span class="mark">input type=text</span></a></h4>
 											<label for="form-clear-base">Текстовое поле без js-классов:</label>
 											<input type="text" placeholder="Текстовое поле (placeholder)" id="form-clear-base" />
 											<div class="error-note">Required field</div>
@@ -210,7 +240,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcInputTypeOther" id="hash-fcInputTypeOther" class="hashAnchor"><span class="mark">input other type</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcInputTypeOther" id="hash-fcInputTypeOther" class="hashAnchor"><span class="mark">input other type</span></a></h4>
 											<div class="form-columnize--3">
 												<!--=======================email============================-->
 												<!--===================================================-->
@@ -298,7 +328,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcTextarea" id="hash-fcTextarea" class="hashAnchor"><span class="mark">textarea</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcTextarea" id="hash-fcTextarea" class="hashAnchor"><span class="mark">textarea</span></a></h4>
 											<label for="form-clear-ta-base">Текстареа без js-классов:</label>
 											<textarea placeholder="Текстареа (placeholder)" id="form-clear-ta-base"></textarea>
 											<div class="error-note">Required field</div>
@@ -329,7 +359,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcSelectDefault" id="hash-fcSelectDefault" class="hashAnchor"><span class="mark">select (default) (рекомендуем)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcSelectDefault" id="hash-fcSelectDefault" class="hashAnchor"><span class="mark">select (default) (рекомендуем)</span></a></h4>
 											<label for="form-clear-select-base">Селект - без js-классов:</label>
 											<select name="select-name" id="form-clear-select-base">
 				<!--Важно! У первого опшина value должен быть равен ""--><option value="">- Выбрать -</option>
@@ -410,7 +440,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcSelectArrDefault" id="hash-fcSelectArrDefault" class="hashAnchor"><span class="mark">select (default) с кастомной стрелкой</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcSelectArrDefault" id="hash-fcSelectArrDefault" class="hashAnchor"><span class="mark">select (default) с кастомной стрелкой</span></a></h4>
 											<div><code class="mark">select</code> необходимо завернуть в <code class="mark">div</code> с классом <code class="mark">.select</code></div>
 											<div>Элементы валидаци поместить в <code class="mark">.select</code> после тэга <code class="mark">select</code></div>
 											<div>Если элементы валидаци поместить после <code class="mark">.select</code>, то классы валидации необходимо добавлять и на <code class="mark">.select</code></div>
@@ -505,7 +535,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcSelectCustom" id="hash-fcSelectCustom" class="hashAnchor"><span class="mark">select (custom - select2)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcSelectCustom" id="hash-fcSelectCustom" class="hashAnchor"><span class="mark">select (custom - select2)</span></a></h4>
 											<div>На <code class="mark">select</code> добавляем класс <code class="mark">.cselect</code></div>
 											<div class="user-spacer"></div>
 											<label for="form-clear-c-select-base">Селект - без js-классов:</label>
@@ -588,7 +618,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcMultiselectCustom" id="hash-fcMultiselectCustom" class="hashAnchor"><span class="mark">multiselect (custom - select2)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcMultiselectCustom" id="hash-fcMultiselectCustom" class="hashAnchor"><span class="mark">multiselect (custom - select2)</span></a></h4>
 											<label for="form-clear-c-mSelect-base">Селект - без js-классов:</label>
 											<select class="cselect" data-placeholder="- Выберите несколько вариантов -" name="select-name" multiple id="form-clear-c-mSelect-base">
 				<!--Важно! У первого опшина value должен быть равен ""--><option value="">- Выбрать -</option>
@@ -668,7 +698,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcColumnizeCustom" id="hash-fcColumnizeCustom" class="hashAnchor"><span class="mark">в два столбца (ie10+) - N-тип</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcColumnizeCustom" id="hash-fcColumnizeCustom" class="hashAnchor"><span class="mark">в два столбца (ie10+) - N-тип</span></a></h4>
 											<div class="form-columnize">
 												<label for="form-clear-columnize-01" title="Текстовое поле">Текстовое поле:</label>
 												<input type="text" placeholder="Текстовое поле" id="form-clear-columnize-01" />
@@ -726,7 +756,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fcColumnsCustom" id="hash-fcColumnsCustom" class="hashAnchor"><span class="mark">в два столбца - Z-тип</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fcColumnsCustom" id="hash-fcColumnsCustom" class="hashAnchor"><span class="mark">в два столбца - Z-тип</span></a></h4>
 											<div class="form-row">
 												<div class="input-wrap">
 													<label for="form-clear-columns-01" title="Текстовое поле">Текстовое поле:</label>
@@ -801,7 +831,7 @@
 								<!--===============form clear end===============-->
 								<div class="user-spacer"></div>
 								<!--===============form default===============-->
-								<h3><a href="#hash-formElementExample" id="hash-formElementExample" class="hashAnchor"><span class="mark">Поля форм c обертками. (если необходимо)</span></a></h3>
+								<h3 class="hashTitle"><a href="#hash-formElementExample" id="hash-formElementExample" class="hashAnchor"><span class="mark">Поля форм c обертками. (если необходимо)</span></a></h3>
 								<style>
 									form.form-cover>div {
 										padding-top: 20px;
@@ -819,7 +849,7 @@
 								<form action="#" method="post" class="form-cover">
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdInputTypeText" id="hash-fdInputTypeText" class="hashAnchor"><span class="mark">input type=text</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdInputTypeText" id="hash-fdInputTypeText" class="hashAnchor"><span class="mark">input type=text</span></a></h4>
 											<div class="input-wrap">
 												<div class="label-holder">
 													<label for="form-cover-base">Текстовое поле без js-классов:</label>
@@ -880,7 +910,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdTextarea" id="hash-fdTextarea" class="hashAnchor"><span class="mark">textarea</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdTextarea" id="hash-fdTextarea" class="hashAnchor"><span class="mark">textarea</span></a></h4>
 											<div class="input-wrap">
 												<div class="label-holder"><label for="form-cover-ta-base">Текстареа без js-классов:</label></div>
 												<div class="input-holder">
@@ -939,7 +969,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdSelectDefault" id="hash-fdSelectDefault" class="hashAnchor"><span class="mark">select (default) (рекомендуем)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdSelectDefault" id="hash-fdSelectDefault" class="hashAnchor"><span class="mark">select (default) (рекомендуем)</span></a></h4>
 											<div class="input-wrap">
 												<div class="label-holder">
 													<label for="form-cover-select-base">Селект - без js-классов:</label>
@@ -1050,7 +1080,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdSelectArrDefault" id="hash-fdSelectArrDefault" class="hashAnchor"><span class="mark">select (default) с кастомной стрелкой</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdSelectArrDefault" id="hash-fdSelectArrDefault" class="hashAnchor"><span class="mark">select (default) с кастомной стрелкой</span></a></h4>
 											<div><code class="mark">select</code> необходимо завернуть в <code class="mark">div</code> с классом <code class="mark">.select</code></div>
 											<div>Элементы валидаци поместить в <code class="mark">.select</code> после тэга <code class="mark">select</code></div>
 											<div>Если элементы валидаци поместить после <code class="mark">.select</code>, то классы валидации необходимо добавлять и на <code class="mark">.select</code></div>
@@ -1175,7 +1205,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdSelectCustom" id="hash-fdSelectCustom" class="hashAnchor"><span class="mark">select (custom - select2)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdSelectCustom" id="hash-fdSelectCustom" class="hashAnchor"><span class="mark">select (custom - select2)</span></a></h4>
 											<div>На <code class="mark">select</code> добавляем класс <code class="mark">.cselect</code></div>
 											<div class="user-spacer"></div>
 											<div class="input-wrap">
@@ -1288,7 +1318,7 @@
 									<!--===================================================-->
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdMultiselectCustom" id="hash-fdMultiselectCustom" class="hashAnchor"><span class="mark">multiselect (custom - select2)</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdMultiselectCustom" id="hash-fdMultiselectCustom" class="hashAnchor"><span class="mark">multiselect (custom - select2)</span></a></h4>
 											<div class="input-wrap">
 												<div class="label-holder">
 													<label for="form-cover-c-mSelect-base">Селект - без js-классов:</label>
@@ -1396,7 +1426,7 @@
 									</div>
 									<div>
 										<div class="layout-text">
-											<h4><a href="#hash-fdColumnsCustom" id="hash-fdColumnsCustom" class="hashAnchor"><span class="mark">в два столбца - Z-тип</span></a></h4>
+											<h4 class="hashTitle"><a href="#hash-fdColumnsCustom" id="hash-fdColumnsCustom" class="hashAnchor"><span class="mark">в два столбца - Z-тип</span></a></h4>
 											<div class="form-row">
 												<div class="input-wrap">
 													<div class="label-holder">
@@ -1495,7 +1525,7 @@
 								<!--===============form default end===============-->
 								<div class="user-spacer"></div>
 								<!--===============checkbox and radio===============-->
-								<h3><a href="#hash-formCheckboxExample" id="hash-formCheckboxExample" class="hashAnchor"><span class="mark">Чекбоксы и Радиобаттоны</span></a></h3>
+								<h3 class="hashTitle"><a href="#hash-formCheckboxExample" id="hash-formCheckboxExample" class="hashAnchor"><span class="mark">Чекбоксы и Радиобаттоны</span></a></h3>
 								<div class="layout-text">
 									<form action="#" method="post">
 										<div class="form-row">
@@ -1617,7 +1647,7 @@
 								<!--===============checkbox and radio end===============-->
 								<div class="user-spacer"></div>
 								<!--===============user form===============-->
-								<h3><a href="#hash-userFormExample" id="hash-userFormExample" class="hashAnchor"><span class="mark">Форма обратной связи</span></a></h3>
+								<h3 class="hashTitle"><a href="#hash-userFormExample" id="hash-userFormExample" class="hashAnchor"><span class="mark">Форма обратной связи</span></a></h3>
 								<div class="user-form">
 									<div class="layout-text">
 										<div class="form-title">Задать вопрос</div>
@@ -1769,6 +1799,18 @@
 								}
 							</script>
 							<style>
+								/*h3.hashTitle a,*/
+
+								/*h4.hashTitle a{*/
+
+								/*padding-top: 100px;*/
+
+								/*margin-top: -100px;*/
+
+								/*z-index: -1;*/
+
+								/*}*/
+
 								.navigationByTypographyElements {
 									position: fixed;
 									right: 20px;
@@ -2027,23 +2069,25 @@
 					</nav>
 				</div>
 				<div class="footer-col">
-					<div class="subscription-form">
-						<form action="javascript:void(0)" method="post" class="layout-text">
+					<!--subscription form-->
+					<div class="subs-form">
+						<form action="javascript:void(0)" method="post">
 							<div class="input-wrap">
 								<div class="label-holder">
-									<label for="subscription-email">Sign up to our news</label>
+									<label for="subs">Sign up to our news</label>
 								</div>
 								<div class="form-fields">
 									<div class="input-holder">
-										<input id="subscription-email" type="email" placeholder="E-mail">
+										<input id="subs" type="email" placeholder="E-mail">
 										<button class="btn-default">SEND</button>
 									</div>
-									<div class="success-text"><span>&nbsp;</span></div>
-									<div class="error-text">Пожалуйста, ведите корректный email</div>
+									<div class="subs-success"><span>Signed</span></div>
+									<div class="subs-error">Invalid email</div>
 								</div>
 							</div>
 						</form>
 					</div>
+					<!--subscription form-->
 				</div>
 			</div>
 			<div class="footer-row">

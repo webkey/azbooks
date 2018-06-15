@@ -16,9 +16,8 @@
 	z-index: 1 // Важно! Отметка подтверждения полей формы имеет z-index: -1
 
 .label-holder, label
-	+font-normal
-	+font($font-size, $line-height)
-	color: $text-color-light
+	+font-medium
+	+font(1.6rem, 2.4rem)
 	margin-bottom: 7px
 
 label, .label
@@ -26,7 +25,10 @@ label, .label
 	user-select: none
 
 .label-holder
+	color: $text-color
+
 	label, .label
+		color: currentColor
 		margin-bottom: 0
 
 .form-mark
@@ -697,25 +699,23 @@ input[type="radio"]
 /* inputs states
 =form-success()
 	color: $form-success-color
-	border-color: $form-success-color
+	border-color: $form-success-color !important
 
 =form-error()
 	color: $form-error-color
-	border-color: $form-error-color
+	border-color: $form-error-color !important
 
 =form-has-value()
-	color: blueviolet
-	border-color: blueviolet
+	border-color: $form-border-hover-color
 
 =form-on-focus()
-	color: blue
-	border-color: blue
+	border-color: $form-border-focus-color
 
 input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea, .#{$user-content} select, .select
 
 	//form hover
 	&:hover
-		border-color: $form-border-focus-color
+		border-color: $form-border-hover-color
 
 	//form focus
 	&:focus
@@ -779,3 +779,60 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
 				color: $form-error-color
 
 /* inputs states end
+
+
+/* with float label
+// Плавающий label
+// Если полев в фокуси
+// или заполнено
+.type--float-label
+	.label-holder
+		+size(100%)
+		+font-bold
+		position: absolute
+		left: 0
+		bottom: 0
+		padding: 0
+		margin-bottom: 0
+		+antialiased
+		color: $text-color
+		pointer-events: none // важно! поднять выше лейбла
+		z-index: 5
+
+		label
+			display: block
+			+truncate(100%)
+			transform-origin: 0 0
+			padding: #{$form-input-space-vt + $form-border-width} #{$form-input-space-h} #{$form-input-space-vb + $form-border-width}
+			+size(100%, $form-input-height)
+			$prop: transform, color
+			will-change: $prop
+			transition:
+				property: $prop
+				duration: $animation-speed
+				timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+
+	.label-holder, label
+		+font-medium
+		+font($font-size, $form-line-height)
+		margin-bottom: 0
+
+	input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea
+		padding: #{$form-input-space-vt + 7} #{$form-input-space-h} #{$form-input-space-vb - 7}
+
+	// active
+	&.input--focus, &.input--has-value
+		input[type="text"], input[type="password"], input[type="email"], input[type="search"], textarea
+			cursor: text
+			box-shadow: none
+
+		label
+			$transform: 0.3em, -0.1em
+			$scale: 0.55
+			+font-normal
+			transform: translate($transform) scale($scale)
+			transform: translate3d($transform, 0) scale3d($scale, $scale, 1)
+			cursor: default
+
+
+/* with float label end

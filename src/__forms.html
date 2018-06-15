@@ -23,6 +23,36 @@
 
 						<h1>Тестирование элементов форм</h1>
 
+						<div class="layout-text" style="background-color: #fff; padding: 20px;">
+							<!--===================================================-->
+							<h3><a href="#hash-fdInputFloatLabel" id="hash-fdInputFloatLabel" class="hashAnchor"><span class="mark">Float label</span></a></h3>
+							<form action="">
+								<!--===================================================-->
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label for="fll_01">Name*</label>
+									</div>
+									<div class="input-holder">
+										<input class="field-effects-js" type="text" id="fll_01"/>
+										@@include('_tpl_forms_form-validation.html')
+									</div>
+								</div>
+								<!--===================================================-->
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label class="error" for="fll_02">E-mail*</label>
+									</div>
+									<div class="input-holder">
+										<input class="field-effects-js error" type="text" id="fll_02"/>
+										@@include('_tpl_forms_form-validation.html')
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<!--===================================================-->
+						<!--===================================================-->
+
 						<!--===============form clear===============-->
 						@@include('_tpl_title-anchor.html', {
 							"taId": "formElementClearExample",

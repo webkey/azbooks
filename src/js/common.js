@@ -238,7 +238,7 @@ function slidersInit() {
  * !Testing form validation (for example). Do not use on release!
  * */
 function formSuccessExample() {
-	var $form = $('.user-form form, .subscription-form form');
+	var $form = $('.user-form form, .subs-form form');
 
 	if ( $form.length ) {
 

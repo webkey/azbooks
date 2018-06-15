@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 9]>      <html class="no-js old-ie" lang="ru"> <![endif]-->
-<!--[if IE 9]>         <html class="no-js ie9" lang="ru"> <![endif]-->
+<!--[if lt IE 9]>      <html class="no-js old-ie" lang="en"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js ie9" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
-<html class="no-js" lang="ru">
+<html class="no-js" lang="en">
 <!--<![endif]-->
 
 <head>
@@ -11,7 +11,7 @@
 	<!--Mobile optimized-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
 	<!--Theme color-->
-	<meta name="theme-color" content="#fff">
+	<meta name="theme-color" content="#00abc5">
 	<!--SEO-->
 	<meta name="description" content="описание">
 	<meta name="keywords" content="ключевые слова">
@@ -257,23 +257,25 @@
 					</nav>
 				</div>
 				<div class="footer-col">
-					<div class="subscription-form">
-						<form action="javascript:void(0)" method="post" class="layout-text">
+					<!--subscription form-->
+					<div class="subs-form">
+						<form action="javascript:void(0)" method="post">
 							<div class="input-wrap">
 								<div class="label-holder">
-									<label for="subscription-email">Sign up to our news</label>
+									<label for="subs">Sign up to our news</label>
 								</div>
 								<div class="form-fields">
 									<div class="input-holder">
-										<input id="subscription-email" type="email" placeholder="E-mail">
+										<input id="subs" type="email" placeholder="E-mail">
 										<button class="btn-default">SEND</button>
 									</div>
-									<div class="success-text"><span>&nbsp;</span></div>
-									<div class="error-text">Пожалуйста, ведите корректный email</div>
+									<div class="subs-success"><span>Signed</span></div>
+									<div class="subs-error">Invalid email</div>
 								</div>
 							</div>
 						</form>
 					</div>
+					<!--subscription form-->
 				</div>
 			</div>
 			<div class="footer-row">

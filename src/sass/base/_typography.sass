@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6
 
 	a
 		text-decoration: none
-		color: inherit
+		color: currentColor
 
 		.no-touchevents &:hover
 			color: $base-color
@@ -26,16 +26,19 @@ h1
 	+font($font-size-h1, $line-height-h1)
 
 	+media('<mob-lg')
-		+font($font-size-h1--sm, $line-height-h1--sm)
+		+font($font-size-h1--mob, $line-height-h1--mob)
 
 h2
 	+font($font-size-h2, $line-height-h2)
 
 	+media('<mob-lg')
-		+font($font-size-h2--sm, $line-height-h2--sm)
+		+font($font-size-h2--mob, $line-height-h2--mob)
 
 h3
 	+font($font-size-h3, $line-height-h3)
+
+	+media('<mob-lg')
+		+font($font-size-h3--mob, $line-height-h3--mob)
 
 h4
 	+font($font-size-h4, $line-height-h4)
@@ -44,6 +47,7 @@ h5
 	+font($font-size-h5, $line-height-h5)
 
 h6
+	+font-normal
 	+font($font-size-h6, $line-height-h6)
 	text-transform: uppercase
 
@@ -51,6 +55,11 @@ p
 	padding: 0
 	margin: 0 0 $bottom-space
 
+	small
+		font-size: 0.78em
+		line-height: round-float(24/14, 2)
+		display: inline-block
+		vertical-align: top
 hr
 	line-height: 1px
 	height: 0
@@ -96,65 +105,6 @@ i, em
 i b, i strong, em b, em strong, b i, b em, strong i, strong em
 	+font-bold-italic
 
-.entry-text
-	+font-bold
-	font-size: 1.2em
-	margin-bottom: $bottom-space
-
-	b, strong
-		+font-bold
-
-	i, em
-		+font-bold-italic
-
-.entry-img
-	position: relative
-	overflow: hidden
-	+ratio(10, 6)
-	margin-bottom: $bottom-space
-
-	+media('<mob-md')
-		+ratio(16, 9)
-
-	img
-		position: absolute
-		left: 50%
-		top: 50%
-		max-width: 100%
-		max-height: none
-		min-width: 0
-		min-height: 0
-		text-align: left
-		width: calc(100% + 4px)
-		height: calc(100% + 4px)
-		transform: translate(-50%, -50%)
-		+object-fit(cover)
-
-		//.no-objectfit &
-			width: auto
-			height: 100%
-
-.entry-img__title
-	position: absolute
-	+position(50%)
-	+padding-horizontal(0 !important)
-	margin: 0
-	transform: translate(-50%, -50%)
-	z-index: 10
-	+font($font-size-h1, $line-height-h1)
-	color: $bg-color-base
-	text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2)
-	text-align: center
-
-	+media('<desk-md')
-		+font($font-size-h1--md, $line-height-h1--md)
-
-	+media('<mob-lg')
-		+font($font-size-h1--sm, $line-height-h1--sm)
-
-	+media('<mob-md')
-		+font(22px, 1)
-
 .mark
 	color: $mark-color
 	font-style: inherit
@@ -191,7 +141,7 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 		text-align: center
 		display: block
 		margin: 0 auto $bottom-space
-		width: $flood-layout-width
+		width: $text-layout-width
 		max-width: 100%
 		clear: both
 
@@ -271,7 +221,7 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 
 		li
 			padding-left: $list-space
-			margin: 0 0 round($bottom-space*0.5)
+			margin: 0 0 round-float($bottom-space*0.5, 2)
 			position: relative
 
 	ul > li::before
@@ -279,10 +229,11 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 		display: block
 		float: left
 		+size(0)
-		margin: 0.4em 0 -0.5em -#{$list-space}
+		margin: 0.6em 0 -0.6em -#{$list-space}
+		border-radius: 6px
 		border: solid transparent
-			width: 5px 0 5px 9px
-			left-color: $base-color
+			width: 3px
+			color: $text-color
 
 	ol
 		counter-reset: section
@@ -291,17 +242,22 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 			counter-increment: section
 			height: 1%
 			overflow: hidden
+			padding-left: 40px
 
 			&::before
 				position: relative
 				display: inline-block
-				text-align: left
-				+font-alt-bold
-				color: $base-color
+				vertical-align: top
+				+size(28px)
+				+font-bold
+				+font(12px, 28px)
+				text-align: center
+				color: white
+				background-color: $base-color
 				content: counter(section)
-				padding: 0 4px 0 0
-				min-width: $list-space
-				margin-left: -#{$list-space}
+				border-radius: 28px
+				padding: 0
+				margin: 1px calc(40px - 28px) 0 -40px
 
 	ul, ol
 		ul, ol
@@ -329,10 +285,12 @@ table
 	width: auto
 
 	td, th
-		+font($font-size, $line-height)
-		color: inherit
-		padding: 8px 15px
-		border-color: $text-color-base
+		padding: 12px 20px
+		+font(1.6rem, round-float(24/16, 2))
+		color: currentColor
+		text-align: left
+		vertical-align: top
+		border-color: #ddd
 
 .table-auto
 	position: relative
@@ -353,45 +311,41 @@ table
 	.table-auto table
 		margin-bottom: 0
 
+	// custom table
 	.tbl
 		border: none
 
 		td, th
 			color: $text-color
 			background-color: $bg-color-base
-			border: 0 solid $base-color
-			+font(1.4rem, 1.5)
-
-			&:first-child, &:first-child
-				border-left-width: 1px
-
-			&:last-child, &:last-child
-				border-right-width: 1px
-
-		tr:last-child
-			td
-				border-bottom-width: 0
-
-		td
-			border-top-width: 1px
-
-		tbody tr:first-child td
-			border-top-width: 0
+			border: 2px solid #ddd
 
 		tbody tr:nth-child(even) td
-			background: $base-color
-			color: $bg-color-base
-
-		th, thead td
-			+font-bold
-			font-size: 1.6rem
-			text-align: left
+			background: $bg-color-alt
 
 		th, thead td, tfoot td
 			background: $base-color
-			color: $bg-color-base
-			border-color: $base-color
-			border-top-width: 0
+			color: white
+
+	// table rows view
+	.tbl-rows
+		border: none
+
+		td, th
+			color: $text-color
+			background-color: $bg-color-base
+			border: solid #ddd
+			border-width: 2px 0
+
+			&:first-child
+				padding-left: 0
+
+			&:last-child
+				padding-right: 0
+
+		th, thead td, tfoot td
+			background: $base-color
+			color: white
 
 /* table end
 
@@ -408,23 +362,24 @@ table
 			display: block
 			margin: 0
 			padding: 0 0 10px
-			font-family: $font-alt
-			+font(round-float($font-size*1.25, 1), $line-height)
-			color: $text-color
+			+font-bold
+			+font(1.5em, 1.33)
+			color: $base-color
 			text-align: center
 
 			&::before, &::after
+				+font-bold
 				+pseudo($pos: relative)
-				+font(4rem, 1)
+				+font(1.5em, 1)
 				text-align: left
 
 			&::before
-				content: '«'
+				content: '“'
 				padding-left: 17%
 				padding-bottom: 10px
 
 			&::after
-				content: '»'
+				content: '”'
 				text-align: right
 				padding-right: 18.5%
 				padding-top: 8px
@@ -433,8 +388,8 @@ table
 			text-align: right
 			display: block
 			margin-left: auto
+			+font-bold-italic
 			+font($font-size, $line-height)
-			color: $text-color-light
 
 /* blockquote end
 
@@ -452,43 +407,9 @@ table
 
 /* datetime
 .datetime
+	+font-bold-italic
+	color: $base-color
 	display: block
-	font-style: normal
-	margin-bottom: $bottom-space
+	font-size: 0.9em
 
 /* datetime end
-
-/* view print
-.view-print
-	+display-inline-block-top
-	padding: 6px 12px
-	margin-bottom: $bottom-space
-	background: #f9f9f9
-	line-height: 1
-	color: black
-	text-decoration: none
-
-	+media('<desk-lg')
-		margin-bottom: $bottom-space--ml
-
-	+media('<tab-lg')
-		display: none
-
-	&:last-child
-		margin-bottom: 0
-
-	.no-touchevents &:hover
-		background-color: #eaeaea
-
-	svg
-		display: inline-block
-		vertical-align: middle
-		width: 20px
-		height: 20px
-		margin-right: 5px
-
-	span
-		display: inline-block
-		vertical-align: middle
-
-/* view print end

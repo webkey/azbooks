@@ -356,8 +356,7 @@
 
 /* breadcrumbs
 .breadcrumbs
-	color: $text-color-light
-	margin-bottom: $bottom-space--lg
+	margin-bottom: 20px
 
 	+media('<desk-lg')
 		margin-bottom: $bottom-space--ml
@@ -372,7 +371,7 @@
 		list-style: none
 
 		li
-			padding: 0 6px 0 0
+			padding: 0 3px 0 0
 			margin: 0
 
 			&::before, &:first-child::before
@@ -392,17 +391,16 @@
 		&::after
 			display: inline-block
 			vertical-align: baseline
-			content: '•'
+			content: '/'
 			border: none
-			color: $base-color
-			padding-left: 10px
+			padding-left: 3px
 
 		&:last-child::after
 			content: none
 
 	a
 		padding-top: 0.5em
-		color: $text-color
+		color: $link-color
 		text-decoration: none
 		cursor: pointer
 
@@ -422,8 +420,7 @@
 	$file-icon-size: 42px
 	+display-inline-block-top
 	min-height: $file-icon-size
-	padding: 0.5em
-	+font(16px, 20px)
+	+font($font-size--sm, $line-height--sm)
 	color: $text-color
 	text-decoration: none
 
@@ -436,18 +433,16 @@
 	& > span, & > em
 		display: block
 		margin-left: #{$file-icon-size}
+		margin-bottom: 0.3em
 		padding-left: 1em
 
 	& > em
-		display: block
-		font-size: 1.4rem
+		font-size: 0.8em
 		color: $text-color-light
+		margin-bottom: 0
 
 	.no-touchevents &:hover
-		background-color: $base-color
-
-		& > em
-			color: $bg-color-base
+		color: $base-color
 
 .st-bg
 	fill: #e2e5e7
@@ -527,7 +522,7 @@
 		border-radius: 30px
 		background: white
 		color: white
-		box-shadow: 0 0 6px rgba(black, 0)
+		border: 2px solid transparent
 		transition:
 			property: box-shadow
 			duration: $animation-speed
@@ -546,13 +541,13 @@
 
 		svg
 			+centering-transform-abs
-			+size(12px)
+			+size(14px)
 
 		path
 			fill: currentColor
 
 		// hover
 		.no-touchevents &:hover
-			box-shadow: 0 0 6px rgba(black, 0.5)
+			border-color: rgba(black, 0.3)
 
 /* social networks end

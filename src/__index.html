@@ -1,48 +1,125 @@
 @@include('_tpl_layout_head.html', {
-	"title": "Главная",
-	"pageClass": ""
+	"title": "AZBooks - Home",
+	"pageClass": "home-page"
 })
 
 @@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
 
 <!--HEADER-->
 @@include('_tpl_layout_header.html', {
-	"currentItem": "Главная"
+	"currentItem": "Home"
 })
 <!--HEADER end-->
 
 <!--MAIN-->
 <div class="main">
-	<div class="max-wrap layout">
-		<div class="main__holder">
-			<!--CONTENT-->
-			<div class="content-wrap">
-				<div class="content user-content">
-					<!--breadcrumbs-->
-					@@include('_tpl_breadcrumbs.html', {
-						"items": ["Главная"],
-						"last": "Главная"
-					})
-					<!--breadcrumbs end-->
-					<section class="section">
-						<div class="section__title"><h2>Заголовок секции</h2></div>
-						<div class="section__holder">
-							Контент секции
-						</div>
-					</section>
+	<section class="main-section main-section--promo">
+		<div class="promo-slider">
+			<div class="promo-slider__list promo-slider-js">
+				@@loop("_tpl_sliders_promo-slider--items.html", "includes/json/sliders_promo-slider.json")
+			</div>
+		</div>
+	</section>
+	<section class="main-section main-section--links layout">
+		<div class="links">
+			<div class="links__list">
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-01.svg")
+						Sound touch-it books
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-02.svg")
+						Toybooks
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-03.svg")
+						Innovative sound books
+					</a>
+				</div>
+
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-04.svg")
+						Pop-up books
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-05.svg")
+						Music and light
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-06.svg")
+						Tactile and puppet
+					</a>
+				</div>
+
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-07.svg")
+						Puzzle books
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-08.svg")
+						Craft books
+					</a>
+				</div>
+				<div class="links__item">
+					<a href="news-inner.html" class="links__item__inner">
+						@@include("includes/svg/icon-links-09.svg")
+						Books without sounds
+					</a>
 				</div>
 			</div>
-			<!--CONTENT end-->
-
-			<!--SIDEBAR-->
-			@@include('_tpl_layout_sidebar.html')
-			<!--SIDEBAR-->
-
-			<!--ASIDE-->
-			@@include('_tpl_layout_aside.html')
-			<!--ASIDE end-->
 		</div>
-	</div>
+		<div class="main-section__footer align-center">
+			<a href="news.html" class="btn-default">All books</a>
+		</div>
+	</section>
+	<section class="main-section main-section--links layout">
+		<div class="contacts__info">
+			<div class="contacts-tabs tabs-js" data-auto-height="true">
+				<div class="contacts-tabs__nav">
+					<div class="contacts-tabs__thumbs">
+						<div class="contacts-tabs__tab">
+							<a href="#tabNew" class="tab-anchor-js active-tab"><span>New</span></a>
+						</div>
+						<div class="contacts-tabs__tab">
+							<a href="#tabBestsellers" class="tab-anchor-js"><span>Bestsellers</span></a>
+						</div>
+						<div class="contacts-tabs__tab">
+							<a href="#tabSeries" class="tab-anchor-js"><span>Series</span></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="contacts-tabs__panels tab-container-js">
+					<div class="contacts-tabs__panel tab-content-js" id="tabNew">
+						<div class="similar-slider">
+							<div class="similar-slider__list similar-slider-js">
+								@@loop("_tpl_sliders_similar-slider--items.html", "includes/json/products.json")
+							</div>
+						</div>
+					</div>
+					<div class="contacts-tabs__panel tab-content-js" id="tabBestsellers">
+						{{tabBestsellers}}
+					</div>
+					<div class="contacts-tabs__panel tab-content-js" id="tabSeries">
+						{{tabSeries}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 <!--MAIN end-->
 

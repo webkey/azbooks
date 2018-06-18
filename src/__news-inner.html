@@ -1,0 +1,51 @@
+@@include('_tpl_layout_head.html', {
+	"title": "News inner",
+	"pageClass": ""
+})
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
+
+<!--HEADER-->
+@@include('_tpl_layout_header.html', {
+	"currentItem": "News"
+})
+<!--HEADER end-->
+
+<!--MAIN-->
+<div class="main">
+	<div class="content layout user-content">
+		<!--===============breadcrumbs===============-->
+		@@include('_tpl_breadcrumbs.html', {
+			"items": ["Home", "News"],
+			"last": "Toy Fair 27 January – 1 February 2016 Spielwarenmesse 2016, Nuremberg, Germany"
+		})
+		<!--===============breadcrumbs end===============-->
+		<!--CONTENT-->
+		<div class="sheet layout-article">
+			<h1>Toy Fair 27 January – 1 February 2016 Spielwarenmesse 2016, Nuremberg, Germany</h1>
+			<figure class="imgc">
+				<img src="img/temp/img-entry.jpg" alt="image description">
+			</figure>
+			<p>New to the States, but well established in overseas markets, AZ Books LLC, is a leading publisher and producer of innovative and interactive books and toys for young children.
+				<br> Our products are educational and entertaining, exciting and imaginative, and will entertain and inspire children and adults for countless hours.
+				<br> We create a vast array of children’s book products, including pop-ups, electronic books, sound books, encyclopedias, and craft & activity books aimed at kids from newborn to 8-years old. <br></p>
+			<p>Our range of innovative toys includes popular tablets and smartphones, talking pads and musical watches, clever games and quests, art and craft toys for children. Most of our toys are educational and kids learn ABC, counting, forms, colors, animals, human body and many other things while playing with our toys.</p>
+			<p>Our product line appears in more than 40 languages, selling in 60 countries. With a price point under $20 on each product global sales have exceeded 45 million units.</p>
+			<p>Teaming up with Newman Communications, a leading book publicity firm for more than 20 years, our vibrant line of children’s books is being introduced to the U.S. media market, targeting major national media, children’s book reviewers, book bloggers, parenting and education reporters and more.</p>
+			<div class="article-footer layout-text">
+				<div class="article-footer__col"><a href="news.html" class="btn-default">All news</a></div>
+				<div class="article-footer__col">@@include("_tpl_share.html")</div>
+			</div>
+		</div>
+		<!--CONTENT end-->
+	</div>
+</div>
+<!--MAIN end-->
+
+<!--FOOTER-->
+@@include('_tpl_layout_footer.html')
+<!--FOOTER end-->
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "END" })
+
+@@include('_tpl_layout_foot.html')

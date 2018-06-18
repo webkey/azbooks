@@ -323,9 +323,13 @@ table
 		tbody tr:nth-child(even) td
 			background: $bg-color-alt
 
-		th, thead td, tfoot td
+		th, thead td
 			background: $base-color
 			color: white
+
+		tfoot td
+			background-color: white
+			+font-bold
 
 	// table rows view
 	.tbl-rows
@@ -343,9 +347,13 @@ table
 			&:last-child
 				padding-right: 0
 
-		th, thead td, tfoot td
+		th, thead td
 			background: $base-color
 			color: white
+
+		tfoot td
+			background-color: white
+			+font-bold
 
 /* table end
 
@@ -407,9 +415,9 @@ table
 
 /* datetime
 .datetime
-	+font-bold-italic
-	color: $base-color
+	+font-normal
+	color: $text-color-light
 	display: block
-	font-size: 0.9em
+	font-size: 0.8em
 
 /* datetime end

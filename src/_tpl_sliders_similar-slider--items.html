@@ -1,0 +1,108 @@
+@@if (context.inCart) {
+	@@if (context.src) {
+	<div class="similar-slider__item products--in-cart">
+	}
+	@@if (!context.src) {
+	<div class="similar-slider__item products--in-cart products--no-image">
+	}
+}
+@@if (!context.inCart) {
+	@@if (context.src) {
+	<div class="similar-slider__item">
+	}
+	@@if (!context.src) {
+	<div class="similar-slider__item products--no-image">
+	}
+}
+		<div class="products__inner">
+			<div class="products__visual-wrap products__animation-wrap products__spacer">
+				<div class="products__visual products__spacer">
+					<div class="products__figure">
+						<div class="products__img">
+							@@if (context.src) {
+							<img src="img/@@src" alt="@@title" />
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="products__animation-wrap products__spacer">
+				<div class="products__align">
+					<a href="#" class="products__inset">
+
+						<!--<div class="products__title"><span>@@title</span></div>-->
+
+						<div class="products__spacer">&nbsp;</div>
+
+						<div class="products__footer">
+							@@if (context.info) {
+							<div class="products__info">
+								@@if (context.info.brand) {
+								<div class="products__info__brand">@@info.brand</div>
+								}
+								@@if (context.info.model) {
+								<div class="products__info__model">@@info.model</div>
+								}
+							</div>
+							}
+
+							@@if (context.price) {
+							<div class="products__price">
+								@@if (context.old) {
+								<div class="products__price__share">
+									<div class="products__price__old">
+										<strong class="products__price__old__val">@@old</strong>
+										<span class="products__price__old__unit">@@oldUnit</span>
+									</div>
+									@@if (context.sale) {
+									<span class="products__price__sale">@@sale</span>
+									}
+								</div>
+								}
+								<div class="products__price__cur">
+									<strong class="products__price__cur__val">@@price</strong>
+									<span class="products__price__cur__unit">@@priceUnit</span>
+								</div>
+							</div>
+							}
+							@@if (!context.price) {
+							<div class="products__price">
+								<div class="products__price--missing">цену уточняйте</div>
+							</div>
+							}
+						</div>
+
+						@@if (context.labels) {
+						<div class="products__labels">
+							@@if (context.labels.sale) {
+							<div class="products__label products__label--sale">Скидка!</div>
+							}
+							@@if (context.labels.hit) {
+							<div class="products__label products__label--hit">Хит!</div>
+							}
+						</div>
+						}
+
+						@@if (context.ch.material) {
+						<div class="products__tags">
+							<div class="products__tag">
+								<i>
+									<img src="img/@@ch.materialImgSts" alt="@@ch.material" />
+								</i>
+								<span>@@ch.material</span>
+							</div>
+						</div>
+						}
+					</a>
+
+					<a href="#" class="products__likes toggle-state-js@@if(context.liked){ active}" title="Нравится" data-active-text="Не нравится" data-unactive-text="Нравится">
+						<!--@@include("includes/svg/icon-like.svg")-->
+						<span>Нравится</span>
+					</a>
+
+					<div class="product__shadow">&nbsp;</div>
+				</div>
+			</div>
+		</div>
+
+</div>

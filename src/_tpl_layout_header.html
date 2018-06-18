@@ -10,10 +10,25 @@
 			<img style="display: none;" class="logo-print" src="img/logo.png" alt="Azbooks">
 		</div>
 		<!--logo end-->
+
+		<!--search-->
+		<div class="search-form">
+			<form action="#" method="post">
+				<div class="search-form__field input-wrap">
+					<input type="search" placeholder="Search" class="search-form__input field-effects-js"/>
+					<div class="search-form__btn">
+						@@include("includes/svg/icon-search.svg")
+						<span>Find</span>
+						<input type="submit" value="">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--search end-->
 	</div>
 </header>
 
-<nav class="nav">
+<nav class="nav shutter--nav-js">
 	<div class="nav__layout max-wrap layout">
 		@@include('_tpl_nav-constructor.html', {
 			"currentItem": "@@currentItem",
@@ -21,3 +36,7 @@
 		})
 	</div>
 </nav>
+
+<div class="nav-overlay nav-overlay-js">&nbsp;</div>
+
+<a href="#" class="nav-opener nav-opener-js"><i>&nbsp;</i><span>Menu</span></a>

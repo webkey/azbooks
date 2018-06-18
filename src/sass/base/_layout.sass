@@ -164,21 +164,42 @@ body
 	border: solid #cdcdcd
 	border-width: 0 1px
 
+.article-footer
+	position: relative
+	display: flex
+	justify-content: space-between
+	align-items: center
+
+	+media('<mob-lg')
+		display: block
+
+.article-footer__col
+	display: inline-block
+	display: flex
+
+	+media('<mob-lg')
+		display: block
+		text-align: center
+		margin-bottom: 2rem
+
+	&:last-child
+		margin-bottom: 0
+
 /* === LAYOUT end ===
 
 /* === CONTENT ===
 .main
 	flex-shrink: 1
 	flex-grow: 1
-	clear: both
-	z-index: 4
 	padding-top: $header-height
 
 .content
-	padding-bottom: 38px
 	padding-top: 17px
+	padding-bottom: 40px
 
 .sheet
+	flex-shrink: 1
+	flex-grow: 1
 	background-color: #fff
 	border-radius: 10px
 	box-shadow: 0 3px 3px rgba(black, 0.1)
@@ -201,6 +222,7 @@ body
 .header__holder
 	position: relative
 	height: 100%
+	//padding: 0
 	background-color: $header-bg
 	box-shadow: $header-shadow
 	border: solid #cdcdcd
@@ -210,8 +232,11 @@ body
 /* logo
 .logo
 	display: block
-	position: relative
+	position: absolute
+	left: nth($page-layout-space, 2)
 	width: nth($logo-size, 1)
+	top: 50%
+	transform: translate(0, -50%)
 
 	&::before
 		content: ""
@@ -235,9 +260,124 @@ body
 			+hide-text
 
 /* logo end
+
+/* search-form
+.search-form
+	position: relative
+	margin: 0
+
+	form
+		visibility: visible
+
+	.search-form__field
+		margin: 0
+		height: nth($search-form--btn-size, 1)
+		max-width: nth($search-form--btn-size, 2)
+		border: 2px solid $border-color
+		border-radius: nth($search-form--btn-size, 1)
+		width: 400px
+		overflow: hidden
+		background-color: white
+		//==================
+		$prop: max-width, border-color, border-radius
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+	.search-form__input
+		+size(100%)
+		background: $header-bg
+		border: none
+		+font-medium
+		+font(16px, 20px)
+		padding: 8px 5px 8px 45px
+		text-transform: none
+		letter-spacing: normal
+		// add dot if short
+		position: relative
+		overflow: hidden
+		white-space: nowrap
+		text-overflow: ellipsis
+		color: transparent
+
+		&, &:hover, &:focus, &.error, &.input--has-value
+			box-shadow: none
+
+		&.input--focus, &:focus
+			color: $text-color
+			background-color: #f3f3f3
+
+	// inside header
+	.header &
+		//visibility: hidden
+		position: absolute
+		right: nth($page-layout-space, 2)
+		top: 50%
+		margin-top: -25px
+		z-index: 5
+
+	// hover
+	.search-form__field:hover
+		border-color: $base-color
+
+	// transform search form on focus
+	//&.input--has-value
+	.search-form__field.input--focus
+		max-width: 600px
+		border-color: $border-color
+		border-radius: 5px
+
+		.search-form__input
+			opacity: 1
+
+.search-form__btn
+	position: absolute
+	left: 13px
+	top: 50%
+	+size(22px)
+	margin-top: -11px
+	+font-normal
+	text-align: center
+	z-index: 5
+	pointer-events: none
+	color: $text-color
+
+	.input--has-value.input--focus &
+		pointer-events: auto
+
+	.no-touchevents &:hover
+		color: $link-color
+
+	input
+		+cover-abs()
+		padding: 0
+		border: 0
+		opacity: 0
+		z-index: 99
+
+	svg
+		display: inline-block
+		position: absolute
+		+position(50%)
+		+size(nth($search-form--btn-icon-size, 1))
+		margin: -#{round(nth($search-form--btn-icon-size, 1)*0.5)} 0 0 -#{round(nth($search-form--btn-icon-size, 1)*0.5)}
+
+	path
+		fill: currentColor
+		transition: inherit
+
+	span
+		+hide-text
+
+/* search-form end
 /* === HEADER end ===
 
 /* === NAVIGATION ===
+// variables
+$nav-is-open-class: 'nav-is-open'
+
+// nav layout
 .nav
 	position: fixed
 	width: 100%
@@ -245,77 +385,443 @@ body
 	z-index: $header-z
 	left: 0
 	top: 0
+	$prop: transform, opacity
+	will-change: $prop
+	transition:
+		property: transform, opacity
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		position: fixed
+		width: 320px
+		height: 100%
+		left: 0
+		top: 0
+		background-color: lightsteelblue
+		z-index: 9999
+		$x: -100%
+		transform: translate($x, 0) // for old browser
+		transform: translateX($x)
+
+		&.#{$nav-is-open-class} // add js
+			$x: 0
+			transform: translate($x, 0) // for old browser
+			transform: translateX($x)
 
 .nav__layout
 	position: relative
 	height: 100%
 	margin: 0 auto
 
-	.nav__list
-		position: absolute
-		top: 0
-		left: #{nth($logo-size, 1) + nth($page-layout-space, 2) + 50}
-
+/* nav list
+// общие стили для пунктов навигации
 .nav__list
+	position: absolute
+	top: 0
+	left: #{nth($logo-size, 1) + nth($page-layout-space, 2) + 50}
 	height: $header-height
-	+clear
+
+	// убрать подсветку при клике на тачскринах
+	.touchevents &
+		user-select: none
+		-webkit-tap-highlight-color: transparent
+
+	+media('<tab-lg')
+		padding: 20px
 
 	li
 		position: relative
 
-		&.has-drop
-			padding-right: 2rem
-
-			.nav__angle
-				position: absolute
-				right: 0
-				top: 50%
-				transform: translate(0, -50%)
-				line-height: 0
-				pointer-events: none
+	.nav__tab
+		position: relative
 
 	a
 		display: block
+		position: relative
+		padding: 8px 20px
+		color: $text-color
+		text-decoration: none
+		$prop: color, background-color, border-color
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed
 
-	& > li
-		float: left
-		margin-right: 2rem
+		// убрать подсветку при клике на тачскринах
+		.touchevents &
+			user-select: none
+			-webkit-tap-highlight-color: transparent
 
-		&.has-drop > .nav__tab .nav__angle i
-			display: inline-block
-			vertical-align: top
-			+triangle(bottom, tomato, 5px, 2)
+		span
+			+font(1.6rem, round-float(24/16, 2))
 
+// общие стили для подменю навигации
 .nav__drop
+	display: none
 	position: absolute
 	left: 0
 	top: 100%
-	background-color: white
-	border: 1px solid $border-color
-	padding: 2rem
-	width: 320px
+	width: 280px
+	padding: 14px 0
+	border: 1px solid #ccc
+	background-color: #fff
+
+	.hover > &
+		display: block
+
+	.no-js &
+		display: block
+
+// стили для пунктов навигации, у которых ЕСТЬ ПОДМЕНЮ
+.nav__list li.has-drop > .nav__tab > a
+	+media('<tab-lg')
+		padding-right: (round($nav-arrow-size+10))
+
+// стили для пункта навигации ТЕКУЩЕЙ страницы
+.nav__list li.current > .nav__tab
+
+	&
+		a
+			color: $base-color
+
+// стили для пункта навигации С ОТКРЫТЫМ ПОДМЕНЮ
+//.nav__list li
+	&.is-open
+		& > .nav__tab a
+			&::before
+				opacity: 1
+				transform: translate(0, 0)
+
+//& > .nav__drop
+	display: block
+
+// нужно добавлять на nav__drop style="display: block"
+
+// особые стили для пунктов навигации ПЕРВОГО урованя
+.nav__list > li
+	float: left
+	height: $header-height
+
+	+media('<tab-lg')
+		float: none
+
+	& > .nav__tab
+		height: 100%
+		padding: 10px 0
+
+		a
+			display: flex
+			align-items: center
+			height: 100%
+			+padding-vertical(5px)
+			+font-alt-bold
+			color: $text-color
+			border-radius: 10px
+			border: 2px solid transparent
+
+			span
+				+font(2.0rem, round-float(24/20, 2))
+
+	// hover
+	&.hover
+		& > .nav__tab
+			a
+				border-color: rgba($base-color, 0.3)
+				color: $base-color
+
+// СТРЕЛКИ навигации
+.nav__angle
+	position: absolute
+	right: 0
+	top: 0
+	width: $nav-arrow-size
+	height: 100%
+	//border: solid #666
+	//border-width: 0 0 0 1px
+	transition-property: transform, color, background-color
+	transition-duration: $animation-speed
+	z-index: 2
+	cursor: pointer
+	display: none
+
+	// убрать подсветку при клике на тачскринах
+	.touchevents &
+		user-select: none
+		-webkit-tap-highlight-color: transparent
+
+	li.has-drop > .nav__tab > &
+		+media('<tab-lg')
+			display: block
+
+	i
+		position: absolute
+		+position(50%, 50%)
+		+size(16px)
+		margin: -8px 0 0 -8px
+		pointer-events: none
+		transition-property: transform
+		transition-duration: $animation-speed
+		+font(0, 0)
+
+		&::before, &::after
+			+pseudo()
+			+position(50%, -10px)
+			height: 2px
+			width: 16px
+			backface-visibility: hidden
+			background-color: $text-color
+			transition-property: background-color, transform
+			transition-duration: $animation-speed
+
+		&::after
+			transform: rotate(0.25turn)
+
+// стили стрелок навигации для разных состояний
+.nav__angle
+
+	// активное (подменю открыто)
+	li.is-open > .nav__tab & i
+		//transform: rotate(0)
+
+		&::before, &::after
+			transform: rotate(0)
+
+	// ховер
+	.no-touchevents li > .nav__tab &:hover i
+		&::before, &::after
+			background-color: $base-color
+
+// особые стили для пунктов ПОДМЕНЮ
+.nav__drop
+
+	// особые стили для пунктов навигации ВТОРОГО урованя
+	//ul, a, .nav__angle
+		background-color: $nav-bg-color-s
+
+	a
+		padding-left: 20px
+		color: $text-color
+
+		span
+			+font(1.6rem, round-float(20/16, 2))
+
+	// hover
+	li.hover
+		& > .nav__tab
+			& > a
+				background-color: rgba($base-color, 0.1)
+
+	.nav__drop
+
+		left: 100%
+		top: -15px
+		// особые стили для пунктов навигации ТРЕТЬЕГО урованя
+		//ul, a, .nav__angle
+			background-color: $nav-bg-color-ss
+
+		//a
+			span
+				+font(1.6rem, round-float(20/16, 2))
+
+		.nav__drop
+			// особые стили для пунктов навигации ТРЕТЬЕГО урованя
+			//ul, a, .nav__angle
+				background-color: $nav-bg-color-sss
+
+			//a
+				span
+					+font(1.4rem, round-float(18/14, 2))
+
+/* nav list
+// nav opener btn
+a.nav-opener
+	$btn-menu-bg: lightcoral
+	$btn-menu-color: white
+	$btn-menu-lines-width: 26px
+	$btn-menu-lines-width--lg: 22px
+	$btn-menu-lines-height: 3px
+	$btn-menu-lines-height--lg: 2px
+	$btn-menu-lines-space: 5px
+	$btn-menu-lines-space--lg: 4px
+	$btn-menu-lines-color: white
+	$btn-menu-animation-speed: $animation-speed
+	$btn-menu-animation-delay: round-float($animation-speed*0.5, 2)
+
+	$user-options-cross-width: $btn-menu-lines-width
+	$user-options-cross-width--lg: $btn-menu-lines-width--lg
+	$user-options-cross-height: $btn-menu-lines-height
+	$user-options-cross-height--lg: $btn-menu-lines-height--lg
+	$user-options-cross-color: $btn-menu-lines-color
+
+	// =====================
+
+	display: none
+	+size(50px)
+	position: relative
+	text-decoration: none
+	color: $text-color
+	background-color: $btn-menu-bg
+	user-select: none
+	-webkit-tap-highlight-color: transparent
+	transition:
+		property: background-color
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		display: block
+
+	.touchevents &
+		// убрать подсветку при клике на тачскринах
+		user-select: none
+		-webkit-tap-highlight-color: transparent
+
+	& > span
+		+hide-text
+		white-space: normal
+
+	// крест
+	&::before, &::after
+		+pseudo()
+		+size($user-options-cross-width, $user-options-cross-height)
+		background-color: $user-options-cross-color
+		+position(50%)
+		+margin($top: -#{round($user-options-cross-height*0.5)}, $left: -#{round($user-options-cross-width*0.5)})
+		will-change: opacity, transform
+		opacity: 0
+		transition:
+			property: transform, opacity
+			duration: $btn-menu-animation-speed
+			delay: 0s
+			timing-function: cubic-bezier(0.65, 0.05, 0.36, 1)
+
+		+media('<desk-lg')
+			+size($user-options-cross-width--lg, $user-options-cross-height--lg)
+			+margin($top: -#{round($user-options-cross-height--lg*0.5)}, $left: -#{round($user-options-cross-width--lg*0.5)})
+
+	// бутерброд
+	& > i
+		position: absolute
+		left: 50%
+		top: 50%
+		+size($btn-menu-lines-width, $btn-menu-lines-height)
+		background-color: $btn-menu-lines-color
+		+margin($top: -#{round($btn-menu-lines-height*0.5)}, $left: -#{round($btn-menu-lines-width*0.5)})
+		backface-visibility: hidden
+		transition:
+			property: opacity
+			duration: $btn-menu-animation-speed
+			delay: $btn-menu-animation-delay
+
+
+		+media('<desk-lg')
+			+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
+			+margin($top: -#{round($btn-menu-lines-height--lg*0.5)}, $left: -#{round($btn-menu-lines-width--lg*0.5)})
+
+		&::before, &::after
+			+pseudo()
+			left: 0
+			+size($btn-menu-lines-width, $btn-menu-lines-height)
+			background-color: $btn-menu-lines-color
+			backface-visibility: hidden
+			transition:
+				property: transform
+				duration: $btn-menu-animation-speed
+				delay: $btn-menu-animation-delay
+
+
+			+media('<desk-lg')
+				+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
+
+		//first line menu
+		&::before
+			top: -#{$btn-menu-lines-height + $btn-menu-lines-space}
+
+			+media('<desk-lg')
+				top: -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
+
+		//third line menu
+		&::after
+			top: #{$btn-menu-lines-height + $btn-menu-lines-space}
+
+			+media('<desk-lg')
+				top: #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
+
+	// hover
+	.no-touchevents &:hover
+		background-color: #f3f3f3
+
+		&::before, &::after
+			background-color: $base-color
+
+		& > i
+			background-color: $base-color
+
+			&::before, &::after
+				background-color: $base-color
+
+	// active
+	&.nav-is-open
+		background-color: #fff
+
+		&::before, &::after
+			transition-delay: $btn-menu-animation-delay
+			background-color: $base-color
+
+			opacity: 1
+
+		&::before
+			transform: rotate(45deg) translateZ(0)
+
+		&::after
+			transform: rotate(-45deg) translateZ(0)
+
+		& > i
+			opacity: 0
+			transition-delay: 0s
+
+			&::before, &::after
+				transition-delay: 0s
+
+			&::before
+				transform: translate(0, #{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
+
+				+media('<desk-lg')
+					transform: translate(0, #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
+
+			&::after
+				transform: translate(0, -#{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
+
+				+media('<desk-lg')
+					transform: translate(0, -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
+
+// overlay
+// в html добавить
+// <div class="nav-overlay nav-overlay-js">&nbsp;</div>
+.nav-overlay
+	position: fixed
+	left: 0
+	top: 0
+	width: 100%
+	height: 100%
+	background-color: rgba(black, 0.35)
+	z-index: 9998
 	opacity: 0
 	visibility: hidden
-	z-index: 10
+	$prop: opacity, visibility
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
 
-	li:hover > &
+	&.open-only-mob
+		+media('>=tab-lg')
+			display: none
+
+	&.#{$nav-is-open-class}
 		opacity: 1
 		visibility: visible
 
-	li
-		margin-bottom: 1rem
-		font-size: 1.4rem
-		line-height: 1.5
-
-		&.has-drop > .nav__tab .nav__angle i
-			display: inline-block
-			vertical-align: top
-			+triangle(right, tomato, 5px, 2)
-
-
-	.nav__drop
-		top: 0
-		left: 100%
+/* navigation end
 
 /* === NAVIGATION end ===
 
@@ -338,8 +844,18 @@ body
 	justify-content: space-between
 	border-top: 1px solid #ddd
 	+padding-horizontal(nth($page-layout-space, 2))
-	+padding-vertical(10px)
+	+padding-vertical(1rem)
 	min-height: 60px
+
+	+media('<tab-lg')
+		+padding-vertical(20px)
+
+	+media('<mob-lg')
+		display: block
+
+	&:first-child
+		+media('<tab-lg')
+			display: block
 
 .footer-col
 	width: 33.33%
@@ -351,23 +867,36 @@ body
 	text-align: center
 
 	+media('<mob-lg')
-		min-width: 100%
-		margin-bottom: #{round(nth($grid-space, 1)/2)}
+		display: block
+		width: 100%
+		margin-bottom: 20px
+		padding: 0
+
+		&:last-child
+			margin-bottom: 0
 
 	.footer-row:first-child &
 		width: auto
 
+		+media('<tab-lg')
+			display: flex
+			justify-content: center
+			margin-bottom: 2rem
+
+			&:last-child
+				margin-bottom: 0
+
 	&:first-child
 		+media('>=mob-lg')
 			justify-content: flex-start
-			padding-left: 0
+			+padding-horizontal(0)
 			text-align: left
 
 	&:last-child
 		+media('>=mob-lg')
 			justify-content: flex-end
+			+padding-horizontal(0)
 			text-align: right
-			padding-right: 0
 
 	a
 		color: inherit
@@ -384,9 +913,21 @@ body
 		margin-left: -45px
 		margin-bottom: -10px
 
+		+media('<desk-sm')
+			margin-left: -20px
+
+		+media('<tab-lg')
+
+
 		li
 			float: left
 			margin: 0 0 10px 45px
+
+			+media('<desk-sm')
+				margin-left: 20px
+
+			+media('<mob-lg')
+				float: none
 
 		a
 			text-decoration: none
@@ -407,9 +948,15 @@ body
 
 	text-align: left
 
+	+media('<mob-lg')
+		width: 100%
+
 	.input-wrap
 		display: flex
 		margin: 0
+
+		+media('<mob-lg')
+			display: block
 
 	.label-holder
 		margin: 0 17px 0 0
@@ -423,6 +970,9 @@ body
 	.form-fields
 		position: relative
 		width: nth($subs-form-size, 2)
+
+		+media('<mob-lg')
+			width: 100%
 
 	.input-holder
 		position: relative
@@ -571,10 +1121,10 @@ body
 
 .developer__label
 	+display-inline-block-middle
-	margin: 0 10px
+	margin: 4px 0
 
 	+media('<mob-lg')
-		display: block
+		font-size: 1.2rem
 
 .developer__logo
 	+display-inline-block-middle
@@ -582,6 +1132,11 @@ body
 	+size(133px, 20px)
 	text-align: left
 	text-indent: -9999px
+	margin-left: 10px
+
+	+media('<mob-lg')
+		+size(98px, 16px)
+		margin-left: 0
 
 	&::after
 		+pseudo()
@@ -592,6 +1147,9 @@ body
 		transition:
 			property: background-color
 			duration: $animation-speed
+
+		+media('<mob-lg')
+			background-size: auto 12px
 
 // hover
 .no-touchevents .developer a:hover

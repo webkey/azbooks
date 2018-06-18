@@ -23,7 +23,7 @@
 /* btn-default
 [class*="btn-default"]
 	position: relative
-	padding: 9px 78px 7px
+	padding: 9px 30px 7px
 	border: 2px solid transparent
 	border-radius: 10px
 	margin: 0
@@ -52,6 +52,12 @@
 
 /* btn-default end
 
+/* btn's width set auto
+.btn-width-auto
+	min-width: 0
+
+/* btn's width set auto end
+
 /* btn-default-alt
 .btn-default-alt
 	color: white
@@ -61,6 +67,36 @@
 		border-color: darken($base-color, 8%)
 
 /* btn-default-alt end
+
+/* btn-outline
+.btn-outline
+	position: relative
+	padding: 9px 30px 7px
+	border: 2px solid #ccc
+	border-radius: 10px
+	margin: 0
+	min-width: 210px
+	+font-alt
+	color: $text-color
+	text-transform: uppercase
+	background-color: transparent
+
+	&, & > span
+		+font(16px, 20px)
+		letter-spacing: normal
+
+	.no-touchevents &:hover
+		border-color: #999
+
+	// disabled
+	&:disabled, &.disabled, &[data-disabled]
+		cursor: default
+		background-color: $btn-disabled-color !important
+		border-color: transparent !important
+		box-shadow: none !important
+		color: #bfbfbf !important
+
+/* btn-outline end
 
 /* btn-with-icon
 .btn-with-icon

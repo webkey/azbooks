@@ -85,36 +85,33 @@
 			<a href="news.html" class="btn-default">All books</a>
 		</div>
 	</section>
-	<section class="main-section main-section--links layout">
-		<div class="contacts__info">
-			<div class="contacts-tabs tabs-js" data-auto-height="true">
-				<div class="contacts-tabs__nav">
-					<div class="contacts-tabs__thumbs">
-						<div class="contacts-tabs__tab">
-							<a href="#tabNew" class="tab-anchor-js active-tab"><span>New</span></a>
-						</div>
-						<div class="contacts-tabs__tab">
-							<a href="#tabBestsellers" class="tab-anchor-js"><span>Bestsellers</span></a>
-						</div>
-						<div class="contacts-tabs__tab">
-							<a href="#tabSeries" class="tab-anchor-js"><span>Series</span></a>
-						</div>
-					</div>
+	<section class="main-section main-section--categories">
+		<div class="categories layout">
+			<div class="categories__tabs tabs-js">
+				<div class="categories__tabs__nav">
+					<a href="#tabNew" class="tabs__anchor-js tabs--active"><span>New</span></a>
+					<a href="#tabBestsellers" class="tabs__anchor-js"><span>Bestsellers</span></a>
+					<a href="#tabSeries" class="tabs__anchor-js"><span>Series</span></a>
 				</div>
-
-				<div class="contacts-tabs__panels tab-container-js">
-					<div class="contacts-tabs__panel tab-content-js" id="tabNew">
+				<div class="categories__tabs__panels tabs__panels-js">
+					<div class="categories__tabs__panel tabs__panel-js" id="tabNew">
 						<div class="similar-slider">
 							<div class="similar-slider__list similar-slider-js">
-								@@loop("_tpl_sliders_similar-slider--items.html", "includes/json/products.json")
+								@@loop("_tpl_sliders_similar-slider--items.html", "includes/json/products--new.json")
 							</div>
 						</div>
 					</div>
-					<div class="contacts-tabs__panel tab-content-js" id="tabBestsellers">
-						{{tabBestsellers}}
+					<div class="categories__tabs__panel tabs__panel-js" id="tabBestsellers">
+						{{tabBestsellers}} <br>
+						{{tabBestsellers}} <br>
+						{{tabBestsellers}} <br>
 					</div>
-					<div class="contacts-tabs__panel tab-content-js" id="tabSeries">
-						{{tabSeries}}
+					<div class="categories__tabs__panel tabs__panel-js" id="tabSeries">
+						{{tabSeries}} <br>
+						{{tabSeries}} <br>
+						{{tabSeries}} <br>
+						{{tabSeries}} <br>
+						{{tabSeries}} <br>
 					</div>
 				</div>
 			</div>

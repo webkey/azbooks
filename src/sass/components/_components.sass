@@ -716,3 +716,204 @@ $links-icon-size--mob: 50px
 			fill: white
 
 /* links end
+
+/* products preview / product
+.product
+	display: block
+	position: relative
+	padding: $product-space
+	letter-spacing: normal
+	color: inherit
+	text-decoration: none
+	text-align: center
+	background-color: white
+	border-radius: 10px
+	box-shadow: 0 3px 3px rgba(black, 0.1)
+	z-index: 1
+	transition:
+		property: box-shadow
+		duration: $animation-speed
+
+	.no-touchevents &:hover
+		box-shadow: 0 5px 5px rgba(black, 0.3)
+
+.product__img
+	position: relative
+	display: block
+	padding: 0
+	width: 150px
+	max-width: 100%
+	margin: 0 auto 2rem
+
+	&::before
+		content: ""
+		display: block
+		+ratio(150, 190)
+
+	img
+		display: block
+		position: absolute
+		left: 0
+		top: 0
+		width: 100%
+		height: 100%
+		max-width: none
+		margin: 0 auto
+		+object-fit(scale-down)
+
+.product__title
+	text-align: center
+	+font-alt-bold
+	+font(2.0rem, round-float(30/20, 2))
+
+.product__labels
+	position: absolute
+	left: 10px
+	top: 10px
+	z-index: 1
+
+.product__label
+	width: 61px
+	height: 61px
+	text-align: left
+	text-indent: -9999px
+	overflow: hidden
+
+.product__label--new
+	background: url(../../img/label-new.png) no-repeat
+
+.product__label--bestseller
+	background: url(../../img/label-bestseller.png) no-repeat
+
+/* products preview / product end
+
+/* categories
+.categories
+	background-color: $base-color
+	+padding-vertical(40px, calc(50px - #{nth($similar-slider-space-inner, 3)}))
+
+.categories__tabs__nav
+	text-align: center
+	margin-bottom: calc(4rem - #{nth($similar-slider-space-inner, 1)})
+	+clear-spacing
+
+	a
+		display: inline-block
+		vertical-align: top
+		position: relative
+		+font-alt-bold
+		+font(2.4rem, round-float(30/24, 2))
+		letter-spacing: normal
+		color: white
+		text-decoration: none
+		border-radius: 10px
+		padding: 10px 25px
+		margin: 0 12px
+		z-index: 1
+
+		&::before, &::after
+			content: ""
+			display: block
+			position: absolute
+			opacity: 0
+			z-index: -1
+			pointer-events: none
+
+		&::before
+			left: 0
+			top: 0
+			+size(100%)
+			border-radius: 10px
+			background-color: #007485
+
+		&::after
+			left: 50%
+			top: 100%
+			margin-left: -10px
+			+triangle('bottom', $color: #007485, $size: 10px, $kef: 1)
+
+		span
+			border-bottom: 1px solid white
+
+		// hover
+		.no-touchevents &:hover
+
+			span
+				border-bottom-color: transparent
+
+		// active
+		&.tabs--active
+			color: $base-color-alt
+			cursor: default
+
+			&::before, &::after
+				opacity: 1
+
+			span
+				border-bottom-color: transparent
+
+.categories__tabs__panels
+	position: relative
+	z-index: 1
+
+/* categories end
+
+/* similar slider
+// slider
+.similar-slider
+	position: relative
+
+.similar-slider__list
+	// before slide load
+	white-space: nowrap
+	overflow: hidden
+	// before slide load end
+	padding: 0 42px
+
+	&, &.slick-dotted
+		margin: 0
+
+	&.slick-initialized, .no-js &
+		// after slide load
+		white-space: normal
+		overflow: visible
+		// after slide load end
+
+	.slick-track
+		margin: 0
+
+	.slick-prev
+		left: 0
+
+	.slick-next
+		right: 0
+
+	// dots
+	.slick-dots
+		bottom: 10px
+
+		//+media('>=tab-lg')
+			display: none !important
+
+// slide
+.similar-slider__item
+	// before slide load
+	float: none
+	display: inline-block
+	vertical-align: top
+	// before slide load end
+	padding: $similar-slider-space-inner
+
+	.no-js &
+		width: 320px
+
+	.slick-initialized &
+		// after slide load
+		float: left
+		display: block
+		// after slide load end
+
+	.product
+		height: 100%
+
+/* similar slider end

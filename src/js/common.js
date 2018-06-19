@@ -1050,7 +1050,7 @@ function slidersInit() {
 				});
 			}).slick({
 				speed: dur,
-				slidesToShow: 5,
+				slidesToShow: 4,
 				slidesToScroll: 2,
 				infinite: false,
 				dots: true,
@@ -1059,7 +1059,7 @@ function slidersInit() {
 					{
 						breakpoint: 1440,
 						settings: {
-							slidesToShow: 4,
+							slidesToShow: 3,
 							slidesToScroll: 2
 						}
 					},
@@ -1086,300 +1086,273 @@ function slidersInit() {
 /**
  * !tab switcher
  * */
-function tabSwitcher() {
-	// external js:
-	// 1) TweetMax VERSION: 1.19.0 (widgets.js);
-	// 2) resizeByWidth (resize only width);
+;(function($){
+	'use strict';
 
-	/*
-	 <!--html-->
-	 <div class="some-class tabs-js" data-collapsed="true" data-auto-height="true" data-to-queue="480">
-	 <!--if has data-collapsed="true" one click open tab content, two click close collapse tab content-->
-	 <div class="some-class__nav">
-	 <div class="some-class__tab">
-	 <a href="#some-id-01" class="tab-anchor-js">Text tab 01</a>
-	 </div>
-	 <div class="some-class__tab">
-	 <a href="#some-id-02" class="tab-anchor-js">Text tab 02</a>
-	 </div>
-	 </div>
+	var MsTabs = function(element, config){
+		var $element = $(element),
+			$anchor = $element.find(config.anchor),
+			$panels = $element.find(config.panels),
+			$panel = $element.find(config.panel),
+			isAnimated = false,
+			activeId,
+			isOpen = false,
+			collapsed = $element.data('tabs-collapsed') || config.collapsed;
 
-	 <div class="some-class__panels tab-container-js">
-	 <div class="some-class__panel tab-content-js" id="some-id-01">Text content 01</div>
-	 <div class="some-class__panel tab-content-js" id="some-id-02">Text content 02</div>
-	 </div>
-	 </div>
-	 <!--html end-->
-	 */
-
-	var $tabWrapper = $('.tabs-js');
-	var $container = $('.tab-container-js');
-
-	if (!$container.length) return false;
-
-	if ($tabWrapper.length) {
-		var $anchor = $('.tab-anchor-js'),
-			$content = $('.tab-content-js'),
-			$simpleAccordionHand = $('.tab-link-js'),
-			activeClass = 'active-tab',
-			collapseAllClass = 'collapsed-all-tab',
-			idPrefix = 'activeIs',
-			animationSpeed = 0.2,
-			animationHeightSpeed = 0.08;
-
-		$.each($tabWrapper, function () {
-			var $currentContainer = $(this),
-				$currentAnchor = $currentContainer.find($anchor),
-				$thisContainer = $currentContainer.find($container),
-				$currentContent = $currentContainer.find($content);
-
-
-			if ($currentContainer.find('.' + activeClass).length > 0) {
-				var initialTab = $currentContainer.find('.' + activeClass).attr('href').substring(1);
-			}
-			if($currentContainer.data('collapsed') === true){
-				$currentContainer.addClass(collapseAllClass);
-			}
-			// var toQueue = $currentContainer.data('to-queue'); // transform tab for toQueue value layout width
-			// var tabInitedFlag = false;
-			var valDataAutoHeight = $currentContainer.data('auto-height');
-			var thisAutoHeight = valDataAutoHeight !== false;
-			var activeTab = false;
-
-			// prepare traffic content
-			function prepareTabsContent() {
-				$thisContainer.css({
-					'display': 'block',
-					'position': 'relative',
-					'overflow': 'hidden'
-				});
-
-				$currentContent.css({
-					// 'display': 'none',
-					'position': 'absolute',
-					'left': 0,
-					'top': 0,
-					'width': '100%',
-					'z-index': -1
-				});
-
-				switchContent();
-			}
-
-			prepareTabsContent();
-
-			// toggle content
-			$currentAnchor.on('click', function (e) {
-				e.preventDefault();
-
-				var $self = $(this),
-					selfTab = $self.attr('href').substring(1);
-
-				if ($currentContainer.data('collapsed') === true && activeTab === selfTab) {
-
-					toggleActiveClass();
-					toggleContent(false);
-					changeHeightContainer(false);
-
-					return;
-				}
-
-				if (activeTab === selfTab) return false;
-
-				initialTab = selfTab;
-
-				switchContent();
-			});
-
-			// collapse current tab method
-			$currentAnchor.eq(0).on('tabSwitcherCollapse', function () {
-				var $self = $(this);
-				var selfTab = $self.attr('href').substring(1);
-
-				if (activeTab === selfTab) {
-					toggleActiveClass();
-					toggleContent(false);
-					changeHeightContainer(false);
-				}
-			});
-
-			// switch content
-			function switchContent() {
-				if (initialTab) {
-					toggleContent();
-					changeHeightContainer();
-					toggleActiveClass();
-				}
-			}
-
-			// show active content and hide other
-			function toggleContent() {
-
-				thisAutoHeight && $thisContainer.css('height', $thisContainer.outerHeight());
-
-				$currentContent.css({
-					'position': 'absolute',
-					'left': 0,
-					'top': 0
-				});
-
-				// TweenMax.to($currentContent, animationSpeed, {
-				// 	autoAlpha: 0
-				// 	// ,'z-index': -1
-				// });
-
-				if (arguments[0] === false) return;
-
-				var $initialContent = $currentContent.filter('[id="' + initialTab + '"]');
-
-				$initialContent.css('z-index', 2);
-
-				// TweenMax.to($initialContent, animationSpeed, {
-				// 	autoAlpha: 1
-				// 	// ,'z-index': 2
-				// });
-			}
-
-			// change container's height
-			function changeHeightContainer() {
-				var $initialContent = $currentContent.filter('[id="' + initialTab + '"]');
-
-				if (arguments[0] === false) {
-					// TweenMax.to($thisContainer, animationHeightSpeed, {
-					// 'height': 0
-					// });
-
-					$thisContainer.animate({
-						'height': 0
-					}, animationHeightSpeed*1000, function() {
-						// Animation complete.
+		var callbacks = function () {
+			/** track events */
+			$.each(config, function (key, value) {
+				if (typeof value === 'function') {
+					$element.on('msTabs.' + key, function (e, param) {
+						return value(e, $element, param);
 					});
-
-					return;
 				}
+			});
+		}, show = function () {
+			// Определяем текущий таб
+			var $activePanel = $panel.filter('[id="' + activeId + '"]'),
+				$otherPanel = $panel.not('[id="' + activeId + '"]'),
+				$activeAnchor = $anchor.filter('[href="#' + activeId + '"]');
 
-				if (thisAutoHeight) {
-					// TweenMax.to($thisContainer, animationHeightSpeed, {
-					// 	'height': $initialContent.outerHeight(),
-					// 	onComplete: function () {
-					//
-					// 		thisAutoHeight && $thisContainer.css('height', '');
-					//
-					// 		$initialContent.css({
-					// 			'position': 'relative',
-					// 			'left': 'auto',
-					// 			'right': 'auto'
-					// 		});
-					//
-					// 		$tabWrapper.trigger('afterChange.tabSwitcher');
-					// 	}
-					// });
+			if (!isAnimated) {
+				// console.log('Показать таб:', activeId);
+				isAnimated = true;
 
-					$thisContainer.animate({
-						'height': 0
-					}, animationHeightSpeed*1000, function() {
-						// Animation complete.
-						thisAutoHeight && $thisContainer.css('height', '');
+				// Удалить активный класс со всех элементов
+				toggleClass([$panel, $anchor], false);
 
-						$initialContent.css({
+				// Добавить класс на каждый активный элемент
+				toggleClass([$activePanel, $activeAnchor], true);
+
+				// Анимирование высоты табов
+				$panels.animate({
+					'height': $activePanel.outerHeight()
+				}, config.animationSpeed);
+
+				// Скрыть все табы, кроме активного
+				hideTab($otherPanel);
+
+				// Показать активный таб
+				$activePanel
+					.css({
+						'z-index': 2,
+						'visibility': 'visible'
+					})
+					.animate({
+						'opacity': 1
+					}, config.animationSpeed, function () {
+						$activePanel.css({
 							'position': 'relative',
 							'left': 'auto',
-							'right': 'auto'
-						});
+							'top': 'auto'
+						}).attr('tabindex', 0);
 
-						$tabWrapper.trigger('afterChange.tabSwitcher');
+						// Анимация полностью завершена
+						isOpen = true;
+						isAnimated = false;
 					});
-				}
-
-				$initialContent.css({
-					'position': 'relative',
-					'left': 'auto',
-					'right': 'auto'
-				})
 			}
 
-			// toggle class active
-			function toggleActiveClass() {
-				$currentAnchor.removeClass(activeClass);
-				$currentContent.removeClass(activeClass);
-				if($currentContainer.data('collapsed') === true){
-					$currentContainer.addClass(collapseAllClass);
+			// callback after showed tab
+			$element.trigger('msTabs.afterShowed');
+		}, hide = function () {
+			// Определить текущий таб
+			var $activePanel = $panel.filter('[id="' + activeId + '"]');
+
+			if (!isAnimated) {
+				// console.log("Скрыть таб: ", activeId);
+
+				isAnimated = true;
+
+				// Удалить активный класс со всех элементов
+				toggleClass([$panel, $anchor], false);
+
+				// Анимирование высоты табов
+				$panels.animate({
+					'height': 0
+				}, config.animationSpeed);
+
+				hideTab($activePanel, function () {
+					isOpen = false;
+					isAnimated = false;
+				});
+			}
+
+			// callback after tab hidden
+			$element.trigger('msTabs.afterHidden');
+		}, hideTab = function (tab) {
+			var callback = arguments[1];
+			tab
+				.css({
+					'z-index': -1
+				})
+				.attr('tabindex', -1)
+				.animate({
+					'opacity': 0
+				}, config.animationSpeed, function () {
+					tab.css({
+						'position': 'absolute',
+						'left': 0,
+						'top': 0,
+						'visibility': 'hidden'
+					});
+
+					// Анимация полностью завершена
+					if (typeof callback === "function") {
+						callback();
+					}
+				});
+		}, toggleClass = function (arr) {
+			var remove = arguments[1] === false;
+			$.each(arr, function () {
+				var iElem = this;
+				// если массив, то устанавливаем класс на каждый из элемент этого массива
+				if ($.isArray(iElem)) {
+					$.each(iElem, function () {
+						var $curElem = $(this);
+						if ($curElem.length) {
+							// Если второй аргумент false, то удаляем класс
+							if (remove) {
+								$curElem.removeClass(config.modifiers.activeClass);
+							} else {
+								// Если второй аргумент не false, то добавляем класс
+								$curElem.addClass(config.modifiers.activeClass);
+							}
+						} else {
+							// В консоль вывести предупреждение,
+							// если указанного элемента не существует.
+							console.warn('Element "' + this + '" does not exist!')
+						}
+					});
+				} else {
+					// Если второй аргумент false, то удаляем класс
+					if (remove) {
+						$(iElem).removeClass(config.modifiers.activeClass);
+					} else {
+						// Если второй аргумент не false, то добавляем класс
+						$(iElem).addClass(config.modifiers.activeClass);
+					}
 				}
+			});
+		}, events = function () {
+			$element.on('click', config.anchor, function (event) {
+				event.preventDefault();
 
-				if (activeTab) {
-					$currentContainer.removeClass(idPrefix + '-' + activeTab);
-				}
+				var curId = $(this).attr('href').substring(1);
 
-				if (initialTab !== activeTab) {
-
-					$currentAnchor.filter('[href="#' + initialTab + '"]').addClass(activeClass);
-					$currentContent.filter('[id="' + initialTab + '"]').addClass(activeClass);
-					$currentContainer.addClass(idPrefix + '-' + initialTab);
-					$currentContainer.removeClass(collapseAllClass);
-
-					activeTab = initialTab;
-
+				if (isAnimated || !collapsed && curId === activeId) {
 					return false;
 				}
 
-				activeTab = false;
+				if (collapsed && isOpen && curId === activeId) {
+					hide();
+				} else {
+					activeId = curId;
+					show();
+				}
+			});
+		}, init = function () {
+			activeId = $anchor.filter('.' + config.modifiers.activeClass).length && $anchor.filter('.' + config.modifiers.activeClass).attr('href').substring(1);
+
+			// console.log("activeId (сразу после инициализации): ", !!activeId);
+
+			$panels.css({
+				'display': 'block',
+				'position': 'relative',
+				'overflow': 'hidden'
+			});
+
+			$panel.css({
+				'position': 'absolute',
+				'left': 0,
+				'top': 0,
+				'opacity': 0,
+				'width': '100%',
+				'visibility': 'hidden',
+				'z-index': -1
+			}).attr('tabindex', -1);
+
+			if (activeId) {
+				var $activePanel = $panel.filter('[id="' + activeId + '"]');
+
+				// Добавить класс на каждый элемен
+				toggleClass([$activePanel], true);
+
+				// Показать активный таб
+				$activePanel
+					.css({
+						'position': 'relative',
+						'left': 'auto',
+						'top': 'auto',
+						'opacity': 1,
+						'visibility': 'visible',
+						'z-index': 2
+					})
+					.attr('tabindex', 0);
+
+				isOpen = true;
 			}
 
-			// to queue
-			// $(window).on('load debouncedresize', function () {
-			// 	console.log("toQueue.length: ", !!toQueue);
-			// 	if (toQueue && window.innerWidth < toQueue){
-			// 		tabInitedFlag = false;
-			// 		$thisContainer.attr('style', "");
-			// 		$currentContent.attr('style', "");
-			//
-			// 		return;
-			// 	}
-			//
-			// 	console.log("tabInitedFlag: ", tabInitedFlag);
-			// 	if(!tabInitedFlag) {
-			// 		prepareTabsContent();
-			// 		tabInitedFlag = true;
-			// 	}
-			// });
-		});
 
-		// if transform tabs to accordion
-		// if ($simpleAccordionHand.length) {
-		// 	$simpleAccordionHand.on('click', function (e) {
-		// 		e.preventDefault();
-		//
-		// 		var $curHand = $(this),
-		// 			$curPanel = $curHand.next().children();
-		//
-		// 		if($curHand.hasClass(activeClass)){
-		// 			$curHand.removeClass(activeClass);
-		// 			$curPanel.css({
-		// 				'overflow': 'hidden'
-		// 			});
-		// 			TweenMax.to($curPanel, animationHeightSpeed, {
-		// 				autoAlpha: 0,
-		// 				height: 0
-		// 			});
-		// 		} else {
-		// 			$curHand.addClass(activeClass);
-		// 			TweenMax.to($curPanel, animationHeightSpeed, {
-		// 				autoAlpha: 1,
-		// 				height: '',
-		// 				onComplete: function () {
-		// 					$curPanel.css({
-		// 						'overflow': '',
-		// 						'visibility': '',
-		// 						'opacity': ''
-		// 					});
-		// 				}
-		// 			});
-		// 		}
-		// 	});
-		// }
+			$element.addClass(config.modifiers.init);
+
+			$element.trigger('msTabs.afterInit');
+		};
+
+		self = {
+			callbacks: callbacks,
+			events: events,
+			init: init
+		};
+
+		return self;
+	};
+
+	$.fn.msTabs = function () {
+		var _ = this,
+			opt = arguments[0],
+			args = Array.prototype.slice.call(arguments, 1),
+			l = _.length,
+			i,
+			ret;
+		for (i = 0; i < l; i++) {
+			if (typeof opt === 'object' || typeof opt === 'undefined') {
+				_[i].msTabs = new MsTabs(_[i], $.extend(true, {}, $.fn.msTabs.defaultOptions, opt));
+				_[i].msTabs.init();
+				_[i].msTabs.callbacks();
+				_[i].msTabs.events();
+			}
+			else {
+				ret = _[i].msTabs[opt].apply(_[i].slick, args);
+			}
+			if (typeof ret !== 'undefined') {
+				return ret;
+			}
+		}
+		return _;
+	};
+
+	$.fn.msTabs.defaultOptions = {
+		anchor: '.tabs__anchor-js',
+		panels: '.tabs__panels-js',
+		panel: '.tabs__panel-js',
+		animationSpeed: 300,
+		collapsed: false,
+		modifiers: {
+			init: 'tabs--initialized',
+			activeClass: 'tabs--active'
+		}
+	};
+
+})(jQuery);
+
+function tabSwitcher() {
+	var $tabs = $('.tabs-js');
+
+	if ($tabs.length) {
+		$tabs.msTabs();
 	}
-}
-
+};
 /**
  * !Testing form validation (for example). Do not use on release!
  * */

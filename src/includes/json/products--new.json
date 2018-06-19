@@ -14,7 +14,7 @@
 	"inCart": "",
 	"labels": {
 	  "new": "New",
-	  "bestseller": "Best seller"
+	  "bestseller": ""
 	}
   },
   {
@@ -22,8 +22,8 @@
 	"title": "The Little Elephant",
 	"inCart": "",
 	"labels": {
-	  "new": "",
-	  "bestseller": "Best seller"
+	  "new": "New",
+	  "bestseller": ""
 	}
   },
   {
@@ -40,7 +40,7 @@
 	"title": "The Little Elephant and funny cat",
 	"inCart": "",
 	"labels": {
-	  "new": "",
+	  "new": "New",
 	  "bestseller": "Best seller"
 	}
   },
@@ -58,7 +58,7 @@
 	"title": "The Little Elephant",
 	"inCart": "",
 	"labels": {
-	  "new": "",
+	  "new": "New",
 	  "bestseller": "Best seller"
 	}
   },
@@ -67,8 +67,8 @@
 	"title": "The Little Elephant and funny cat",
 	"inCart": "",
 	"labels": {
-	  "new": "",
-	  "bestseller": "Best seller"
+	  "new": "New",
+	  "bestseller": ""
 	}
   },
   {

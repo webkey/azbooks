@@ -3257,6 +3257,236 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 /* links end */
+/* products preview / product */
+.product {
+	display: block;
+	position: relative;
+	padding: 40px 20px 23px;
+	letter-spacing: normal;
+	color: inherit;
+	text-decoration: none;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+	z-index: 1;
+	transition-property: box-shadow;
+	transition-duration: 0.2s;
+}
+
+.no-touchevents .product:hover {
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.product__img {
+	position: relative;
+	display: block;
+	padding: 0;
+	width: 150px;
+	max-width: 100%;
+	margin: 0 auto 2rem;
+}
+
+.product__img::before {
+	content: "";
+	display: block;
+	height: 0;
+	padding-top: 126.67%;
+}
+
+.product__img img {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	margin: 0 auto;
+	-o-object-fit: scale-down;
+	   object-fit: scale-down;
+	font-family: "object-fit: scale-down";
+}
+
+.product__title {
+	text-align: center;
+	font-family: "Museo Sans Rounded 700", sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2rem;
+	line-height: 1.5;
+}
+
+.product__labels {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 1;
+}
+
+.product__label {
+	width: 61px;
+	height: 61px;
+	text-align: left;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+.product__label--new {
+	background: url(../img/label-new.png) no-repeat;
+}
+
+.product__label--bestseller {
+	background: url(../img/label-bestseller.png) no-repeat;
+}
+
+/* products preview / product end */
+/* categories */
+.categories {
+	background-color: #00abc5;
+	padding-top: 40px;
+	padding-bottom: calc(50px - 10px);
+}
+
+.categories__tabs__nav {
+	text-align: center;
+	margin-bottom: calc(4rem - 5px);
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.categories__tabs__nav a {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	font-family: "Museo Sans Rounded 700", sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2.4rem;
+	line-height: 1.25;
+	letter-spacing: normal;
+	color: white;
+	text-decoration: none;
+	border-radius: 10px;
+	padding: 10px 25px;
+	margin: 0 12px;
+	z-index: 1;
+}
+
+.categories__tabs__nav a::before, .categories__tabs__nav a::after {
+	content: "";
+	display: block;
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+	pointer-events: none;
+}
+
+.categories__tabs__nav a::before {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background-color: #007485;
+}
+
+.categories__tabs__nav a::after {
+	left: 50%;
+	top: 100%;
+	margin-left: -10px;
+	width: 0;
+	height: 0;
+	z-index: 2;
+	border-top: 10px solid #007485;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+}
+
+.categories__tabs__nav a span {
+	border-bottom: 1px solid white;
+}
+
+.no-touchevents .categories__tabs__nav a:hover span {
+	border-bottom-color: transparent;
+}
+
+.categories__tabs__nav a.tabs--active {
+	color: #ffd400;
+	cursor: default;
+}
+
+.categories__tabs__nav a.tabs--active::before, .categories__tabs__nav a.tabs--active::after {
+	opacity: 1;
+}
+
+.categories__tabs__nav a.tabs--active span {
+	border-bottom-color: transparent;
+}
+
+.categories__tabs__panels {
+	position: relative;
+	z-index: 1;
+}
+
+/* categories end */
+/* similar slider */
+.similar-slider {
+	position: relative;
+}
+
+.similar-slider__list {
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 42px;
+}
+
+.similar-slider__list, .similar-slider__list.slick-dotted {
+	margin: 0;
+}
+
+.similar-slider__list.slick-initialized, .no-js .similar-slider__list {
+	white-space: normal;
+	overflow: visible;
+}
+
+.similar-slider__list .slick-track {
+	margin: 0;
+}
+
+.similar-slider__list .slick-prev {
+	left: 0;
+}
+
+.similar-slider__list .slick-next {
+	right: 0;
+}
+
+.similar-slider__list .slick-dots {
+	bottom: 10px;
+}
+
+.similar-slider__item {
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+	padding: 5px 10px 10px;
+}
+
+.no-js .similar-slider__item {
+	width: 320px;
+}
+
+.slick-initialized .similar-slider__item {
+	float: left;
+	display: block;
+}
+
+.similar-slider__item .product {
+	height: 100%;
+}
+
+/* similar slider end */
 /*======================================================*/
 /* PARTIALS */
 /*======================================================*/

@@ -963,7 +963,7 @@ function accordionInit() {
 				_[i].tClass.init();
 			}
 			else {
-				ret = _[i].tClass[opt].apply(_[i].slick, args);
+				ret = _[i].tClass[opt].apply(_[i].tClass, args);
 			}
 			if (typeof ret !== 'undefined') {
 				return ret;
@@ -1057,13 +1057,6 @@ function slidersInit() {
 				arrows: true,
 				responsive: [
 					{
-						breakpoint: 1440,
-						settings: {
-							slidesToShow: 3,
-							slidesToScroll: 2
-						}
-					},
-					{
 						breakpoint: 1100,
 						settings: {
 							slidesToShow: 3,
@@ -1071,7 +1064,7 @@ function slidersInit() {
 						}
 					},
 					{
-						breakpoint: 560,
+						breakpoint: 880,
 						settings: {
 							slidesToShow: 2,
 							slidesToScroll: 2
@@ -1323,7 +1316,7 @@ function slidersInit() {
 				_[i].msTabs.events();
 			}
 			else {
-				ret = _[i].msTabs[opt].apply(_[i].slick, args);
+				ret = _[i].msTabs[opt].apply(_[i].msTabs, args);
 			}
 			if (typeof ret !== 'undefined') {
 				return ret;
@@ -1420,18 +1413,18 @@ $(window).on('debouncedresize', function () {
 });
 
 $(document).ready(function () {
-	placeholderInit();
-	printShow();
-	inputToggleFocusClass();
-	inputHasValueClass();
-	initHoverClass();
-	multiAccordionInit();
-	customSelect($('select.cselect'));
-	accordionInit();
-	toggleShutters();
-	slidersInit();
+	// placeholderInit();
+	// printShow();
+	// inputToggleFocusClass();
+	// inputHasValueClass();
+	// initHoverClass();
+	// multiAccordionInit();
+	// customSelect($('select.cselect'));
+	// accordionInit();
+	// toggleShutters();
+	// slidersInit();
 	tabSwitcher();
-	objectFitImages(); // object-fit-images initial
+	// objectFitImages(); // object-fit-images initial
 
-	formSuccessExample();
+	// formSuccessExample();
 });

@@ -131,9 +131,11 @@ gulp.task('browserSync', function (done) { // Таск browserSync
 		server: {
 			baseDir: "./src"
 		},
+		setImmediate: ['setimmediate', 'setImmedate'],
+		clearImmediate: ['setimmediate', 'clearImmedate'],
 		notify: false // Отключаем уведомления
 	});
-	browserSync.watch(['src/*.html', 'src/js/**/*.js', 'src/includes/**/*.json', 'src/includes/**/*.svg']).on("change", browserSync.reload);
+	browserSync.watch(['src/*.html', 'src/js/**/*.js']).on("change", browserSync.reload);
 	done();
 });
 

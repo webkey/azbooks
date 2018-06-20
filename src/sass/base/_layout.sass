@@ -6,12 +6,13 @@ html
 	font-size: 62.5%
 
 	// блокировка скролла
-	&.css-scroll-fixed:not(.css-scroll-fixed)
-		+scroll-blocked()
+	&.css-scroll-fixed:not(.open-only-mob)
+		+media('>=tab-lg')
+			+scroll-blocked
 
-	//&.shutter-only-mob.css-scroll-fixed
+	&.css-scroll-fixed.open-only-mob
 		+media('<tab-lg')
-			+scroll-blocked()
+			+scroll-blocked
 
 body
 	position: relative
@@ -41,8 +42,14 @@ body
 	+padding-horizontal(nth($page-layout-space, 2))
 	+push-auto
 
+	+media('<mob-lg')
+		+padding-horizontal(nth($page-layout-space--mob, 2))
+
 .layout-space
 	+padding-horizontal(nth($page-layout-space, 2))
+
+	+media('<mob-lg')
+		+padding-horizontal(nth($page-layout-space--mob, 2))
 
 // выравнивание текстовых элементов на странице статьи (контент обернут в .layout-article)
 // и их максимальная ширина
@@ -161,8 +168,7 @@ body
 	max-width: 100%
 	width: $page-layout-width
 	background-color: $bg-color-alt
-	border: solid #cdcdcd
-	border-width: 0 1px
+	box-shadow: 0 0 0 1px #cdcdcd
 
 .article-footer
 	position: relative
@@ -193,6 +199,9 @@ body
 	flex-grow: 1
 	padding-top: $header-height
 
+	+media('<tab-lg')
+		padding-top: $header-height--sm
+
 .content
 	padding-top: 17px
 	padding-bottom: 40px
@@ -219,14 +228,15 @@ body
 	min-width: $page-layout-min
 	z-index: $header-z
 
+	+media('<tab-lg')
+		height: $header-height--sm
+
 .header__holder
 	position: relative
 	height: 100%
 	//padding: 0
 	background-color: $header-bg
 	box-shadow: $header-shadow
-	border: solid #cdcdcd
-	border-width: 0 1px
 	+clear
 
 /* logo
@@ -237,6 +247,10 @@ body
 	width: nth($logo-size, 1)
 	top: 50%
 	transform: translate(0, -50%)
+
+	+media('<mob-lg')
+		left: nth($page-layout-space--mob, 2)
+		width: nth($logo-size--mob, 1)
 
 	&::before
 		content: ""
@@ -262,92 +276,136 @@ body
 /* logo end
 
 /* search-form
-.search-form
+.search-panel
+	position: fixed
+	left: 0
+	top: 0
+	width: 100%
+	min-width: 320px
+	z-index: 20
+
+	&.search-is-open
+		z-index: 25
+
+.search-panel__layout
+	margin: 0 auto
 	position: relative
-	margin: 0
 
-	form
-		visibility: visible
+.search-form
+	$bg-color: white
+	display: none
+	align-items: center
+	position: absolute
+	right: 0
+	top: 0
+	height: $header-height
+	padding: 5px 90px 5px nth($page-layout-space, 2)
+	background-color: $bg-color
+	//opacity: 0
+	//visibility: hidden
+	// transition
+	//z-index: -1
+	//$prop: opacity
+	//will-change: $prop
+	//transition:
+		property: $prop
+		duration: $animation-speed
 
-	.search-form__field
-		margin: 0
-		height: nth($search-form--btn-size, 1)
-		max-width: nth($search-form--btn-size, 2)
-		border: 2px solid $border-color
-		border-radius: nth($search-form--btn-size, 1)
-		width: 400px
-		overflow: hidden
-		background-color: white
-		//==================
-		$prop: max-width, border-color, border-radius
-		will-change: $prop
-		transition:
-			property: $prop
-			duration: $animation-speed
+	+media('<tab-lg')
+		height: $header-height--sm
+		padding-right: 70px
+		width: 100%
 
-	.search-form__input
-		+size(100%)
-		background: $header-bg
-		border: none
-		+font-medium
-		+font(16px, 20px)
-		padding: 8px 5px 8px 45px
-		text-transform: none
-		letter-spacing: normal
-		// add dot if short
-		position: relative
-		overflow: hidden
-		white-space: nowrap
-		text-overflow: ellipsis
-		color: transparent
+	+media('<mob-lg')
+		padding-left: nth($page-layout-space--mob, 2)
 
-		&, &:hover, &:focus, &.error, &.input--has-value
-			box-shadow: none
-
-		&.input--focus, &:focus
-			color: $text-color
-			background-color: #f3f3f3
-
-	// inside header
-	.header &
-		//visibility: hidden
+	&::before
+		content: ""
+		display: block
 		position: absolute
-		right: nth($page-layout-space, 2)
-		top: 50%
-		margin-top: -25px
-		z-index: 5
+		top: 0
+		right: 100%
+		height: 100%
+		width: 40px
+		margin: 0 -4px
+		pointer-events: none
+		+linear-gradient(to left, $bg-color 0%, $bg-color 50%, rgba($bg-color, 0) 100%)
 
-	// hover
-	.search-form__field:hover
-		border-color: $base-color
+		+media('<tab-lg')
+			display: none
 
-	// transform search form on focus
-	//&.input--has-value
-	.search-form__field.input--focus
-		max-width: 600px
+	.search-is-open &
+		display: block
+		display: flex
+		//opacity: 1
+		//z-index: auto
+
+.search-form__field
+	position: relative
+	height: nth($search-form--size, 1)
+	width: nth($search-form--size, 2)
+	margin: 0
+	// transform
+	//$scale: 0.95
+	//transform: scale($scale)
+	//transform: scale3d($scale, $scale, 1)
+	// transition
+	//$prop: transform
+	//will-change: $prop
+	//transition:
+		property: $prop
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		height: nth($search-form--size--sm, 1)
+		width: nth($search-form--size--sm, 2)
+
+	.search-is-open &
+		// transform
+		//$scale: 1
+		//transform: scale($scale)
+		//transform: scale3d($scale, $scale, 1)
+		display: block
+
+input.search-form__input
+	+size(100%)
+	+font-medium
+	+font(16px, 20px)
+	padding: 13px 45px 13px 10px
+	border-radius: 5px
+	border: 2px solid $border-color
+	background-color: #f3f3f3
+
+	+media('<tab-lg')
+		+padding-vertical(8px)
+
+	&, &:hover, &:focus, &.error, &.input--has-value
+		box-shadow: none
 		border-color: $border-color
-		border-radius: 5px
-
-		.search-form__input
-			opacity: 1
 
 .search-form__btn
 	position: absolute
-	left: 13px
+	right: 10px
 	top: 50%
-	+size(22px)
-	margin-top: -11px
+	margin: -15px 0 0
 	+font-normal
-	text-align: center
-	z-index: 5
-	pointer-events: none
+	+size(30px)
 	color: $text-color
+	text-align: center
+	border: none
+	background: none
+	padding: 0
+	z-index: 5
+	// transition
+	pointer-events: none
+	$prop: color
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
 
-	.input--has-value.input--focus &
+	.input--has-value &
 		pointer-events: auto
-
-	.no-touchevents &:hover
-		color: $link-color
 
 	input
 		+cover-abs()
@@ -360,8 +418,8 @@ body
 		display: inline-block
 		position: absolute
 		+position(50%)
-		+size(nth($search-form--btn-icon-size, 1))
-		margin: -#{round(nth($search-form--btn-icon-size, 1)*0.5)} 0 0 -#{round(nth($search-form--btn-icon-size, 1)*0.5)}
+		+size(18px)
+		margin: -9px 0 0 -9px
 
 	path
 		fill: currentColor
@@ -369,6 +427,132 @@ body
 
 	span
 		+hide-text
+
+	.no-touchevents &:hover
+		color: $link-color
+
+.search-opener
+	display: block
+	position: absolute
+	right: nth($page-layout-space, 2)
+	top: round($header-height/2)
+	margin: -#{round($search-form--opener-size/2)} 0 0
+	height: $search-form--opener-size
+	width: $search-form--opener-size
+	border: 2px solid $border-color
+	border-radius: $search-form--opener-size
+	background-color: white
+	color: $text-color
+	z-index: 20
+	$prop: color, border-color
+	transition:
+		property: $prop
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		top: round($header-height--sm/2)
+		right: 66px
+		border: none
+		border-radius: 0
+
+	svg
+		display: block
+		position: absolute
+		+position(50%)
+		// transition
+		//$prop: transform, opacity
+		//will-change: $prop
+		//transition:
+			property: $prop
+			duration: $animation-speed
+			timing-function: ease-in-out
+
+		&.svg-ico-search
+			+size($search-form--btn-icon-size)
+			margin: -#{round($search-form--btn-icon-size*0.5)} 0 0 -#{round($search-form--btn-icon-size*0.5)}
+
+			+media('<tab-lg')
+				+size($search-form--btn-icon-size--sm)
+				margin: -#{round($search-form--btn-icon-size--sm*0.5)} 0 0 -#{round($search-form--btn-icon-size--sm*0.5)}
+
+		//&.svg-ico-cross
+			+size(24px)
+			margin: -12px 0 0 -12px
+			opacity: 0
+			// transform
+			$scale: 0.5
+			transform: scale($scale)
+			transform: scale3d($scale, $scale, 1)
+
+	path
+		fill: currentColor
+		transition: inherit
+
+	// hover
+	.no-touchevents &:hover
+		color: $base-color
+
+	// active
+	&.search-is-open
+		display: none
+
+	// active
+	//&.search-is-open
+		border-color: white
+
+		svg
+			&.svg-ico-search
+				opacity: 0
+				// transform
+				$scale: 0.5
+				transform: scale($scale)
+				transform: scale3d($scale, $scale, 1)
+
+			&.svg-ico-cross
+				opacity: 1
+				// transform
+				$scale: 1
+				transform: scale($scale)
+				transform: scale3d($scale, $scale, 1)
+
+.search-closer
+	display: none
+	position: absolute
+	right: nth($page-layout-space, 2)
+	top: round($header-height/2)
+	margin: -#{round($search-form--opener-size/2)} 0 0
+	height: $search-form--opener-size
+	width: $search-form--opener-size
+	color: $text-color
+	z-index: 20
+	$prop: color
+	transition:
+		property: $prop
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		top: round($header-height--sm/2)
+		right: 10px
+		border: none
+
+	svg
+		display: block
+		position: absolute
+		+position(50%)
+		+size(24px)
+		margin: -12px 0 0 -12px
+
+	path
+		fill: currentColor
+		transition: inherit
+
+	// hover
+	.no-touchevents &:hover
+		color: $base-color
+
+	// active
+	&.search-is-open
+		display: block
 
 /* search-form end
 /* === HEADER end ===
@@ -393,11 +577,11 @@ $nav-is-open-class: 'nav-is-open'
 
 	+media('<tab-lg')
 		position: fixed
-		width: 320px
-		height: 100%
+		width: $nav-width
+		height: calc(100% - #{$header-height--sm})
 		left: 0
-		top: 0
-		background-color: lightsteelblue
+		top: $header-height--sm
+		background-color: white
 		z-index: 9999
 		$x: -100%
 		transform: translate($x, 0) // for old browser
@@ -413,6 +597,9 @@ $nav-is-open-class: 'nav-is-open'
 	height: 100%
 	margin: 0 auto
 
+	+media('<tab-lg')
+		padding: 0
+
 /* nav list
 // общие стили для пунктов навигации
 .nav__list
@@ -421,13 +608,18 @@ $nav-is-open-class: 'nav-is-open'
 	left: #{nth($logo-size, 1) + nth($page-layout-space, 2) + 50}
 	height: $header-height
 
+	+media('<tab-lg')
+		position: relative
+		top: auto
+		left: auto
+		height: 100%
+		overflow-x: hidden
+		overflow-y: auto
+
 	// убрать подсветку при клике на тачскринах
 	.touchevents &
 		user-select: none
 		-webkit-tap-highlight-color: transparent
-
-	+media('<tab-lg')
-		padding: 20px
 
 	li
 		position: relative
@@ -447,6 +639,12 @@ $nav-is-open-class: 'nav-is-open'
 			property: $prop
 			duration: $animation-speed
 
+		+media('<tab-lg')
+			+padding-horizontal(nth($page-layout-space, 2))
+
+		//+media('<mob-lg')
+			+padding-horizontal(nth($page-layout-space--mob, 2))
+
 		// убрать подсветку при клике на тачскринах
 		.touchevents &
 			user-select: none
@@ -458,19 +656,35 @@ $nav-is-open-class: 'nav-is-open'
 // общие стили для подменю навигации
 .nav__drop
 	display: none
-	position: absolute
-	left: 0
-	top: 100%
-	width: 280px
-	padding: 14px 0
-	border: 1px solid #ccc
-	background-color: #fff
+	// transition
+	$prop: opacity, visibility
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
+		timing-function: ease-in-out
+
+	+media('>=tab-lg')
+		position: absolute
+		left: 0
+		top: 100%
+		width: 280px
+		padding: 14px 0
+		opacity: 0
+		visibility: hidden
+		border: 1px solid #ccc
+		background-color: #fff
 
 	.hover > &
-		display: block
+		+media('>=tab-lg')
+			display: block
+			opacity: 1
+			visibility: visible
 
 	.no-js &
 		display: block
+		opacity: 1
+		visibility: visible
 
 // стили для пунктов навигации, у которых ЕСТЬ ПОДМЕНЮ
 .nav__list li.has-drop > .nav__tab > a
@@ -483,6 +697,7 @@ $nav-is-open-class: 'nav-is-open'
 	&
 		a
 			color: $base-color
+			+font-alt-bold
 
 // стили для пункта навигации С ОТКРЫТЫМ ПОДМЕНЮ
 //.nav__list li
@@ -504,10 +719,19 @@ $nav-is-open-class: 'nav-is-open'
 
 	+media('<tab-lg')
 		float: none
+		height: auto
+		width: $nav-width
+
+		.touchevents &
+			width: auto
 
 	& > .nav__tab
 		height: 100%
 		padding: 10px 0
+
+		+media('<tab-lg')
+			padding: 0
+			height: auto
 
 		a
 			display: flex
@@ -519,15 +743,21 @@ $nav-is-open-class: 'nav-is-open'
 			border-radius: 10px
 			border: 2px solid transparent
 
+			+media('<tab-lg')
+				border: none
+				+padding-vertical(15px)
+
 			span
 				+font(2.0rem, round-float(24/20, 2))
 
 	// hover
 	&.hover
-		& > .nav__tab
-			a
-				border-color: rgba($base-color, 0.3)
-				color: $base-color
+		// только для десктопа
+		+media('>=tab-lg')
+			& > .nav__tab
+				a
+					border-color: rgba($base-color, 0.3)
+					color: $base-color
 
 // СТРЕЛКИ навигации
 .nav__angle
@@ -556,8 +786,10 @@ $nav-is-open-class: 'nav-is-open'
 	i
 		position: absolute
 		+position(50%, 50%)
-		+size(16px)
-		margin: -8px 0 0 -8px
+		+size(20px)
+		margin: -10px 0 0 -10px
+		background-color: $base-color
+		border-radius: 10px
 		pointer-events: none
 		transition-property: transform
 		transition-duration: $animation-speed
@@ -565,19 +797,18 @@ $nav-is-open-class: 'nav-is-open'
 
 		&::before, &::after
 			+pseudo()
-			+position(50%, -10px)
+			+position(50%, 50%)
 			height: 2px
-			width: 16px
+			width: 10px
+			margin: -1px -5px
+			border-radius: 2px
 			backface-visibility: hidden
-			background-color: $text-color
+			background-color: white
 			transition-property: background-color, transform
 			transition-duration: $animation-speed
 
 		&::after
 			transform: rotate(0.25turn)
-
-// стили стрелок навигации для разных состояний
-.nav__angle
 
 	// активное (подменю открыто)
 	li.is-open > .nav__tab & i
@@ -586,8 +817,11 @@ $nav-is-open-class: 'nav-is-open'
 		&::before, &::after
 			transform: rotate(0)
 
+// стили стрелок навигации для разных состояний
+//.nav__angle
+
 	// ховер
-	.no-touchevents li > .nav__tab &:hover i
+	//.no-touchevents li > .nav__tab &:hover i
 		&::before, &::after
 			background-color: $base-color
 
@@ -599,17 +833,24 @@ $nav-is-open-class: 'nav-is-open'
 		background-color: $nav-bg-color-s
 
 	a
-		padding-left: 20px
 		color: $text-color
 
-		span
+		+media('>=tab-lg')
+			padding-left: 20px
+
+		+media('<tab-lg')
+			padding-left: #{round(nth($page-layout-space, 2)*2)}
+
+		//span
 			+font(1.6rem, round-float(20/16, 2))
 
 	// hover
 	li.hover
-		& > .nav__tab
-			& > a
-				background-color: rgba($base-color, 0.1)
+		// только для десктопа
+		+media('>=tab-lg')
+			& > .nav__tab
+				& > a
+					background-color: rgba($base-color, 0.1)
 
 	.nav__drop
 
@@ -619,8 +860,11 @@ $nav-is-open-class: 'nav-is-open'
 		//ul, a, .nav__angle
 			background-color: $nav-bg-color-ss
 
-		//a
-			span
+		a
+			+media('<tab-lg')
+				padding-left: #{round(nth($page-layout-space, 2)*3)}
+
+			//span
 				+font(1.6rem, round-float(20/16, 2))
 
 		.nav__drop
@@ -635,37 +879,34 @@ $nav-is-open-class: 'nav-is-open'
 /* nav list
 // nav opener btn
 a.nav-opener
-	$btn-menu-bg: lightcoral
-	$btn-menu-color: white
-	$btn-menu-lines-width: 26px
-	$btn-menu-lines-width--lg: 22px
+	$btn-menu-bg: white
+	$btn-menu-color: $text-color
+	$btn-menu-size: 40px
+	$btn-menu-lines-width: 30px
 	$btn-menu-lines-height: 3px
-	$btn-menu-lines-height--lg: 2px
 	$btn-menu-lines-space: 5px
-	$btn-menu-lines-space--lg: 4px
-	$btn-menu-lines-color: white
+	$btn-menu-lines-color: $text-color
 	$btn-menu-animation-speed: $animation-speed
 	$btn-menu-animation-delay: round-float($animation-speed*0.5, 2)
 
 	$user-options-cross-width: $btn-menu-lines-width
-	$user-options-cross-width--lg: $btn-menu-lines-width--lg
 	$user-options-cross-height: $btn-menu-lines-height
-	$user-options-cross-height--lg: $btn-menu-lines-height--lg
 	$user-options-cross-color: $btn-menu-lines-color
 
 	// =====================
 
 	display: none
-	+size(50px)
-	position: relative
+	position: fixed
+	right: 14px
+	top: round($header-height--sm/2)
+	margin-top: -#{round($btn-menu-size/2)}
+	z-index: 20
+	+size($btn-menu-size)
 	text-decoration: none
 	color: $text-color
 	background-color: $btn-menu-bg
 	user-select: none
 	-webkit-tap-highlight-color: transparent
-	transition:
-		property: background-color
-		duration: $animation-speed
 
 	+media('<tab-lg')
 		display: block
@@ -694,10 +935,6 @@ a.nav-opener
 			delay: 0s
 			timing-function: cubic-bezier(0.65, 0.05, 0.36, 1)
 
-		+media('<desk-lg')
-			+size($user-options-cross-width--lg, $user-options-cross-height--lg)
-			+margin($top: -#{round($user-options-cross-height--lg*0.5)}, $left: -#{round($user-options-cross-width--lg*0.5)})
-
 	// бутерброд
 	& > i
 		position: absolute
@@ -712,11 +949,6 @@ a.nav-opener
 			duration: $btn-menu-animation-speed
 			delay: $btn-menu-animation-delay
 
-
-		+media('<desk-lg')
-			+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
-			+margin($top: -#{round($btn-menu-lines-height--lg*0.5)}, $left: -#{round($btn-menu-lines-width--lg*0.5)})
-
 		&::before, &::after
 			+pseudo()
 			left: 0
@@ -728,27 +960,17 @@ a.nav-opener
 				duration: $btn-menu-animation-speed
 				delay: $btn-menu-animation-delay
 
-
-			+media('<desk-lg')
-				+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
-
 		//first line menu
 		&::before
 			top: -#{$btn-menu-lines-height + $btn-menu-lines-space}
-
-			+media('<desk-lg')
-				top: -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
 
 		//third line menu
 		&::after
 			top: #{$btn-menu-lines-height + $btn-menu-lines-space}
 
-			+media('<desk-lg')
-				top: #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
-
 	// hover
 	.no-touchevents &:hover
-		background-color: #f3f3f3
+		//background-color: #f3f3f3
 
 		&::before, &::after
 			background-color: $base-color
@@ -765,7 +987,7 @@ a.nav-opener
 
 		&::before, &::after
 			transition-delay: $btn-menu-animation-delay
-			background-color: $base-color
+			//background-color: $base-color
 
 			opacity: 1
 
@@ -785,14 +1007,8 @@ a.nav-opener
 			&::before
 				transform: translate(0, #{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
 
-				+media('<desk-lg')
-					transform: translate(0, #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
-
 			&::after
 				transform: translate(0, -#{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
-
-				+media('<desk-lg')
-					transform: translate(0, -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
 
 // overlay
 // в html добавить
@@ -800,7 +1016,7 @@ a.nav-opener
 .nav-overlay
 	position: fixed
 	left: 0
-	top: 0
+	top: $header-height--sm
 	width: 100%
 	height: 100%
 	background-color: rgba(black, 0.35)
@@ -852,6 +1068,7 @@ a.nav-opener
 
 	+media('<mob-lg')
 		display: block
+		+padding-horizontal(nth($page-layout-space--mob, 2))
 
 	&:first-child
 		+media('<tab-lg')
@@ -1002,7 +1219,7 @@ a.nav-opener
 		visibility: hidden
 		$scale: 0.76
 		transform: scale($scale)
-		transform: scale3d($scale, 1)
+		transform: scale3d($scale, $scale, 1)
 		pointer-events: none
 
 	input[type='submit'], button

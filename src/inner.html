@@ -56,23 +56,32 @@
 					<img style="display: none;" class="logo-print" src="img/logo.png" alt="Azbooks">
 				</div>
 				<!--logo end-->
-				<!--search-->
-				<div class="search-form">
-					<form action="#" method="post">
-						<div class="search-form__field input-wrap">
-							<input type="search" placeholder="Search" class="search-form__input field-effects-js" />
-							<div class="search-form__btn">
-								<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"/></svg>
-								<span>Find</span>
-								<input type="submit" value="">
-							</div>
-						</div>
-					</form>
-				</div>
-				<!--search end-->
 			</div>
 		</header>
-		<nav class="nav shutter--nav-js">
+		<!--search-->
+		<div class="search-panel search-form-js">
+			<div class="search-panel__layout max-wrap layout">
+				<form class="search-form" action="#" method="post" data-tc-stop>
+					<div class="search-form__field input-wrap">
+						<input type="search" class="search-form__input field-effects-js" />
+						<div class="search-form__btn">
+							<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"></path></svg>
+							<span>Find</span>
+							<input type="submit" value="">
+						</div>
+					</div>
+				</form>
+				<a href="#" class="search-opener search-opener-js">
+			<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"></path></svg>
+		</a>
+				<a href="#" class="search-closer search-closer-js">
+			<svg class="svg-ico-cross" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.3 23.3"><path d="M23.3 2.3 21 0l-9.3 9.3L2.3 0 0 2.3l9.3 9.3L0 21l2.4 2.4 9.3-9.3 9.3 9.3 2.4-2.3-9.3-9.3Z"></path></svg>
+		</a>
+			</div>
+		</div>
+		<!--search end-->
+		<!--navigation-->
+		<nav class="nav shutter--nav-js" data-tc-stop>
 			<div class="nav__layout max-wrap layout">
 				<!--(1) START nav FIRST level-->
 				<ul class="nav__list nav__list-js">
@@ -166,6 +175,7 @@
 		</nav>
 		<div class="nav-overlay nav-overlay-js">&nbsp;</div>
 		<a href="#" class="nav-opener nav-opener-js"><i>&nbsp;</i><span>Menu</span></a>
+		<!--navigation end-->
 		<!--HEADER end-->
 		<!--MAIN-->
 		<div class="main">
@@ -262,7 +272,7 @@
 		<footer class="max-wrap footer">
 			<div class="footer-row">
 				<div class="footer-col">
-					<nav class="footer-nav">
+					<div class="footer-nav">
 						<ul>
 							<li><a href="#"><span>Home</span></a></li>
 							<li><a href="#"><span>Books</span></a></li>
@@ -270,7 +280,7 @@
 							<li><a href="#"><span>About us</span></a></li>
 							<li><a href="#"><span>Contacts</span></a></li>
 						</ul>
-					</nav>
+					</div>
 				</div>
 				<div class="footer-col">
 					<!--subscription form-->

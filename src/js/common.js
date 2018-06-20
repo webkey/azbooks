@@ -288,11 +288,24 @@ function inputHasValueClass() {
 /**
  * !Toggle "hover" class by hover on the item of the list
  * */
-function initHoverClass(){
-	if($('.nav__list-js').length){
+function initHoverClass() {
+	if ($('.nav__list-js').length) {
 		new HoverClass({
-			container: '.nav__list-js',
-			drop: '.nav__drop-js'
+			container: '.nav__list-js', drop: '.nav__drop-js'
+		});
+	}
+}
+
+/**
+ * !Equal height of blocks by maximum height of them
+ */
+function equalHeight() {
+	// equal height
+	var $equalHeight = $('.equal-height-js');
+
+	if($equalHeight.length) {
+		$equalHeight.children().matchHeight({
+			byRow: true, property: 'height', target: null, remove: false
 		});
 	}
 }
@@ -986,7 +999,9 @@ function accordionInit() {
 })(jQuery);
 
 function toggleShutters() {
-	var $nav = $('.nav-opener-js'), nav;
+	var nav, search;
+
+	var $nav = $('.nav-opener-js');
 	if ($nav.length) {
 		nav = $nav.tClass({
 			toggleClassTo: ['html', '.nav-overlay-js', '.shutter--nav-js']
@@ -996,6 +1011,34 @@ function toggleShutters() {
 			}
 			, cssScrollFixed: true
 			, removeOutsideClick: true
+			, beforeAdded: function () {
+				search.tClass('remove');
+			}
+		});
+	}
+
+	var $search = $('.search-opener-js'),
+		searchForm = '.search-form-js';
+	if ($search.length) {
+		search = $search.tClass({
+			toggleClassTo: ['html', searchForm]
+			, modifiers: {
+				currentClass: 'search-is-open'
+			}
+			, cssScrollFixed: false
+			, removeOutsideClick: true
+			, switchBtn: '.search-closer-js'
+			, beforeAdded: function () {
+				nav.tClass('remove');
+			}
+			, afterAdded: function () {
+				setTimeout(function () {
+					$(searchForm).find('input[type=search]').focus();
+				}, 100)
+			}
+			, afterRemoved: function () {
+				$(searchForm).find('input[type=search]').blur();
+			}
 		});
 	}
 }
@@ -1020,14 +1063,14 @@ function slidersInit() {
 				infinite: true,
 				dots: true,
 				arrows: true,
-				responsive:[
-					{
-						breakpoint: 768,
-						settings: {
-							arrows: false
-						}
-					}
-				]
+				// responsive:[
+				// 	{
+				// 		breakpoint: 768,
+				// 		settings: {
+				// 			arrows: false
+				// 		}
+				// 	}
+				// ]
 			});
 
 		});
@@ -1053,7 +1096,7 @@ function slidersInit() {
 				slidesToShow: 4,
 				slidesToScroll: 2,
 				infinite: false,
-				dots: true,
+				dots: false,
 				arrows: true,
 				responsive: [
 					{
@@ -1064,10 +1107,19 @@ function slidersInit() {
 						}
 					},
 					{
-						breakpoint: 880,
+						breakpoint: 768,
 						settings: {
 							slidesToShow: 2,
 							slidesToScroll: 2
+						}
+					},
+					{
+						breakpoint: 640,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 2,
+							dots: true,
+							arrows: false
 						}
 					}
 				]
@@ -1083,7 +1135,8 @@ function slidersInit() {
 	'use strict';
 
 	var MsTabs = function(element, config){
-		var $element = $(element),
+		var self,
+			$element = $(element),
 			$anchor = $element.find(config.anchor),
 			$panels = $element.find(config.panels),
 			$panel = $element.find(config.panel),
@@ -1310,7 +1363,7 @@ function slidersInit() {
 			ret;
 		for (i = 0; i < l; i++) {
 			if (typeof opt === 'object' || typeof opt === 'undefined') {
-				_[i].msTabs = new MsTabs(_[i], $.extend(true, {}, $.fn.msTabs.defaultOptions, opt));
+				_[i].msTabs = new MsTabs(_[i], $.extend(true, $.fn.msTabs.defaultOptions, opt));
 				_[i].msTabs.init();
 				_[i].msTabs.callbacks();
 				_[i].msTabs.events();
@@ -1345,7 +1398,7 @@ function tabSwitcher() {
 	if ($tabs.length) {
 		$tabs.msTabs();
 	}
-};
+}
 /**
  * !Testing form validation (for example). Do not use on release!
  * */
@@ -1413,18 +1466,19 @@ $(window).on('debouncedresize', function () {
 });
 
 $(document).ready(function () {
-	// placeholderInit();
-	// printShow();
-	// inputToggleFocusClass();
-	// inputHasValueClass();
-	// initHoverClass();
-	// multiAccordionInit();
-	// customSelect($('select.cselect'));
-	// accordionInit();
-	// toggleShutters();
-	// slidersInit();
+	placeholderInit();
+	printShow();
+	inputToggleFocusClass();
+	inputHasValueClass();
+	initHoverClass();
+	equalHeight();
+	multiAccordionInit();
+	customSelect($('select.cselect'));
+	accordionInit();
+	toggleShutters();
+	slidersInit();
 	tabSwitcher();
-	// objectFitImages(); // object-fit-images initial
+	objectFitImages(); // object-fit-images initial
 
-	// formSuccessExample();
+	formSuccessExample();
 });

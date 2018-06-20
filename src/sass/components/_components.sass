@@ -201,7 +201,10 @@
 				property: $prop
 				duration: $animation-speed
 			transform: scale($scale)
-			transform: scale3d($scale, 1)
+			transform: scale3d($scale, $scale, 1)
+
+			+media('<tab-lg')
+				+size(16px)
 
 			&::before
 				content: none
@@ -210,7 +213,7 @@
 			$scale: 1
 			background-color: white
 			transform: scale($scale)
-			transform: scale3d($scale, 1)
+			transform: scale3d($scale, $scale, 1)
 
 //.no-touchevents &:hover button::before
 /* slick sliders end
@@ -601,6 +604,12 @@
 		display: block
 		+ratio(1260, 450)
 
+		+media('<mob-lg')
+			padding-top: 50%
+
+		+media('<mob-md')
+			padding-top: 75%
+
 	.slick-initialized &
 		// after slide load
 		float: left
@@ -623,17 +632,25 @@
 	.slick-dots
 		bottom: 20px
 
-		+media('<mob-lg')
-			bottom: 10px
+		+media('<tab-lg')
+			bottom: 15px
 
 	// arrows
 	.slick-arrow
 		width: 74px
 
+		+media('<tab-lg')
+			width: 34px
+
 		&::before
 			$size: 64px
 			+size($size)
 			margin: -#{round($size/2)} 0 0 -#{round($size/2)}
+
+			+media('<tab-lg')
+				$size: 24px
+				+size($size)
+				margin: -#{round($size/2)} 0 0 -#{round($size/2)}
 
 	.slick-next
 		&::before
@@ -649,9 +666,6 @@
 .main-section--links
 	+padding-vertical(35px, 40px)
 
-$links-icon-size: 92px
-$links-icon-size--mob: 50px
-//=============================
 .links
 	overflow: hidden
 	padding-bottom: 4rem
@@ -663,6 +677,9 @@ $links-icon-size--mob: 50px
 	margin: -20px -10px 0
 	+clear-spacing
 
+	+media('<mob-lg')
+		margin: -10px -5px 0
+
 .links__item
 	display: inline-block
 	vertical-align: top
@@ -672,6 +689,18 @@ $links-icon-size--mob: 50px
 	+font(2.4rem, round-float(30/24, 2))
 	letter-spacing: normal
 
+	+media('<tab-lg')
+		font-size: 2.0rem
+
+	+media('<tab-sm')
+		width: calc(100% / 2)
+
+	+media('<mob-lg')
+		padding: 10px 5px 0
+
+	+media('<mob-md')
+		width: 100%
+
 .links__item__inner
 	text-decoration: none
 	position: relative
@@ -679,14 +708,19 @@ $links-icon-size--mob: 50px
 	color: inherit
 	display: flex
 	align-items: center
-	padding: 20px $links-icon-size 20px 20px
+	padding: 20px 100px 20px 20px
 	min-height: 105px
+	height: 100%
 	background-color: white
 	border-radius: 10px
 	box-shadow: 0 3px 3px rgba(black, 0.1)
 	//transition:
 		property: background-color, color
 		duration: $animation-speed
+
+	+media('<desk-sm')
+		min-height: 90px
+		padding-right: 80px
 
 	svg
 		display: block
@@ -698,6 +732,9 @@ $links-icon-size--mob: 50px
 		//transition:
 			property: opacity
 			duration: $animation-speed
+
+		+media('<desk-sm')
+			+size(86px)
 
 	//path
 		transition:
@@ -734,6 +771,9 @@ $links-icon-size--mob: 50px
 		property: box-shadow
 		duration: $animation-speed
 
+	+media('<mob-md')
+		padding: $product-space--mob
+
 	.no-touchevents &:hover
 		box-shadow: 0 5px 5px rgba(black, 0.3)
 
@@ -766,6 +806,9 @@ $links-icon-size--mob: 50px
 	+font-alt-bold
 	+font(2.0rem, round-float(30/20, 2))
 
+	+media('<mob-md')
+		font-size: 1.2rem
+
 .product__labels
 	position: absolute
 	left: 10px
@@ -778,12 +821,22 @@ $links-icon-size--mob: 50px
 	text-align: left
 	text-indent: -9999px
 	overflow: hidden
+	background-repeat: no-repeat
+	background-position: center
+	background-size: contain
+
+	+media('<mob-md')
+		width: 40px
+		height: 40px
+
+	& ~ .product__label
+		margin-top: -40%
 
 .product__label--new
-	background: url(../../img/label-new.png) no-repeat
+	background-image: url(../../img/label-new.png)
 
 .product__label--bestseller
-	background: url(../../img/label-bestseller.png) no-repeat
+	background-image: url(../../img/label-bestseller.png)
 
 /* products preview / product end
 
@@ -792,10 +845,16 @@ $links-icon-size--mob: 50px
 	background-color: $base-color
 	+padding-vertical(40px, calc(50px - #{nth($similar-slider-space-inner, 3)}))
 
+	+media('<mob-lg')
+		+padding-vertical(35px, calc(40px - #{nth($similar-slider-space-inner, 3)}))
+
 .categories__tabs__nav
 	text-align: center
-	margin-bottom: calc(4rem - #{nth($similar-slider-space-inner, 1)})
+	margin-bottom: calc(40px - #{nth($similar-slider-space-inner, 1)})
 	+clear-spacing
+
+	+media('<mob-md')
+		margin-bottom: calc(32px - #{nth($similar-slider-space-inner, 1)})
 
 	a
 		display: inline-block
@@ -812,6 +871,11 @@ $links-icon-size--mob: 50px
 		z-index: 1
 		user-select: none
 		-webkit-tap-highlight-color: transparent
+
+		+media('<mob-lg')
+			font-size: 1.6rem
+			padding: 10px 23px
+			margin: 0
 
 		&::before, &::after
 			content: ""
@@ -831,8 +895,12 @@ $links-icon-size--mob: 50px
 		&::after
 			left: 50%
 			top: 100%
-			margin-left: -10px
+			margin: -1px 0 0 -10px
 			+triangle('bottom', $color: #007485, $size: 10px, $kef: 1)
+
+			+media('<mob-lg')
+				margin: -1px 0 0 -8px
+				+triangle('bottom', $color: #007485, $size: 8px, $kef: 1)
 
 		span
 			border-bottom: 1px solid white
@@ -872,8 +940,14 @@ $links-icon-size--mob: 50px
 	// before slide load end
 	padding: 0 42px
 
+	+media('<mob-lg')
+		padding: 0 0 30px
+
 	&, &.slick-dotted
 		margin: 0
+
+		+media('<mob-lg')
+			+margin-horizontal(-5px)
 
 	&.slick-initialized, .no-js &
 		// after slide load
@@ -892,10 +966,8 @@ $links-icon-size--mob: 50px
 
 	// dots
 	.slick-dots
-		bottom: 10px
-
-		//+media('>=tab-lg')
-			display: none !important
+		bottom: 0
+		left: 0
 
 // slide
 .similar-slider__item
@@ -905,6 +977,9 @@ $links-icon-size--mob: 50px
 	vertical-align: top
 	// before slide load end
 	padding: $similar-slider-space-inner
+
+	+media('<mob-lg')
+		+padding-horizontal(5px)
 
 	.no-js &
 		width: 320px

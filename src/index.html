@@ -56,23 +56,32 @@
 					<img style="display: none;" class="logo-print" src="img/logo.png" alt="Azbooks">
 				</div>
 				<!--logo end-->
-				<!--search-->
-				<div class="search-form">
-					<form action="#" method="post">
-						<div class="search-form__field input-wrap">
-							<input type="search" placeholder="Search" class="search-form__input field-effects-js" />
-							<div class="search-form__btn">
-								<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"/></svg>
-								<span>Find</span>
-								<input type="submit" value="">
-							</div>
-						</div>
-					</form>
-				</div>
-				<!--search end-->
 			</div>
 		</header>
-		<nav class="nav shutter--nav-js">
+		<!--search-->
+		<div class="search-panel search-form-js">
+			<div class="search-panel__layout max-wrap layout">
+				<form class="search-form" action="#" method="post" data-tc-stop>
+					<div class="search-form__field input-wrap">
+						<input type="search" class="search-form__input field-effects-js" />
+						<div class="search-form__btn">
+							<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"></path></svg>
+							<span>Find</span>
+							<input type="submit" value="">
+						</div>
+					</div>
+				</form>
+				<a href="#" class="search-opener search-opener-js">
+			<svg class="svg-ico-search" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.862 21.863"><path class="a" d="M18.625,16.75h-.987l-.35-.338a8.137,8.137,0,1,0-.875.875l.338.35v.987L23,24.862,24.862,23Zm-7.5,0a5.625,5.625,0,1,1,5.625-5.625A5.617,5.617,0,0,1,11.125,16.75Z" transform="translate(-3 -3)"></path></svg>
+		</a>
+				<a href="#" class="search-closer search-closer-js">
+			<svg class="svg-ico-cross" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.3 23.3"><path d="M23.3 2.3 21 0l-9.3 9.3L2.3 0 0 2.3l9.3 9.3L0 21l2.4 2.4 9.3-9.3 9.3 9.3 2.4-2.3-9.3-9.3Z"></path></svg>
+		</a>
+			</div>
+		</div>
+		<!--search end-->
+		<!--navigation-->
+		<nav class="nav shutter--nav-js" data-tc-stop>
 			<div class="nav__layout max-wrap layout">
 				<!--(1) START nav FIRST level-->
 				<ul class="nav__list nav__list-js">
@@ -166,6 +175,7 @@
 		</nav>
 		<div class="nav-overlay nav-overlay-js">&nbsp;</div>
 		<a href="#" class="nav-opener nav-opener-js"><i>&nbsp;</i><span>Menu</span></a>
+		<!--navigation end-->
 		<!--HEADER end-->
 		<!--MAIN-->
 		<div class="main">
@@ -184,7 +194,7 @@
 			</section>
 			<section class="main-section main-section--links layout">
 				<div class="links">
-					<div class="links__list">
+					<div class="links__list equal-height-js">
 						<div class="links__item">
 							<a href="news-inner.html" class="links__item__inner">
 						<svg width="102" height="102" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.281 102.281"><g transform="translate(0 27.293) rotate(-20)"><path fill="#218ac2" d="M43.4,27.3A1.96,1.96,0,0,0,45.2,26h0a12.528,12.528,0,0,0,1.2-5.4A12.04,12.04,0,0,0,34.6,8.4C28.1,8.4,23,13.8,23,20.6a12.32,12.32,0,0,0,1.4,5.7.1.1,0,0,0,.1.1h0a2.222,2.222,0,0,0,2,1.2,1.931,1.931,0,0,0,1.8-2.3c-.1-.5-.6-1.3-.8-1.9v-.1c0-.1,0-.2-.1-.2a9.78,9.78,0,0,1-.3-2.6,7.687,7.687,0,0,1,7.5-7.8,7.687,7.687,0,0,1,7.5,7.8,9.818,9.818,0,0,1-.5,2.9l-.4,1.1h0a1.483,1.483,0,0,0-.1.7A2.364,2.364,0,0,0,43.4,27.3ZM23.3,37.8h0a2.216,2.216,0,0,0,2.6-.1,1.9,1.9,0,0,0,.2-2.9,6.348,6.348,0,0,0-1.2-.7A16.751,16.751,0,1,1,51.5,20.5a16.31,16.31,0,0,1-2.3,8.4h0l-.2.2c-.3.5-.9,1.1-1.2,1.6A2.031,2.031,0,0,0,49,33.3a1.95,1.95,0,0,0,1.5,0c.2-.1.3-.2.5-.3h0c0-.1.1-.1.1-.2a2.092,2.092,0,0,0,.4-.6v-.1a19.916,19.916,0,0,0,3.6-11.6A20.316,20.316,0,0,0,34.7,0,20.585,20.585,0,0,0,23.3,37.8Zm44.8,10a22.872,22.872,0,0,0-.7-3.6,5.31,5.31,0,0,0-2.5-2.5,3.311,3.311,0,0,0-2.6,0c-.3.1-.2-.1-2,1-1.6.9-1.7-.8-2.2-2a4.994,4.994,0,0,0-.9-1.8,3.692,3.692,0,0,0-3.8-.9,7.974,7.974,0,0,0-2.6,1.8c-1.7,1.6-2.1-.9-2.3-1.6a3.2,3.2,0,0,0-1.8-2.5,3.908,3.908,0,0,0-3.4-.4c-1.2.5-1.4,1.1-2.7,2.5-.2.2-.9.5-1.3-.5a26.408,26.408,0,0,1-.3-4.6c-.5-9.7-.3-17-5.7-15,0,0-1.7.7-2,3.4-.3,2.3-.7,1.4.2,26.7.3,7.5-3.6.8-4.9-1.2-.4-.7-2.6-4-4.2-5a4.988,4.988,0,0,0-3.4-.4,2.824,2.824,0,0,0-1.4,1c-1,1.4-.9,3.6.4,7.3C20.8,56.8,32.2,72,35.1,74.1a14.906,14.906,0,0,0,7.8,2.8c1.4.1,5,.1,6.7,0,2-.1,5.9-.3,7.8-1.1a12.778,12.778,0,0,0,4.9-4.6,43.37,43.37,0,0,0,4.2-10.6,33.2,33.2,0,0,0,1.1-5.9A54.682,54.682,0,0,0,68.1,47.8Z"></path></g></svg>
@@ -193,7 +203,7 @@
 						</div>
 						<div class="links__item">
 							<a href="news-inner.html" class="links__item__inner">
-						<svg width="102" height="102" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.409 102.409"><g transform="translate(-733.746 -567.746)"><g transform="translate(733.746 595.073) rotate(-20)"><path fill="#f863a3" d="M19.7,36.1c.8-12.8,5.2-23.2,12-29.2-2.3-3.3-4.9-5.2-7.8-5.6h0c-9-.6-17,14.3-18.2,33.1C4.6,52.8,10.3,68.1,19.1,69.3h0c2.7.2,5.5-1.1,8.1-3.7C21.6,58.7,18.9,48.3,19.7,36.1ZM71.8,20.3c-.1-4.5-3.6-9.1-8.5-9.6l-4.8-.6c-3.7-5.6-8.3-8.3-14.1-8.7L29.8,0c3,2,5.6,5.5,7.6,10.2.2.5.4.9.6,1.4a7.26,7.26,0,0,0-4.5,6.5V49.2a5.561,5.561,0,0,0,4.3,5.4,40.845,40.845,0,0,1-3.5,7.6c-2.8,4.8-6.1,8.1-9.7,9.5l15.5,1.6c8.4.5,16.1-6,20.8-16.1l3.7.2a7.223,7.223,0,0,0,7.5-7.2ZM68.6,51a.367.367,0,0,1-.1.3c0,.1-.1.2-.1.3s-.1.2-.1.3-.1.1-.1.2c-.1.1-.1.2-.2.4h0c-.1.2-.3.3-.4.5a3.775,3.775,0,0,1-2.7,1L44.5,52.3a4.758,4.758,0,0,1-4.3-4.7V16.5a4.681,4.681,0,0,1,1.5-3.4A4.358,4.358,0,0,1,45.3,12l15.2,1.7,2,.2a6.758,6.758,0,0,1,5.9,6.5l.3,29.9A1.953,1.953,0,0,1,68.6,51ZM55.9,29.8c-.1,0-.2-.1-.4-.1a1.721,1.721,0,0,0-1.2.2L48,24.5l-2.4.3.1,2.4L52.5,33a2.6,2.6,0,1,0,5.2,0v-.7l9.1-8.9L67,21l-2.3.2Z"/></g></g></svg>
+						<svg width="102" height="102" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.409 102.409"><g transform="translate(-733.746 -567.746)"><g transform="translate(733.746 595.073) rotate(-20)"><path fill="#f863a3" d="M19.7,36.1c.8-12.8,5.2-23.2,12-29.2-2.3-3.3-4.9-5.2-7.8-5.6h0c-9-.6-17,14.3-18.2,33.1C4.6,52.8,10.3,68.1,19.1,69.3h0c2.7.2,5.5-1.1,8.1-3.7C21.6,58.7,18.9,48.3,19.7,36.1ZM71.8,20.3c-.1-4.5-3.6-9.1-8.5-9.6l-4.8-.6c-3.7-5.6-8.3-8.3-14.1-8.7L29.8,0c3,2,5.6,5.5,7.6,10.2.2.5.4.9.6,1.4a7.26,7.26,0,0,0-4.5,6.5V49.2a5.561,5.561,0,0,0,4.3,5.4,40.845,40.845,0,0,1-3.5,7.6c-2.8,4.8-6.1,8.1-9.7,9.5l15.5,1.6c8.4.5,16.1-6,20.8-16.1l3.7.2a7.223,7.223,0,0,0,7.5-7.2ZM68.6,51a.367.367,0,0,1-.1.3c0,.1-.1.2-.1.3s-.1.2-.1.3-.1.1-.1.2c-.1.1-.1.2-.2.4h0c-.1.2-.3.3-.4.5a3.775,3.775,0,0,1-2.7,1L44.5,52.3a4.758,4.758,0,0,1-4.3-4.7V16.5a4.681,4.681,0,0,1,1.5-3.4A4.358,4.358,0,0,1,45.3,12l15.2,1.7,2,.2a6.758,6.758,0,0,1,5.9,6.5l.3,29.9A1.953,1.953,0,0,1,68.6,51ZM55.9,29.8c-.1,0-.2-.1-.4-.1a1.721,1.721,0,0,0-1.2.2L48,24.5l-2.4.3.1,2.4L52.5,33a2.6,2.6,0,1,0,5.2,0v-.7l9.1-8.9L67,21l-2.3.2Z"></path></g></g></svg>
 						Toybooks
 					</a>
 						</div>
@@ -313,7 +323,6 @@
 											<a href="#" class="product">
 												<div class="product__labels">
 													<div class="product__label product__label--new">New</div>
-													<div class="product__label product__label--bestseller">Best seller</div>
 												</div>
 												<figure class="product__img">
 													<img src="img/img-products-05.jpg" alt="The Little Elephant and funny cat" />
@@ -340,7 +349,6 @@
 											<a href="#" class="product">
 												<div class="product__labels">
 													<div class="product__label product__label--new">New</div>
-													<div class="product__label product__label--bestseller">Best seller</div>
 												</div>
 												<figure class="product__img">
 													<img src="img/img-products-07.jpg" alt="The Little Elephant" />
@@ -380,10 +388,251 @@
 								</div>
 							</div>
 							<div class="categories__tabs__panel tabs__panel-js" id="tabBestsellers">
-								{{tabBestsellers}} <br> {{tabBestsellers}} <br> {{tabBestsellers}} <br>
+								<div class="similar-slider">
+									<div class="similar-slider__list similar-slider-js">
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-01.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+													<div class="product__label product__label--bestseller">Best seller</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-02.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--bestseller">Best seller</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-03.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-04.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--bestseller">Best seller</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-05.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-06.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--bestseller">Best seller</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-07.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--bestseller">Best seller</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-08.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-09.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="categories__tabs__panel tabs__panel-js" id="tabSeries">
-								{{tabSeries}} <br> {{tabSeries}} <br> {{tabSeries}} <br> {{tabSeries}} <br> {{tabSeries}} <br>
+								<div class="similar-slider">
+									<div class="similar-slider__list similar-slider-js">
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-01.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-02.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-03.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-04.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-05.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-06.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-07.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-08.jpg" alt="The Little Elephant and funny cat" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant and funny cat</div>
+												</div>
+											</a>
+										</div>
+										<div class="similar-slider__item">
+											<a href="#" class="product">
+												<div class="product__labels">
+													<div class="product__label product__label--new">New</div>
+												</div>
+												<figure class="product__img">
+													<img src="img/img-products-09.jpg" alt="The Little Elephant" />
+												</figure>
+												<div class="product__content">
+													<div class="product__title">The Little Elephant</div>
+												</div>
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -395,7 +644,7 @@
 		<footer class="max-wrap footer">
 			<div class="footer-row">
 				<div class="footer-col">
-					<nav class="footer-nav">
+					<div class="footer-nav">
 						<ul>
 							<li><a href="#"><span>Home</span></a></li>
 							<li><a href="#"><span>Books</span></a></li>
@@ -403,7 +652,7 @@
 							<li><a href="#"><span>About us</span></a></li>
 							<li><a href="#"><span>Contacts</span></a></li>
 						</ul>
-					</nav>
+					</div>
 				</div>
 				<div class="footer-col">
 					<!--subscription form-->

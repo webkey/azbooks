@@ -1,0 +1,176 @@
+<div class="p-filters-list">
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "START", "isOpen": "true" })
+
+		@@include('_tpl_products-filters--head.html', {
+			"title": "Название изделия"
+		})
+
+		@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "START", "group": "group-title" })
+			<li>
+				<input
+						class="form-light form-minimal field-effects-js"
+						value=""
+						type="text"
+						placeholder="Название"
+						data-filter-default=""
+						data-filter-name="title"
+						data-filter-title="Название изделия"
+						data-filter-type="input"/>
+			</li>
+			<li>
+				<input
+						class="form-light form-minimal field-effects-js"
+						value=""
+						type="text"
+						placeholder="Артикул"
+						data-filter-default=""
+						data-filter-name="vendor"
+						data-filter-title="Артикул изделия"
+						data-filter-type="input"/>
+			</li>
+		@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "END"})
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "END" })
+
+	<!--===============-->
+	<!--===============-->
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "START", "isOpen": "true" })
+
+		@@include('_tpl_products-filters--head.html', {
+			"title": "Наличие"
+		})
+
+		@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "START", "group": "collection" })
+			<li>
+				<div class="form-row">
+					<div class="input-wrap">
+						<select
+								class="form-light form-minimal field-effects-js"
+								name="filter-by-collection-season"
+								data-filter-name="collection-season"
+								data-filter-title="Коллекция"
+								data-filter-default="">
+
+							<option value="">Сезон:</option>
+							<option value="winter" data-filter-tag="Зима">Зима</option>
+							<option value="spring" data-filter-tag="Весна">Весна</option>
+							<option value="summer" data-filter-tag="Лето">Лето</option>
+							<option value="autumn" data-filter-tag="Осень">Осень</option>
+						</select>
+					</div>
+					<div class="input-wrap">
+						<select
+								class="form-light form-minimal field-effects-js"
+								name="filter-by-collection-year"
+								data-filter-name="collection-year"
+								data-filter-default="">
+
+							<option value="">Год:</option>
+							<option value="2018" data-filter-tag="2018">2018</option>
+							<option value="2017" data-filter-tag="2017">2017</option>
+							<option value="2016" data-filter-tag="2016">2016</option>
+						</select>
+					</div>
+				</div>
+			</li>
+		@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "END"})
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "END" })
+
+	<!--===============-->
+	<!--===============-->
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "START", "isOpen": "true" })
+
+		@@include('_tpl_products-filters--head.html', {
+			"title": "Бренд"
+		})
+
+		@@include('_tpl_products-filters--drop.html', {
+			"group": "brands",
+			"hasIcon": "true",
+			"checkboxesExpanded": {
+				"fishka": {
+					"full": "FISHKA",
+					"tag": "FISHKA",
+					"icon": "img/img-brand-02.png"
+				},
+				"kuka-vaka": {
+					"full": "Кука Вака",
+					"tag": "Кука Вака",
+					"icon": "img/img-brand-03.png"
+				},
+				"svitanak": {
+					"full": "Свiтанак",
+					"tag": "Свiтанак",
+					"icon": "img/img-brand-04.png"
+				}
+			},
+			"checkboxes": ""
+		})
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "END" })
+
+	<!--===============-->
+	<!--===============-->
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "START", "isOpen": "true" })
+
+		@@include('_tpl_products-filters--head.html', {
+			"title": "Сезон"
+		})
+
+		@@include('_tpl_products-filters--drop.html', {
+			"group": "seasons",
+			"hasIcon": "",
+			"checkboxesExpanded": {
+				"winter": {
+					"full": "Зима",
+					"tag": "Сезон - Зима"
+				},
+				"spring": {
+					"full": "Весна",
+					"tag": "Сезон - Весна"
+				},
+				"summer": {
+					"full": "Лето",
+					"tag": "Сезон - Лето"
+				},
+				"autumn": {
+					"full": "Осень",
+					"tag": "Сезон - Осень"
+				}
+			},
+			"checkboxes": ""
+		})
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "END" })
+
+	<!--===============-->
+	<!--===============-->
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "START", "isOpen": "true" })
+
+		@@include('_tpl_products-filters--head.html', {
+			"title": "Вид полотна"
+		})
+
+		@@include('_tpl_products-filters--drop.html', {
+			"group": "type",
+			"hasIcon": "",
+			"checkboxesExpanded": "",
+			"checkboxes": {
+				"kulir": "кулир",
+				"interlok": "интерлок",
+				"comb": "комбинир.",
+				"lastik": "ластик 1*1",
+				"neop": "непол ласт"
+			}
+		})
+
+	@@include('_tpl_products-filters--ITEM_LAYOUT.html', {"itemLayout": "END" })
+
+	<!--===============-->
+	<!--===============-->
+</div>

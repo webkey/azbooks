@@ -1399,6 +1399,674 @@ function tabSwitcher() {
 		$tabs.msTabs();
 	}
 }
+
+/**
+ * !Sticky element on page
+ */
+function stickyInit() {
+	var offsetTop = (window.innerWidth < 1366) ? 50 : 70;
+
+	// aside sticky
+	var $mAside = $('.m-aside-sticky-js');
+
+	if ($mAside.length) {
+		stickybits('.m-aside', {
+			useStickyClasses: true,
+			stickyBitStickyOffset: offsetTop
+		});
+	}
+
+	// tags sticky
+	var $tags = $('.tags-sticky-js');
+
+	if ($tags.length) {
+		stickybits('.tags-sticky-js', {
+			useStickyClasses: false,
+			stickyBitStickyOffset: offsetTop
+		});
+	}
+
+	// options sticky
+	var $tags = $('.options-sticky-js');
+
+	if ($tags.length) {
+		stickybits('.options-sticky-js', {
+			useStickyClasses: false,
+			stickyBitStickyOffset: offsetTop
+		});
+	}
+}
+// if sticky is stuck
+
+/**
+ * !Add class if a sticky is stuck
+ * */
+$(function () {
+	var $optionsPanel = $('.m-content__body__options');
+
+	var optionsOffset = 0,
+		parentOffset = 0,
+		currentScrollTop,
+		optionsFixedClass = 'options-stuck-js';
+
+	if ($optionsPanel.length) {
+		$(window).on('load scroll resize', function () {
+			addClassFixed();
+		});
+	}
+
+	function addClassFixed() {
+		optionsOffset = $optionsPanel.offset().top;
+		// console.log("optionsOffset: ", optionsOffset);
+		parentOffset = $optionsPanel.parent().offset().top;
+		// console.log("parentOffset: ", parentOffset);
+		currentScrollTop = $(window).scrollTop();
+
+		var cond = optionsOffset > parentOffset;
+
+		$('html').toggleClass(optionsFixedClass, cond);
+	}
+});
+
+$(function () {
+	var $optionsTags = $('.m-content__body__tags');
+	var $products = $('.products');
+
+	var optionsOffset = 0,
+		productsOffset = 0,
+		currentScrollTop,
+		optionsFixedClass = 'tags-stuck-js';
+
+	if ($optionsTags.length) {
+		$(window).on('load scroll resize', function () {
+			addClassFixed();
+		});
+	}
+
+	function addClassFixed() {
+		optionsOffset = $optionsTags.offset().top + $optionsTags.outerHeight();
+		console.log("optionsOffset: ", optionsOffset);
+		productsOffset = $products.offset().top;
+		console.log("productsOffset: ", productsOffset);
+		currentScrollTop = $(window).scrollTop();
+
+		var cond = optionsOffset > productsOffset;
+
+		$('html').toggleClass(optionsFixedClass, cond);
+	}
+});
+
+/**
+ * !multi filters jquery plugin
+ * */
+(function ($) {
+	var MultiFilters = function (settings) {
+		var options = $.extend({
+			container: '.p-filters-js',
+			item: '.p-filters-item-js',
+			group: '.p-filters-group-js',
+			handler: '.p-filters-select-js',
+			placeholder: '.p-filters-placeholder-js',
+			selected: '.p-filters-selected-js',
+			drop: '.p-filters-drop-js',
+			filter: null, // checkbox => filter: checkbox, select or range slider, input
+			labelText: '.p-filters-label-text-js',
+			btnReset: '.btn-reset-js',
+			btnResetAll: '.btn-clear-filters-js',
+			tagsContainer: '.p-filters-tags-js',
+			tagsItem: ".p-filters-tags-item-js",
+			tagTextContainer: '.p-filters-tag-text-js',
+			resultsPanel: '.p-filters-results-js',
+			activatedFilters: '.p-filters-activated-js', // count active filter's group
+			rangeSlider: '.range-slider-js', // range slider js class
+			rangeSliderValContainer: '.range-slider-value-js', // container has values of range slider
+			rangeSliderFrom: '.rs-from-js',
+			rangeSliderTo: '.rs-to-js',
+			tagsItemTpl: null,
+
+			dropOpenClass: 'p-filters-is-open',
+			filtersOnClass: 'p-filters-on',
+			showResultsPanelClass: 'filters-results-show',
+			showSelectedClass: 'filters-selected-show', // show counter of an active filter in group
+			showPlaceholderClass: 'filters-placeholder-show',
+			filterActiveClass: 'is-active',
+
+			dataGroup: 'data-filter-group',
+			dataDefaultValue: 'data-filter-default',
+			dataTag: 'data-filter-tag',
+			dataName: 'data-filter-name',
+			dataType: 'data-filter-type',
+			dataPrefix: 'data-filter-value-prefix',
+			dataPostfix: 'data-filter-value-postfix',
+			dataTitle: 'data-filter-title',
+			tagTitle: 'title'
+		}, settings || {});
+
+		this.options = options;
+		var container = $(options.container);
+
+		this.$container = container;
+		this.$item = $(options.item, container);
+		this.$handler = $(options.handler, container);
+		this.$placeholder = $(options.placeholder, container);
+		this.$selected = $(options.selected, container);
+		this.$drop = $(options.drop, container);
+		this.$group = $(options.group, container);
+		this.$filter = $(options.filter, container);
+		this.$labelText = $(options.labelText, container);
+		this.$btnReset = $(options.btnReset, container);
+		this.$btnResetAll = $(options.btnResetAll, container);
+		this.$tagsContainer = $(options.tagsContainer, container);
+		this.$resultsPanel = $(options.resultsPanel, container);
+		this.$activatedFilters = $(options.activatedFilters, container);
+		this.$rangeSlider = $(options.rangeSlider, container);
+		this.$rangeSliderValContainer = $(options.rangeSliderValContainer, container);
+		this.$rangeSliderFrom = $(options.rangeSliderFrom, container);
+		this.$rangeSliderTo = $(options.rangeSliderTo, container);
+		this.tagsItem = options.tagsItem; // не jq-объект, чтобы можна было искать в DOM после добавления
+		this.tagTextContainer = options.tagTextContainer; // не jq-объект, чтобы можна было искать в DOM после добавления
+		this.tagsItemTpl = !options.tagsItemTpl ?
+			'<div class="' + options.tagsItem.substring(1) + '"><i>Удалить</i><span class="' + options.tagTextContainer.substring(1) + '"></span></div>' :
+			options.tagsItemTpl ;
+
+		this.modifiers = {
+			dropIsOpened: options.dropOpenClass,
+			filtersOn: options.filtersOnClass,
+			showResultsPanel: options.showResultsPanelClass,
+			showSelected: options.showSelectedClass,
+			showPlaceholder: options.showPlaceholderClass,
+			filterActive: options.filterActiveClass
+		};
+
+		this.attributes = {
+			dataGroup: options.dataGroup,
+			dataDefaultValue: options.dataDefaultValue,
+			dataTag: options.dataTag,
+			dataName: options.dataName,
+			dataType: options.dataType,
+			dataPrefix: options.dataPrefix,
+			dataPostfix: options.dataPostfix,
+			dataTitle: options.dataTitle,
+			tagTitle: options.tagTitle
+		};
+
+		this.filterType = {
+			input: 'input',
+			rangeSlider: 'range-slider'
+		};
+
+		this.initRangeSlider();
+		this.changeFilters();
+		this.bindTagsEvents();
+		this.toggleDrop();
+		this.resetFiltersInGroup();
+		this.resetAllFilters();
+
+	};
+
+	MultiFilters.prototype.initRangeSlider = function () {
+		var self = this;
+		self.priceSlider = [];
+
+		$.each(self.$rangeSlider, function (i, el) {
+			var $curSlider = $(this),
+				dataDef = $curSlider.attr(self.attributes.dataDefaultValue).split(';');
+
+			$curSlider.ionRangeSlider({
+				onStart: function (data) {
+					setValue(data, dataDef, $curSlider)
+				},
+				onChange: function (data) {
+					setValue(data, dataDef, $curSlider);
+				},
+				onUpdate: function (data) {
+					setValue(data, dataDef, $curSlider);
+				}
+			});
+
+			self.priceSlider[i] = $curSlider.data('ionRangeSlider');
+		});
+
+		function setValue(data, dataDef, $slider) {
+			var from = data.from,
+				to = data.to,
+				$curSliderItem = $slider.closest('li'),
+				$curSliderValue = $curSliderItem.find(self.$rangeSliderValContainer),
+				$rsFrom = $curSliderItem.find(self.$rangeSliderFrom),
+				$rsTo = $curSliderItem.find(self.$rangeSliderTo);
+
+			$slider.parent().toggleClass('slider-active', (data.from !== +dataDef[0] || data.to !== +dataDef[1]));
+
+			if (data.input.attr('data-type') === "double") {
+				$curSliderValue.html(from + " - " + to);
+				$rsFrom.val(from);
+				$rsTo.val(to);
+			} else {
+				$curSliderValue.html(from);
+				$rsFrom.val(from);
+			}
+		}
+	};
+
+	MultiFilters.prototype.changeFilters = function () {
+		var self = this;
+
+		self.$group.on('change keyup', self.options.filter, function (e) {
+			var $curFilter = $(this);
+
+			// чтобы отработало событие ввода с клавиатуры, нужно прописать тип фильтра "input"
+			if(e.type === 'keyup' && $curFilter.attr(self.attributes.dataType) !== 'input' ){
+				return false
+			}
+
+			// фильтра с типом "input", не должен отрабатывать на событие "change"
+			if(e.type === 'change' && $curFilter.attr(self.attributes.dataType) === 'input' ){
+				return false
+			}
+
+			var $curContainer = $curFilter.closest(self.$container),
+				$curItem = $curFilter.closest(self.$item),
+				$curGroup = $curFilter.closest(self.$group),
+				// label text for tag
+				$curLabel = $curFilter.closest('label'),
+				$curLabelText = $curLabel.find(self.$labelText),
+				// buttons
+				$curBtnReset = $curItem.find(self.$btnReset),
+				$curBtnResetAll = $curContainer.find(self.$btnResetAll);
+
+			// на li добвить класс, если чекбокс отмечен
+			$curFilter.is(':checkbox') &&
+			$curFilter.closest('li').toggleClass(self.modifiers.filterActive, self.getFilterState($curFilter));
+
+			// отключить кнопку очистки чекбоксов в ГРУППЕ
+			self.disabledButton($curBtnReset);
+
+			// удалить класс наличия отмеченных чекбоксов в ГРУППЕ
+			self.removeClassCustom($curItem, self.modifiers.filtersOn);
+
+			// отключить кнопку очистки ВСЕХ чекбоксов
+			self.disabledButton($curBtnResetAll);
+
+			// удалить класс отображения панели результатов фильтрации
+			$curContainer.removeClass(self.modifiers.showResultsPanel);
+
+			// если есть активные фильтры в ГРУППЕ
+			if (self.countActivateFilters($curFilter, $curGroup)) {
+				// включить кнопку очистки чекбоксов в ГРУППЕ
+				self.enabledButton($curBtnReset);
+				// добавить класс наличия отмеченных чекбоксов на фильтры в ГРУППЕ
+				self.addClassCustom($curItem, self.modifiers.filtersOn);
+			}
+
+			// если есть активные фильтры
+			// (проверяем ВСЕ группы фильтров)
+			if (self.countActivateFilters($curContainer.find(self.$filter), $curContainer.find(self.$group))) {
+				// включить кнопку очистки ВСЕХ чекбоксов
+				self.enabledButton($curBtnResetAll);
+				// добавить класс отображения панели результатов фильтрации
+				$curContainer.addClass(self.modifiers.showResultsPanel);
+			}
+
+			// определить количество отмеченных фильтров в ГРУППЕ
+			// изменить значение в соответствующем элементе DOM
+			self.setLengthActiveFilters($curFilter, $curGroup);
+
+			// определить количество ГРУПП, в которых есть отмеченные фильтры
+			// изменить значение в соответствующий элемент DOM
+			var activeGroupLength = $curContainer.find('.' + self.modifiers.filtersOn).length;
+			$curContainer.find(self.$activatedFilters).html(activeGroupLength).toggleClass('hide', !activeGroupLength);
+
+			// ДОБАВИТЬ/УДАЛИТЬ ТЭГ
+			// attributes
+			var curAttrGroup = $curGroup.attr(self.attributes.dataGroup);
+			var curAttrName = $curFilter.attr(self.attributes.dataName);
+			var curAttrTag = $curFilter.attr(self.attributes.dataTag) || $('option:selected', $curFilter).attr(self.attributes.dataTag);
+			var curAttrTitle = $curFilter.attr(self.attributes.dataTitle);
+
+			var dataGroup = "[" + self.attributes.dataGroup + "=" + curAttrGroup + "]",
+				dataName = "[" + self.attributes.dataName + "=" + curAttrName + "]";
+
+			var $filterTag = $curContainer.find(self.tagsItem);
+
+			if(self.getFilterState($curFilter)) {
+				// добавить тэг фильтра
+				var _curFilterTagVal = curAttrTag || $curLabelText.text() || curAttrName,
+					curFilterType = $curFilter.attr(self.attributes.dataType);
+
+				// установить значение тега $curFilterTagVal текущего фильтра
+				switch (true) {
+					case curFilterType === self.filterType.rangeSlider:
+						// если фильтр - диапазон значений
+						var curSliderFilterVal = $curFilter.val().split(';');
+						_curFilterTagVal = curSliderFilterVal[0] + " - " + curSliderFilterVal[1];
+						break;
+
+					case curFilterType === self.filterType.input:
+						// если фильтр - поле ввода
+						_curFilterTagVal = $curFilter.val();
+						break;
+				}
+
+				var createTag = function () {
+					return $(self.tagsItemTpl).clone()
+						.find(self.tagTextContainer)
+						.html(_curFilterTagVal)
+						.end()
+						.attr(self.attributes.tagTitle, curAttrTitle)
+						.attr(self.attributes.dataGroup, curAttrGroup)
+						.attr(self.attributes.dataName, curAttrName);
+				};
+
+				var $filterTags = $curContainer.find(self.$tagsContainer),
+					$curFilterGroup = $filterTag.filter(dataGroup),
+					$curFilterTag = $filterTag.filter(dataGroup + dataName);
+
+				if ($curFilter.is(':checkbox')) {
+					// добавить новый тег вконце списка, либо после последнего уже существующего тега с текущей группы
+					if ($curFilterGroup.length) {
+						$.each($filterTags, function () {
+							createTag().insertAfter($(this).find(self.tagsItem).filter(dataGroup).last());
+						});
+					} else {
+						createTag().appendTo($filterTags);
+					}
+				} else {
+					$curFilterTag.find(self.tagTextContainer).html('');
+
+					// 1) заменяем значение тега, если такой уже добавлен
+					// 2) добавляем новый тег, если такого еще нет, вконец списка
+					// 3) добавляем новый тег после последнего уже существующего тега с текущей группы
+					if ($curFilterTag.length) {
+						$curFilterTag
+							.find(self.tagTextContainer)
+							.html(_curFilterTagVal);
+					} else if ($curFilterGroup.length) {
+						$.each($filterTags, function () {
+							createTag().insertAfter($(this).find(self.tagsItem).filter(dataGroup).last());
+						});
+					} else {
+						createTag().appendTo($filterTags);
+					}
+				}
+
+			} else {
+
+				$filterTag.filter(dataGroup + dataName).remove();
+
+			}
+		});
+
+		$.each(self.$filter, function () {
+			var $thisFilter = $(this);
+			// при загрузке проверить наличие отмеченных активных фильтров, и сделать на них триггер
+			self.getFilterState($thisFilter) &&
+			$thisFilter.trigger('change').trigger('keyup');
+		});
+	};
+
+	MultiFilters.prototype.setLengthActiveFilters = function ($filter, $container) {
+		var self = this;
+		var $curItem = $container.closest(self.$item);
+
+		var lengthChecked = self.countActivateFilters($filter, $container);
+
+		$curItem.find(self.$placeholder).toggleClass(self.modifiers.showPlaceholder, !lengthChecked > 0);
+		$curItem.find(self.$selected).toggleClass(self.modifiers.showSelected, lengthChecked > 0);
+
+		var textPrefix = $curItem.find(self.$selected).attr(self.attributes.dataPrefix) || "",
+			textPostfix = $curItem.find(self.$selected).attr(self.attributes.dataPostfix) || "";
+
+		$curItem.find(self.$selected).html(textPrefix + " " + lengthChecked + " " + textPostfix);
+	};
+
+	// MultiFilters.prototype.checkPropAll = function ($filter, $container) {
+	// 	// если отмеченны ВСЕ фильтры в группе, возвращает true, иначе false
+	//
+	// 	return $container.find(':checkbox').length === this.countActivateFilters($filter, $container);
+	// };
+
+	MultiFilters.prototype.countActivateFilters = function ($filter, $container) {
+		// возвращает количество отмеченных (активных) фильтров
+		var self = this,
+			$curFilters = $filter.closest($container).find(self.$filter),
+			lengthActivateFilters = 0;
+
+		$.each($curFilters, function () {
+			var $thisFilter = $(this);
+
+			self.getFilterState($thisFilter) && lengthActivateFilters++
+		});
+
+		return lengthActivateFilters;
+
+		// if only checkbox
+		// return $container.find('input:checkbox:checked').length;
+	};
+
+	MultiFilters.prototype.bindTagsEvents = function () {
+		var self = this;
+
+		self.$container.on('click', self.tagsItem, function (e) {
+
+			var $curTag = $(this),
+				dataGroup = "[" + self.attributes.dataGroup + "=" + $curTag.attr(self.attributes.dataGroup) + "]",
+				dataName = "[" + self.attributes.dataName + "=" + $curTag.attr(self.attributes.dataName) + "]",
+				$curFilter = $(dataName, $curTag.closest(self.$container).find(self.$group).filter(dataGroup));
+
+			e.preventDefault();
+
+			// отключить соответствующий фильтр
+			// если селект
+			if ($curFilter.prop('tagName') === "SELECT") {
+				$curFilter
+					.prop('selectedIndex', 0)
+					.trigger('change');
+
+				return false;
+			}
+
+			// если слайдер диапазона значений
+			if($curFilter.hasClass(self.options.rangeSlider.substring(1))) {
+				var priceSliderArr = self.priceSlider;
+
+				for (var i = 0; i < priceSliderArr.length; i++) {
+					if (priceSliderArr[i].input.attributes[self.attributes.dataName].nodeValue === $curTag.attr(self.attributes.dataName)) {
+
+						var dataDef = $curFilter.attr(self.attributes.dataDefaultValue).split(';');
+						priceSliderArr[i].update({
+							from: dataDef[0],
+							to: dataDef[1]
+						});
+						break;
+					}
+				}
+
+				return false;
+			}
+
+			// если чекбокс
+			if ($curFilter.is(':checkbox')) {
+				$curFilter
+					.prop('checked', false)
+					.trigger('change');
+
+				return false;
+			}
+
+			// если поле ввода
+			$curFilter.val("").trigger('keyup');
+		});
+	};
+
+	MultiFilters.prototype.resetFiltersInGroup = function () {
+		var self = this;
+
+		self.$btnReset.on('click', function (e) {
+			var $currentBtn = $(this);
+
+			self.resetFilters($currentBtn.closest(self.$item));
+
+			e.preventDefault();
+
+			self.$container.trigger('resetFiltersInGroup');
+		});
+	};
+
+	MultiFilters.prototype.resetAllFilters = function () {
+		var self = this;
+
+		self.$btnResetAll.on('click', function (e) {
+			e.preventDefault();
+
+			var $currentBtn = $(this);
+
+			self.resetFilters($currentBtn.closest(self.$container).find(self.$group));
+
+			self.$container.trigger('resetAllFilters');
+		});
+	};
+
+	MultiFilters.prototype.resetFilters = function ($container) {
+		var self = this;
+		$container.find(':checked').prop('checked', false).trigger('change');
+		$container.find('select').prop('selectedIndex', false).trigger('change');
+		$container.find('input').not(':checkbox, :radio, .range-slider-js').val('').trigger('keyup');
+
+		var priceSliderArr = self.priceSlider;
+
+		for (var i = 0; i < priceSliderArr.length; i++) {
+			if ($(priceSliderArr[i].input).closest($container).length) {
+				var dataDef = $(priceSliderArr[i].input).attr(self.attributes.dataDefaultValue).split(';');
+				priceSliderArr[i].update({
+					from: dataDef[0],
+					to: dataDef[1]
+				});
+			}
+		}
+	};
+
+	MultiFilters.prototype.enabledButton = function ($button) {
+		$button.prop('disabled', false);
+	};
+
+	MultiFilters.prototype.disabledButton = function ($button) {
+		$button.prop('disabled', true);
+	};
+
+	MultiFilters.prototype.toggleDrop = function () {
+		var self = this;
+		var $container = self.$container;
+		var $item = self.$item;
+		var $handler = self.$handler;
+		var $drop = self.$drop;
+		var dropIsOpenedClass = self.modifiers.dropIsOpened;
+
+		$handler.on('click', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			var $currentHandler = $(this);
+			var $currentItem = $currentHandler.closest($item);
+
+			if($currentItem.hasClass(dropIsOpenedClass)) {
+				closeCurrentDrop($currentItem);
+
+				return;
+			}
+
+			openCurrentDrop($currentItem);
+		});
+
+		$container.on('closeDrop', function () {
+			closeVisibleDrop();
+		});
+
+		$($drop).on('click', function (e) {
+			e.stopPropagation();
+		});
+
+		function openCurrentDrop($elements) {
+			self.addClassCustom($elements, dropIsOpenedClass);
+			$container.trigger('dropChange.multiFilters');
+			$container.trigger('dropOpen.multiFilters');
+		}
+
+		function closeCurrentDrop($elements) {
+			self.removeClassCustom($elements, dropIsOpenedClass);
+			$container.trigger('dropChange.multiFilters');
+			$container.trigger('dropClose.multiFilters');
+		}
+
+		function closeVisibleDrop() {
+			self.removeClassCustom($item, dropIsOpenedClass);
+			$container.trigger('dropChange.multiFilters');
+			$container.trigger('dropClose.multiFilters');
+		}
+	};
+
+	MultiFilters.prototype.addClassCustom = function (elements, modifiersClass) {
+		$.each(elements, function () {
+			$(this).addClass(modifiersClass);
+		});
+	};
+
+	MultiFilters.prototype.removeClassCustom = function (elements, modifiersClass) {
+		$.each(elements, function () {
+			$(this).removeClass(modifiersClass);
+		});
+	};
+
+	MultiFilters.prototype.getFilterState = function ($thisFilter) {
+		// возвращает true, если фильтр отмечен, или выбрано значение отличное от дефолтного
+		return $thisFilter.prop('checked') || $thisFilter.attr(this.attributes.dataDefaultValue) !== undefined && $thisFilter.val() !== $thisFilter.attr(this.attributes.dataDefaultValue);
+	};
+
+	window.MultiFilters = MultiFilters;
+}(jQuery));
+
+/**
+ * !multi filters initial
+ * */
+function multiFiltersInit() {
+	var productFilters = '.p-filters-js';
+	// var catalogMenuChangeTimeout;
+
+	if ($(productFilters).length) {
+		new MultiFilters({
+			filter: 'input[type="checkbox"], select, .range-slider-js, [data-filter-type="input"]',
+			tagsItemTpl: '<div class="p-filters-tags__item p-filters-tags-item-js"><i>X</i><span class="p-filters-tag-text-js"></span></div>'
+		});
+	}
+}
+
+/**
+ * !Fixed filters result
+ * */
+$(function () {
+	// fixed filters result
+
+	var $mContainer = $('.m-container');
+
+	if ($mContainer.length) {
+		$(window).on('load scroll resize', function () {
+			addClassFixed();
+		});
+	}
+
+	var mContainerOffset = 0,
+		currentScrollTop,
+		filterResultFixedClass = 'filters-result-fixed';
+
+	function addClassFixed() {
+		mContainerOffset = $mContainer.offset().top + $mContainer.outerHeight();
+		currentScrollTop = $(window).scrollTop() + window.innerHeight;
+
+		var cond = mContainerOffset < currentScrollTop;
+
+		$('html').toggleClass(filterResultFixedClass, !cond);
+	}
+});
+
 /**
  * !Testing form validation (for example). Do not use on release!
  * */
@@ -1478,6 +2146,8 @@ $(document).ready(function () {
 	toggleShutters();
 	slidersInit();
 	tabSwitcher();
+	stickyInit();
+	multiFiltersInit();
 	objectFitImages(); // object-fit-images initial
 
 	formSuccessExample();

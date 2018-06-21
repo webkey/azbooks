@@ -1,5 +1,5 @@
 @@include('_tpl_layout_head.html', {
-	"title": "Тестирование элементов форм",
+	"title": "Forms",
 	"pageClass": ""
 })
 
@@ -13,102 +13,86 @@
 
 <!--MAIN-->
 <div class="main">
-	<div class="max-wrap layout">
-		<div class="main__holder">
-			<!--CONTENT-->
-			<div class="content-wrap">
-				<div class="content user-content">
+	<div class="content layout user-content">
+		<!--CONTENT-->
+		<div class="layout-article">
+			<h1>Тестирование элементов форм</h1>
 
-					<div class="layout-article">
-
-						<h1>Тестирование элементов форм</h1>
-
-						<div class="layout-text" style="background-color: #fff; padding: 20px;">
-							<!--===================================================-->
-							<h3><a href="#hash-fdInputFloatLabel" id="hash-fdInputFloatLabel" class="hashAnchor"><span class="mark">Float label</span></a></h3>
-							<form action="">
-								<!--===================================================-->
-								<div class="input-wrap type--float-label">
-									<div class="label-holder">
-										<label for="fll_01">Name*</label>
-									</div>
-									<div class="input-holder">
-										<input class="field-effects-js" type="text" id="fll_01"/>
-										@@include('_tpl_forms_form-validation.html')
-									</div>
-								</div>
-								<!--===================================================-->
-								<div class="input-wrap type--float-label">
-									<div class="label-holder">
-										<label class="error" for="fll_02">E-mail*</label>
-									</div>
-									<div class="input-holder">
-										<input class="field-effects-js error" type="text" id="fll_02"/>
-										@@include('_tpl_forms_form-validation.html')
-									</div>
-								</div>
-							</form>
+			<div class="layout-text" style="background-color: #fff; padding: 20px;">
+				<!--===================================================-->
+				<h3><a href="#hash-fdInputFloatLabel" id="hash-fdInputFloatLabel" class="hashAnchor"><span class="mark">Float label</span></a></h3>
+				<form action="">
+					<!--===================================================-->
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label for="fll_01">Name*</label>
 						</div>
-
-						<!--===================================================-->
-						<!--===================================================-->
-
-						<!--===============form clear===============-->
-						@@include('_tpl_title-anchor.html', {
-							"taId": "formElementClearExample",
-							"taText": "Поля форм без оберток. Элементы идут один за другим. (рекомендуем)"
-						})
-						@@include('_tpl_forms_form-clear.html')
-						<!--===============form clear end===============-->
-
-						<div class="user-spacer"></div>
-
-						<!--===============form default===============-->
-						@@include('_tpl_title-anchor.html', {
-							"taId": "formElementExample",
-							"taText": "Поля форм c обертками. (если необходимо)"
-						})
-						@@include('_tpl_forms_form-default.html')
-						<!--===============form default end===============-->
-
-						<div class="user-spacer"></div>
-
-						<!--===============checkbox and radio===============-->
-						@@include('_tpl_title-anchor.html', {
-							"taId": "formCheckboxExample",
-							"taText": "Чекбоксы и Радиобаттоны"
-						})
-						<div class="layout-text">
-							@@include('_tpl_forms_checkbox-and-radio.html')
+						<div class="input-holder">
+							<input class="field-effects-js" type="text" id="fll_01"/>
+							@@include('_tpl_forms_form-validation.html')
 						</div>
-						<!--===============checkbox and radio end===============-->
-
-						<div class="user-spacer"></div>
-
-						<!--===============user form===============-->
-						@@include('_tpl_title-anchor.html', {
-							"taId": "userFormExample",
-							"taText": "Форма обратной связи"
-						})
-						@@include('_tpl_forms_user-form.html', {
-							"title": "Задать вопрос"
-						})
-						<!--===============user form end===============-->
 					</div>
-
-					@@include('_tpl_typography_nav.html')
-				</div>
+					<!--===================================================-->
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label class="error" for="fll_02">E-mail*</label>
+						</div>
+						<div class="input-holder">
+							<input class="field-effects-js error" type="text" id="fll_02"/>
+							@@include('_tpl_forms_form-validation.html')
+						</div>
+					</div>
+				</form>
 			</div>
-			<!--CONTENT end-->
 
-			<!--SIDEBAR-->
-			@@include('_tpl_layout_sidebar.html')
-			<!--SIDEBAR-->
+			<!--===================================================-->
+			<!--===================================================-->
 
-			<!--ASIDE-->
-			@@include('_tpl_layout_aside.html')
-			<!--ASIDE end-->
+			<!--===============form clear===============-->
+			@@include('_tpl_title-anchor.html', {
+				"taId": "formElementClearExample",
+				"taText": "Поля форм без оберток. Элементы идут один за другим. (рекомендуем)"
+			})
+			@@include('_tpl_forms_form-clear.html')
+			<!--===============form clear end===============-->
+
+			<div class="user-spacer"></div>
+
+			<!--===============form default===============-->
+			@@include('_tpl_title-anchor.html', {
+				"taId": "formElementExample",
+				"taText": "Поля форм c обертками. (если необходимо)"
+			})
+			@@include('_tpl_forms_form-default.html')
+			<!--===============form default end===============-->
+
+			<div class="user-spacer"></div>
+
+			<!--===============checkbox and radio===============-->
+			@@include('_tpl_title-anchor.html', {
+				"taId": "formCheckboxExample",
+				"taText": "Чекбоксы и Радиобаттоны"
+			})
+			<div class="layout-text">
+				@@include('_tpl_forms_checkbox-and-radio.html')
+			</div>
+			<!--===============checkbox and radio end===============-->
+
+			<div class="user-spacer"></div>
+
+			<!--===============user form===============-->
+			@@include('_tpl_title-anchor.html', {
+				"taId": "userFormExample",
+				"taText": "Форма обратной связи"
+			})
+			@@include('_tpl_forms_user-form.html', {
+				"title": "Задать вопрос"
+			})
+			<!--===============user form end===============-->
 		</div>
+		<!--CONTENT end-->
+
+		@@include('_tpl_typography_nav.html')
 	</div>
 </div>
 <!--MAIN end-->

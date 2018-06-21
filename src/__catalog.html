@@ -1,0 +1,111 @@
+@@include('_tpl_layout_head.html', {
+	"title": "Books",
+	"pageClass": ""
+})
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
+
+<!--HEADER-->
+@@include('_tpl_layout_header.html', {
+	"currentItem": "Books"
+})
+<!--HEADER end-->
+
+<!--MAIN-->
+<div class="main">
+	<div class="content layout user-content">
+		<!--===============breadcrumbs===============-->
+		@@include('_tpl_breadcrumbs.html', {
+			"items": ["Home"],
+			"last": "Books"
+		})
+		<!--===============breadcrumbs end===============-->
+		<!--CONTENT-->
+		<div class="sheet layout-article">
+			<div class="heading">
+				<h1>Books</h1>
+				<span>(1520)</span>
+			</div>
+		</div>
+		<!--CONTENT end-->
+
+		<!--Во время подбора результатов добавляем класс js-loading на контейнер с классом p-filters-js-->
+		<div class="m-container p-filters-js">
+			<div class="m-aside  shutter--filters shutter--filters-js m-aside-sticky-js">
+				<div class="m-aside-sticky__layout-js">
+					<div class="shutter--filters__options">
+						<a href="#" class="btn-filters-close js-btn-shutter-close" title="Закрыть фильтр">
+							<div><span>Фильтр</span> <span class="p-filters-activated p-filters-activated-js hide">0</span></div>
+							<svg class="svg-ico-close" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 57.2 57.2">
+								<path d="M34.3 28.6L56 6.9c1.6-1.6 1.6-4.1 0-5.7 -1.6-1.6-4.1-1.6-5.7 0L28.6 22.9 6.9 1.3c-1.6-1.6-4.1-1.6-5.7 0 -1.6 1.6-1.6 4.1 0 5.7l21.7 21.6L1.3 50.3c-1.6 1.5-1.6 4.1 0 5.6 0.8 0.8 1.8 1.2 2.8 1.2s2-0.4 2.8-1.2l21.7-21.6L50.3 56c0.8 0.8 1.8 1.2 2.8 1.2s2-0.4 2.8-1.2c1.6-1.6 1.6-4.1 0-5.7L34.3 28.6z"></path>
+							</svg>
+						</a>
+					</div>
+					<form name="_form" action="#?" method="get" class="js-filter-form">
+						<div class="m-aside__align">
+							<div class="m-aside__holder">
+								<!--filters-->
+								@@include('_tpl_products-filters.html')
+								<!--filters end-->
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="m-content">
+				<div class="m-content__body">
+					<div class="m-content__body__options options-sticky-js">
+						@@include('_tpl_products-options.html')
+					</div>
+					<div class="m-content__body__tags tags-sticky-js">
+						<div class="p-filters-tags">
+							<div class="p-filters-tags__frame p-filters-tags-js">
+								<!--filters tags-->
+							</div>
+						</div>
+					</div>
+					<div class="m-content__body__layout">
+						<div class="products">
+							<section class="products__list">
+								<div class="products__list__holder">
+									@@loop("_tpl_sliders_similar-slider--items.html", "includes/json/products--new.json")
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+
+				<div class="m-content__footer">
+					@@include('_tpl_pagination.html')
+				</div>
+			</div>
+
+			<div class="p-filters-results p-filters-results-js">
+				<div class="p-filters-results__selected">
+					<div class="p-filters-results__selected__align">
+						<div class="p-filters-results__selected__label">Выбрано</div>
+						<div class="p-filters-results__selected__count"><span class="cur">1202</span> из 1202</div>
+					</div>
+				</div>
+				<div class="p-filters-results__apply">
+					<a href="#" class="btn-filters-apply"><span>подобрать</span></a>
+				</div>
+				<button class="btn-default btn-with-icon btn-clear-filters btn-clear-filters-js" title="Сбросить фильтры">
+					@@include("includes/svg/icon-bin.svg")
+				</button>
+				<div class="results-loading">Подбор результатов...</div>
+			</div>
+
+			<div class="loader-cover">&nbsp;</div>
+		</div>
+	</div>
+</div>
+<!--MAIN end-->
+
+<!--FOOTER-->
+@@include('_tpl_layout_footer.html')
+<!--FOOTER end-->
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "END" })
+
+@@include('_tpl_layout_foot.html')

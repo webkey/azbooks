@@ -134,6 +134,20 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 .hide-text
 	+hide-text
 
+.heading
+	display: flex
+	justify-content: flex-start
+	align-items: flex-end
+	margin-bottom: round-float($bottom-space/2, 1)
+
+	& > *
+		margin-right: 20px
+		line-height: 32px
+		margin-bottom: round-float($bottom-space/2, 1)
+
+	& > h1, & > h2
+		line-height: 40px
+
 /* content img
 
 .layout-article

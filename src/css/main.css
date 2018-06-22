@@ -653,6 +653,26 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 	width: auto;
 }
 
+.heading {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: start;
+	    justify-content: flex-start;
+	-ms-flex-align: end;
+	    align-items: flex-end;
+	margin-bottom: 1.5rem;
+}
+
+.heading > * {
+	margin-right: 20px;
+	line-height: 32px;
+	margin-bottom: 1.5rem;
+}
+
+.heading > h1, .heading > h2 {
+	line-height: 40px;
+}
+
 /* content img */
 .layout-article > img, .layout-article .imgc {
 	text-align: center;
@@ -1674,9 +1694,9 @@ input[type="checkbox"] ~ label, input[type="radio"] ~ label, .check-label, .radi
 	font-family: "Museo Sans Cyrl 300", sans-serif;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 16px;
-	line-height: 22px;
-	letter-spacing: 0.025em;
+	font-size: 18px;
+	line-height: 24px;
+	letter-spacing: normal;
 	color: #333;
 	text-transform: none;
 	cursor: pointer;
@@ -1690,11 +1710,11 @@ input[type="checkbox"] ~ label, input[type="radio"] ~ label, .check-label, .radi
 }
 
 .no-touchevents input[type="checkbox"] ~ label:hover, .no-touchevents input[type="radio"] ~ label:hover, .no-touchevents .check-label:hover, .no-touchevents .radio-label:hover {
-	color: blue;
+	color: #00abc5;
 }
 
 .no-touchevents input[type="checkbox"] ~ label:hover input[type="checkbox"]:not(:disabled) ~ i::before, .no-touchevents input[type="radio"] ~ label:hover input[type="checkbox"]:not(:disabled) ~ i::before, .no-touchevents .check-label:hover input[type="checkbox"]:not(:disabled) ~ i::before, .no-touchevents .radio-label:hover input[type="checkbox"]:not(:disabled) ~ i::before {
-	border-color: blue;
+	border-color: #00abc5;
 }
 
 input[type="checkbox"],
@@ -1728,29 +1748,29 @@ input[type="radio"] ~ i {
 }
 
 .no-touchevents .check-label:hover input[type="checkbox"]:not(:disabled) ~ i::before {
-	border-color: blue;
+	border-color: #00abc5;
 }
 
 .no-touchevents .radio-label:hover input[type="radio"]:not(:disabled) ~ span::before {
-	border-color: blue;
+	border-color: #00abc5;
 }
 
 input[type="checkbox"] ~ label::before, input[type="checkbox"] ~ label::after,
 input[type="checkbox"] ~ i::before,
 input[type="checkbox"] ~ i::after {
 	content: '';
-	width: 22px;
-	height: 22px;
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	left: 0;
 	top: 50%;
-	margin-top: -11px;
-	border-radius: 0;
+	margin-top: -10px;
+	border-radius: 4px;
 }
 
 input[type="checkbox"] ~ label::before,
 input[type="checkbox"] ~ i::before {
-	border: 2px solid blue;
+	border: 2px solid #ccc;
 	background-color: transparent;
 }
 
@@ -1765,10 +1785,10 @@ input[type="checkbox"] ~ span::after {
 	content: '';
 	position: absolute;
 	width: 0;
-	height: 4px;
+	height: 2px;
 	left: 0;
 	top: 50%;
-	border-radius: 0;
+	border-radius: 2px;
 	background: white;
 }
 
@@ -1776,8 +1796,8 @@ input[type="checkbox"] ~ label > span::before,
 input[type="checkbox"] ~ span::before {
 	-ms-transform: rotate(45deg);
 	    transform: rotate(45deg);
-	-ms-transform-origin: 0 10px;
-	    transform-origin: 0 10px;
+	-ms-transform-origin: 0 8px;
+	    transform-origin: 0 8px;
 	z-index: 1;
 }
 
@@ -1785,21 +1805,21 @@ input[type="checkbox"] ~ label > span::after,
 input[type="checkbox"] ~ span::after {
 	-ms-transform: rotate(-50deg);
 	    transform: rotate(-50deg);
-	-ms-transform-origin: 0 10px;
-	    transform-origin: 0 10px;
+	-ms-transform-origin: 0 8px;
+	    transform-origin: 0 8px;
 	left: 22px;
 }
 
 input[type="checkbox"]:checked ~ label::before,
 input[type="checkbox"]:checked ~ i::before {
-	border-color: blue;
-	background-color: blue;
+	border-color: #00abc5;
+	background-color: #00abc5;
 }
 
 input[type="checkbox"]:checked ~ label > span::before,
 input[type="checkbox"]:checked ~ span::before {
 	width: 7px;
-	margin: -5px 0 0 0;
+	margin: -4px 0 0 0;
 	-webkit-backface-visibility: hidden;
 	        backface-visibility: hidden;
 }
@@ -1807,45 +1827,45 @@ input[type="checkbox"]:checked ~ span::before {
 input[type="checkbox"]:checked ~ label > span::after,
 input[type="checkbox"]:checked ~ span::after {
 	width: 11px;
-	margin: 0 0 0 -7px;
+	margin: 1px 0 0 -8px;
 	-webkit-backface-visibility: hidden;
 	        backface-visibility: hidden;
 }
 
 input[type="checkbox"]:disabled ~ label,
 input[type="checkbox"]:disabled ~ span {
-	color: #bdbdbd !important;
+	color: #c1c1c1 !important;
 	cursor: default;
 }
 
 input[type="checkbox"]:disabled ~ label::before,
 input[type="checkbox"]:disabled ~ i::before {
-	border-color: #d6d6d6;
-	background-color: #f3f3f3;
+	border-color: #c1c1c1 !important;
+	background-color: #ddd !important;
 }
 
 input[type="checkbox"]:disabled ~ label > span:before, input[type="checkbox"]:disabled ~ label > span:after,
 input[type="checkbox"]:disabled ~ span:before,
 input[type="checkbox"]:disabled ~ span:after {
-	background: #d6d6d6;
+	background: #c1c1c1 !important;
 }
 
 input[type="radio"] ~ label::before, input[type="radio"] ~ label::after,
 input[type="radio"] ~ span::before,
 input[type="radio"] ~ span::after {
 	content: '';
-	width: 22px;
-	height: 22px;
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	left: 0;
 	top: 50%;
-	margin-top: -11px;
-	border-radius: 50px;
+	margin-top: -10px;
+	border-radius: 10px;
 }
 
 input[type="radio"] ~ label::before,
 input[type="radio"] ~ span::before {
-	border: 2px solid blue;
+	border: 2px solid #00abc5;
 }
 
 input[type="radio"] ~ label::after,
@@ -1856,15 +1876,15 @@ input[type="radio"] ~ span::after {
 input[type="radio"] ~ label > span::after,
 input[type="radio"] ~ i::after {
 	content: '';
-	width: 12px;
-	height: 12px;
+	width: 10px;
+	height: 10px;
 	position: absolute;
 	top: 50%;
 	left: 5px;
-	margin-top: -6px;
+	margin-top: -5px;
 	border-radius: 50%;
 	overflow: hidden;
-	background: blue;
+	background: #00abc5;
 	animation: bounceout 0s;
 	animation-iteration-count: 1;
 	animation-fill-mode: forwards;
@@ -1877,7 +1897,7 @@ input[type="radio"] ~ i {
 
 input[type="radio"]:checked ~ label::before,
 input[type="radio"]:checked ~ span::before {
-	border-color: blue;
+	border-color: #00abc5;
 }
 
 input[type="radio"]:checked ~ label > span::after,
@@ -1885,7 +1905,7 @@ input[type="radio"]:checked ~ i::after {
 	animation: bounce 0.3s;
 	animation-iteration-count: 1;
 	opacity: 1;
-	background-color: blue;
+	background-color: #00abc5;
 }
 
 @keyframes bounce {
@@ -1921,20 +1941,20 @@ input[type="radio"]:checked ~ i::after {
 input[type="radio"]:disabled ~ label,
 input[type="radio"]:disabled ~ label > span,
 input[type="radio"]:disabled ~ span {
-	color: #bdbdbd;
+	color: #c1c1c1 !important;
 	cursor: default;
 }
 
 input[type="radio"]:disabled ~ label::before,
 input[type="radio"]:disabled ~ label > span::before,
 input[type="radio"]:disabled ~ span::before {
-	border-color: #d6d6d6;
-	background-color: #f3f3f3;
+	border-color: #c1c1c1 !important;
+	background-color: #ddd !important;
 }
 
 input[type="radio"]:disabled ~ label > span::after,
 input[type="radio"]:disabled ~ i::after {
-	background: #b9b9b9;
+	background: #c1c1c1 !important;
 }
 
 .check-list {
@@ -2639,12 +2659,10 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 /* breadcrumbs */
 .breadcrumbs {
 	margin-bottom: 20px;
-}
-
-@media (max-width: 1599px) {
-	.breadcrumbs {
-		margin-bottom: 4rem;
-	}
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	z-index: 2;
 }
 
 .breadcrumbs:last-child {
@@ -3818,34 +3836,83 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 /* m-container */
 .m-container {
 	position: relative;
+	margin-top: -43px;
+}
+
+.m-heading {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: start;
+	    align-items: flex-start;
+}
+
+.m-heading .heading {
+	-ms-flex-negative: 1;
+	    flex-shrink: 1;
+	-ms-flex-positive: 1;
+	    flex-grow: 1;
+}
+
+.doc-catalog {
+	display: block;
+	position: relative;
+	width: 290px;
+	margin-right: 20px;
+	margin-top: 43px;
+	text-decoration: none;
+	border: 2px solid #ddd;
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 13px 13px 13px 77px;
+	font-size: 1.4rem;
+	line-height: 1.29;
+	text-transform: uppercase;
+	color: inherit;
+	will-change: border-color;
+	transition-property: border-color;
+	transition-duration: 0.2s;
+}
+
+.doc-catalog::before {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 18px;
+	top: 50%;
+	width: 40px;
+	height: 40px;
+	margin-top: -20px;
+	background: url(../img/pdf.svg) no-repeat;
+	background-size: cover;
+}
+
+.doc-catalog b, .doc-catalog span {
+	display: block;
+}
+
+.doc-catalog b {
+	font-family: "Museo Sans Rounded 700", sans-serif;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.no-touchevents .doc-catalog:hover {
+	border-color: #00abc5;
+}
+
+.m-holder {
 	display: -ms-flexbox;
 	display: flex;
 }
 
 @media (max-width: 991px) {
-	.m-container {
+	.m-holder {
 		display: block;
 	}
 }
 
-.m-container::before {
-	content: "";
-	display: block;
-	position: absolute;
-	left: 279px;
-	top: 0;
-	height: 100%;
-	border-right: 1px solid #ddd;
-}
-
-@media (max-width: 991px) {
-	.m-container::before {
-		content: none;
-	}
-}
-
 .m-aside {
-	width: 280px;
+	width: 290px;
 	position: -webkit-sticky;
 	position: sticky;
 	-ms-flex-item-align: start;
@@ -3956,7 +4023,8 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	    flex-direction: column;
 	-ms-flex-pack: justify;
 	    justify-content: space-between;
-	width: calc(100% - 280px);
+	width: calc(100% - 290px);
+	padding-left: 20px;
 }
 
 @media (max-width: 991px) {
@@ -4087,7 +4155,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	position: absolute;
 	bottom: 0;
 	height: 50px;
-	width: 280px;
+	width: 290px;
 	background-color: #fff;
 	color: white;
 	display: -ms-flexbox;
@@ -4900,28 +4968,6 @@ label.checkbox--size input[type="checkbox"]:checked ~ span {
 .p-filters-item.p-filters-on .p-filters-select .p-filters-angle::before,
 .p-filters-item.p-filters-on .p-filters-select .p-filters-angle::after {
 	background-color: #00abc5;
-}
-
-.p-filters-item.p-filters-is-open .p-filters-angle {
-	transform: rotate(0.5turn) translateZ(0);
-}
-
-.p-filters-item.p-filters-is-open .p-filters-angle::after {
-	transform: rotate(0) translateZ(0);
-}
-
-.ie9 .p-filters-item.p-filters-is-open .p-filters-angle {
-	-ms-transform: rotate(0.5turn);
-	    transform: rotate(0.5turn);
-}
-
-.ie9 .p-filters-item.p-filters-is-open .p-filters-angle::after {
-	-ms-transform: rotate(0);
-	    transform: rotate(0);
-}
-
-.p-filters-item.p-filters-is-open .p-filters-drop {
-	display: block;
 }
 
 /* range-slider */

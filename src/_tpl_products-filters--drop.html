@@ -1,32 +1,13 @@
-@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "START", "group": "@@group", "modGroup": "@@modGroup" })
+@@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "START", "group": "@@group", "modGroup": "@@modGroup", "isOpen": "true" })
 
-		@@if (context.checkboxesExpanded) {
-			@@for (var key in checkboxesExpanded) {
-				<li>
-					<label class="check-label@@if(context.addClass){ @@addClass}">
-						<input type="checkbox" name="`+key+`" data-filter-name="`+key+`" data-filter-tag="`+checkboxesExpanded[key].tag+`" />
-						<i>&nbsp;</i>
-						@@if(context.hasIcon){
-							<img src="`+checkboxesExpanded[key].icon+`" alt="`+checkboxesExpanded[key].tag+`" width="50">
-						}
-						<span>`+checkboxesExpanded[key].full+`</span>
-						@@if(context.hasImg){
-							<img src="`+checkboxesExpanded[key].img+`" alt="`+checkboxesExpanded[key].tag+`" />
-						}
-					</label>
-				</li>
-			}
-		}
-		@@if (context.checkboxes) {
-			@@for (var key in checkboxes) {
-				<li>
-					<label class="check-label@@if(context.addClass){ @@addClass}">
-						<input type="checkbox" name="`+key+`" data-filter-name="`+key+`" />
-						<i>&nbsp;</i>
-						<span class="p-filters-label-text-js">`+checkboxes[key]+`</span>
-					</label>
-				</li>
-			}
-		}
+@@for (var key in checkboxes) {
+<li>
+	<label class="check-label@@if(context.addClass){ @@addClass}">
+		<input type="checkbox" name="`+key+`" />
+		<i>&nbsp;</i>
+		<span class="p-filters-label-text-js">`+checkboxes[key]+`</span>
+	</label>
+</li>
+}
 
 @@include('_tpl_products-filters--DROP_LAYOUT.html', {"itemLayout": "END"})

@@ -237,8 +237,8 @@ input, textarea
 input[type="checkbox"] ~ label, input[type="radio"] ~ label, .check-label, .radio-label
 	+display-inline-block-top
 	+font-normal
-	+font(16px, 22px)
-	letter-spacing: 0.025em
+	+font(18px, 24px)
+	letter-spacing: normal
 	color: $text-color
 	text-transform: none
 	cursor: pointer
@@ -249,11 +249,11 @@ input[type="checkbox"] ~ label, input[type="radio"] ~ label, .check-label, .radi
 
 	// hover
 	.no-touchevents &:hover
-		color: $checkbox-color
+		color: $checkbox-color--active
 
 		input[type="checkbox"]:not(:disabled) ~ i
 			&::before
-				border-color: $checkbox-color
+				border-color: $checkbox-color--active
 
 input[type="checkbox"],
 input[type="radio"]
@@ -281,13 +281,13 @@ input[type="radio"]
 
 	input[type="checkbox"]:not(:disabled) ~ i
 		&::before
-			border-color: $checkbox-color
+			border-color: $checkbox-color--active
 
 .no-touchevents .radio-label:hover
 
 	input[type="radio"]:not(:disabled) ~ span
 		&::before
-			border-color: $checkbox-color
+			border-color: $checkbox-color--active
 
 //checkbox
 input[type="checkbox"]
@@ -297,12 +297,12 @@ input[type="checkbox"]
 		&::before,
 		&::after
 			content: ''
-			+size(22px)
+			+size(20px)
 			position: absolute
 			left: 0
 			top: 50%
-			margin-top: -11px
-			border-radius: 0
+			margin-top: -10px
+			border-radius: 4px
 
 		&::before
 			border: 2px solid $checkbox-color
@@ -317,20 +317,20 @@ input[type="checkbox"]
 		&::after
 			content: ''
 			position: absolute
-			+size(0, 4px)
+			+size(0, 2px)
 			left: 0
 			top: 50%
-			border-radius: 0
+			border-radius: 2px
 			background: white
 
 		&::before
 			transform: rotate(45deg)
-			transform-origin: 0 10px
+			transform-origin: 0 8px
 			z-index: 1
 
 		&::after
 			transform: rotate(-50deg)
-			transform-origin: 0 10px
+			transform-origin: 0 8px
 			left: 22px
 
 	// checkbox checked
@@ -338,39 +338,39 @@ input[type="checkbox"]
 		& ~ label,
 		& ~ i
 			&::before
-				border-color: $checkbox-color
-				background-color: $checkbox-color
+				border-color: $checkbox-color--active
+				background-color: $checkbox-color--active
 
 		& ~ label > span,
 		& ~ span
 			&::before
 				width: 7px
-				margin: -5px 0 0 0
+				margin: -4px 0 0 0
 				backface-visibility: hidden
 
 			&::after
 				width: 11px
-				margin: 0 0 0 -7px
+				margin: 1px 0 0 -8px
 				backface-visibility: hidden
 
 	// checkbox disabled
 	&:disabled
 		& ~ label,
 		& ~ span
-			color: #bdbdbd !important
+			color: $checkbox-color--disabled !important
 			cursor: default
 
 		& ~ label,
 		& ~ i
 			&::before
-				border-color: #d6d6d6
-				background-color: #f3f3f3
+				border-color: $checkbox-color--disabled !important
+				background-color: $checkbox-color--disabled-2 !important
 
 		& ~ label > span,
 		& ~ span
 			&:before,
 			&:after
-				background: #d6d6d6
+				background: $checkbox-color--disabled !important
 
 // radio
 input[type="radio"]
@@ -379,15 +379,15 @@ input[type="radio"]
 	& ~ span
 		&::before, &::after
 			content: ''
-			+size(22px)
+			+size(20px)
 			position: absolute
 			left: 0
 			top: 50%
-			margin-top: -11px
-			border-radius: 50px
+			margin-top: -10px
+			border-radius: 10px
 
 		&::before
-			border: 2px solid $checkbox-color
+			border: 2px solid $checkbox-color--active
 
 		&::after
 			background: none
@@ -396,14 +396,14 @@ input[type="radio"]
 	& ~ i
 		&::after
 			content: ''
-			+size(12px)
+			+size(10px)
 			position: absolute
 			top: 50%
 			left: 5px
-			margin-top: -6px
+			margin-top: -5px
 			border-radius: 50%
 			overflow: hidden
-			background: $checkbox-color
+			background: $checkbox-color--active
 			animation: bounceout 0s
 			animation-iteration-count: 1
 			animation-fill-mode: forwards
@@ -417,7 +417,7 @@ input[type="radio"]
 		& ~ label,
 		& ~ span
 			&::before
-				border-color: $checkbox-color
+				border-color: $checkbox-color--active
 
 		& ~ label > span,
 		& ~ i
@@ -425,7 +425,7 @@ input[type="radio"]
 				animation: bounce 0.3s
 				animation-iteration-count: 1
 				opacity: 1
-				background-color: $checkbox-color
+				background-color: $checkbox-color--active
 
 	@keyframes bounce
 		0%
@@ -458,17 +458,17 @@ input[type="radio"]
 		& ~ label,
 		& ~ label > span,
 		& ~ span
-			color: #bdbdbd
+			color: $checkbox-color--disabled !important
 			cursor: default
 
 			&::before
-				border-color: #d6d6d6
-				background-color: #f3f3f3
+				border-color: $checkbox-color--disabled !important
+				background-color: $checkbox-color--disabled-2 !important
 
 		& ~ label > span,
 		& ~ i
 			&::after
-				background: #b9b9b9
+				background: $checkbox-color--disabled !important
 
 .check-list
 	+font(16px, 20px)

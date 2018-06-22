@@ -221,9 +221,11 @@
 /* breadcrumbs
 .breadcrumbs
 	margin-bottom: 20px
-
-	+media('<desk-lg')
-		margin-bottom: $bottom-space--ml
+	// для страници каталога
+	position: relative
+	display: inline-block
+	vertical-align: top
+	z-index: $z-cover
 
 	&:last-child
 		margin-bottom: 0
@@ -1119,23 +1121,65 @@
 /* m-container
 .m-container
 	position: relative
-	display: flex
+	margin-top: -43px
 
-	//+clear
-	+media('<tab-lg')
-		display: block
+.m-heading
+	display: flex
+	align-items: flex-start
+
+	.heading
+		flex-shrink: 1
+		flex-grow: 1
+
+.doc-catalog
+	display: block
+	position: relative
+	width: $p-filters-width
+	margin-right: nth($page-layout-space, 2)
+	margin-top: 43px
+	text-decoration: none
+	border: 2px solid $border-color
+	border-radius: 10px
+	background-color: #fff
+	padding: 13px 13px 13px 77px
+	+font(1.4rem, round-float(18/14, 2))
+	text-transform: uppercase
+	color: inherit
+	// transition
+	$prop: border-color
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
 
 	&::before
 		content: ""
 		display: block
 		position: absolute
-		left: $p-filters-width - 1
-		top: 0
-		height: 100%
-		border-right: 1px solid $border-color
+		left: 18px
+		top: 50%
+		width: 40px
+		height: 40px
+		margin-top: -20px
+		background: url(../../img/pdf.svg) no-repeat
+		background-size: cover
 
-		+media('<tab-lg')
-			content: none
+	b, span
+		display: block
+
+	b
+		+font-alt
+
+	// hover
+	.no-touchevents &:hover
+		border-color: $link-color
+
+.m-holder
+	display: flex
+
+	//+clear
+	+media('<tab-lg')
+		display: block
 
 .m-aside
 	width: $p-filters-width
@@ -1214,9 +1258,7 @@
 	flex-direction: column
 	justify-content: space-between
 	width: calc(100% - #{$p-filters-width})
-	//padding: nth($m-content-space, 1) nth($m-content-space, 2)
-
-	//float: right
+	padding-left: nth($page-layout-space, 2)
 
 	+media('<tab-lg')
 		width: auto
@@ -1959,7 +2001,7 @@ label.checkbox--size
 			background-color: $base-color
 
 // drop open
-.p-filters-item.p-filters-is-open
+//.p-filters-item.p-filters-is-open
 	.p-filters-angle
 		transform: rotate(0.5turn) translateZ(0)
 

@@ -1,13 +1,10 @@
 @@if(itemLayout === "START")
 {
-<div class="p-filters-drop p-filters-drop-js">
-	<ul class="p-filters-drop-list p-filters-group-js" data-filter-group="@@group">
+<div class="p-filters-drop@@if(context.isOpen == "true"){ is-open}"@@if(context.isOpen == "true"){ style="display: block;"}>
+	<ul class="p-filters-drop-list"@@if(context.group){ data-filter-group="@@group"}>
 }
 @@if(itemLayout === "END")
 {
 	</ul>
-	<div class="p-filters-drop-footer">
-		<button class="btn-reset btn-reset-js" disabled><span>Очистить фильтр</span></button>
-	</div>
 </div>
 }

@@ -444,9 +444,7 @@
 .pagination
 	overflow: hidden
 	margin-bottom: $bottom-space--lg
-	border: solid $border-color
-	border-width: 1px 0
-	+font-bold
+	+font-alt-bold
 	color: inherit
 	text-align: center
 	cursor: default
@@ -456,49 +454,47 @@
 	&:last-child
 		margin-bottom: 0
 
-.pg-left
-	float: left
-
-.pg-right
-	float: right
+.pg-left, .pg-right
+	display: inline-block
+	vertical-align: top
 
 .pg-prev, .pg-next
-	position: relative
 	display: block
-	+size(nth($pagination-space, 1)*2+(nth($pagination-item-size, 2))+$pagination-border-width*2)
-	border: $pagination-border-width solid $border-color
-	margin: -$pagination-border-width 0
+	position: relative
+	+size(nth($pagination-item-size, 1), nth($pagination-item-size, 2))
+	border: $pagination-border-width solid #ccc
+	color: $text-color
+	border-radius: 10px
+	text-decoration: none
+	// transition
+	$prop: border-color, background-color, color
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
 
 	+media('<mob-md')
-		+size(nth($pagination-space, 1)*2+(nth($pagination-item-size--sm, 2))+$pagination-border-width*2)
+		height: nth($pagination-item-size--sm, 2)
+		width: nth($pagination-item-size--sm, 1)
 
 	span
 		display: none
 
-.pg-prev
-	margin-left: -$pagination-border-width
-
-.pg-next
-	margin-right: -$pagination-border-width
-
-.pg-prev, .pg-next
-	color: #999
-	text-decoration: none
-
 	// hover
 	.no-touchevents &:hover
-		color: $base-color
+		border-color: $link-color
 
 	// disabled
 	&.disabled, .no-touchevents &.disabled
 		cursor: default
-		color: #dedede
+		color: #ddd
+		border-color: #ddd
 
 .pg-prev-arr, .pg-next-arr
 	position: absolute
 	+position(50%, 50%)
-	+size(16px)
-	margin: -8px 0 0 -8px
+	+size(12px)
+	margin: -6px 0 0 -6px
 	letter-spacing: 0
 
 	svg
@@ -515,8 +511,11 @@
 		margin: 0
 
 		li
-			margin: nth($pagination-space, 1) nth($pagination-space, 2)
+			margin: round(nth($pagination-space, 1)/2) round(nth($pagination-space, 2)/2)
 			padding: 0
+
+			+media('<mob-md')
+				margin: round(nth($pagination-space--sm, 1)/2) round(nth($pagination-space--sm, 2)/2)
 
 			&:before
 				content: none
@@ -534,15 +533,25 @@
 			background: transparent
 			min-width: nth($pagination-item-size, 1)
 			height: nth($pagination-item-size, 2)
-			padding: 0 3px
-			border-radius: 50%
-			+font($pagination-font-size, nth($pagination-item-size, 2))
+			padding: 0 5px
+			border-radius: 10px
+			border: 2px solid #ccc
+			font-size: $pagination-font-size
+			line-height: #{nth($pagination-item-size, 2) - $pagination-border-width*2}
 			letter-spacing: normal
 			text-transform: uppercase
+			// transition
+			$prop: border-color, background-color, color
+			will-change: $prop
+			transition:
+				property: $prop
+				duration: $animation-speed
 
 			+media('<mob-md')
 				min-width: nth($pagination-item-size--sm, 1)
 				height: nth($pagination-item-size--sm, 2)
+				font-size: 14px
+				line-height: #{nth($pagination-item-size--sm, 2) - $pagination-border-width*2}
 
 		a
 			text-decoration: none
@@ -550,11 +559,13 @@
 
 			// hover
 			.no-touchevents &:hover
-				color: $base-color
+				border-color: $link-color
 
 		// active
 		&.active span
-			color: #999
+			color: white
+			border-color: $link-color
+			background-color: $link-color
 
 /* pagination end
 
@@ -890,28 +901,22 @@
 	border-radius: 10px
 	box-shadow: 0 3px 3px rgba(black, 0.1)
 	z-index: 1
-	transition:
-		property: box-shadow
-		duration: $animation-speed
 
 	+media('<mob-md')
 		padding: $product-space--mob
-
-	.no-touchevents &:hover
-		box-shadow: 0 5px 5px rgba(black, 0.3)
 
 .product__img
 	position: relative
 	display: block
 	padding: 0
-	width: 150px
+	width: 190px
 	max-width: 100%
 	margin: 0 auto 2rem
 
 	&::before
 		content: ""
 		display: block
-		+ratio(150, 190)
+		+ratio(190, 190)
 
 	img
 		display: block
@@ -961,7 +966,56 @@
 .product__label--bestseller
 	background-image: url(../../img/label-bestseller.png)
 
+// hover
+.no-touchevents .product
+	transition:
+		property: box-shadow
+		duration: $animation-speed
+
+	.product__img
+		// transition
+		$prop: transform
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed*3
+
+	&:hover
+		box-shadow: 0 5px 5px rgba(black, 0.3)
+
+		.product__img
+			$rotate: 10deg
+			$scale: 1
+			transform: rotate($rotate) scale($scale)
+			transform: rotate3d(0, 0, 1, $rotate) scale3d($scale, $scale, 1)
+			transition:
+				duration: $animation-speed
+
 /* products preview / product end
+
+/* products preview list
+.products
+	position: relative
+	margin-bottom: 40px
+
+	&:last-child
+		margin-bottom: 0
+
+.products__list
+	+grid-parent(10px)
+	+clear-spacing
+
+.products__item
+	+grid-item(3, 10px)
+	letter-spacing: normal
+
+	.product
+		height: 100%
+
+	+media('<mob-lg')
+		+grid-item-responsive(2, 10px)
+
+/* products preview list end
 
 /* categories
 .categories
@@ -1118,30 +1172,17 @@
 
 /* similar slider end
 
-/* m-container
-.m-container
-	position: relative
-	margin-top: -43px
-
-.m-heading
-	display: flex
-	align-items: flex-start
-
-	.heading
-		flex-shrink: 1
-		flex-grow: 1
-
+/* doc-catalog
 .doc-catalog
 	display: block
 	position: relative
 	width: $p-filters-width
-	margin-right: nth($page-layout-space, 2)
-	margin-top: 43px
 	text-decoration: none
-	border: 2px solid $border-color
+	border: 2px solid #ccc
 	border-radius: 10px
-	background-color: #fff
 	padding: 13px 13px 13px 77px
+	background: none
+	margin-bottom: 20px
 	+font(1.4rem, round-float(18/14, 2))
 	text-transform: uppercase
 	color: inherit
@@ -1151,6 +1192,17 @@
 	transition:
 		property: $prop
 		duration: $animation-speed
+
+	+media('<mob-lg')
+		width: 100%
+
+	.m-content &
+		+media('>=tab-lg')
+			display: none
+
+	.m-aside &
+		+media('<tab-lg')
+			display: none
 
 	&::before
 		content: ""
@@ -1174,198 +1226,421 @@
 	.no-touchevents &:hover
 		border-color: $link-color
 
-.m-holder
-	display: flex
+/* doc-catalog end
 
-	//+clear
+/* m-container
+.m-container
+	display: flex
+	margin-bottom: -#{nth($content-space, 3)} // перектыть нижний отступ контента
+
 	+media('<tab-lg')
 		display: block
+		margin-bottom: 0
 
+// m-aside
 .m-aside
-	width: $p-filters-width
-	position: sticky
-	align-self: flex-start
+	//width: $p-filters-width
+	flex-shrink: 0
+	flex-grow: 0
+	flex-basis: $p-filters-width
+	position: relative
+	transition:
+		property: transform
+		duration: $animation-speed
+
+	+media('<tab-lg')
+		overflow: hidden // необходим для скрытия скролла
+		position: fixed
+		left: 0
+		// ширину устанавливаем на основной
+		// и вложенный контейнер,
+		// чтобы корректно обрезать скролл
+		width: $nav-width
+		height: 100%
+		padding-top: $header-height--sm
+		bottom: 0
+		background-color: $bg-color-alt
+		z-index: 10000
+		will-change: transform
+		transform: translate(-100%, 0)
+		transform: translateX(-100%)
+
+		&.filters-is-open
+			transform: translate(0, 0)
+			transform: translateX(0)
+
+	+media('<mob-lg')
+		width: 100%
 
 	.filters-results-show &
-		padding-bottom: 49px
+		padding-bottom: $p-filters-result-height
 
-	form
+.m-aside__layout
+	position: sticky
+	overflow-x: hidden
+	overflow-y: auto
+
+	+media('<tab-lg')
 		height: 100%
+		position: relative !important // !important нужен, чтобы перебить стили назначенные скриптом
+		top: 0 !important // !important нужен, чтобы перебить стили назначенные скриптом
+
+
+	// for no touch screen
+	.no-touchevents &
+		overflow-y: hidden
+
+		&:hover
+			overflow-y: auto
+
+	& > form
+		+media('<tab-lg')
+			width: $nav-width
 
 		+media('<mob-lg')
-			height: calc(100% - #{$header-height--sm})
+			width: 100vw
 
-.m-aside__footer
-	line-height: 1
+.m-aside__options
+	position: absolute
+	left: 0
+	top: 0
+	width: 100%
+	height: $header-height--sm
+	padding: $page-layout-space
+	padding-right: $header-height--sm
+	+font-alt-bold
+	+font(1.8rem, round-float(24/18, 2))
+	background-color: white
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16)
 
-	.btn-filters-apply, .btn-clear-filters
-		+media('<tab-lg')
-			display: block
-			width: calc(50% - #{$header-height--sm})
-			flex: 1 calc(50% - #{$header-height--sm})
-			height: $header-height--sm
-			padding: 21px 5px
-
-	.btn-filters-apply
-		display: none
-		background-color: red
-		border: none
-
-		+media('<tab-lg')
-			display: block
-
-	.btn-clear-filters
-		+media('<tab-lg')
-			border: none
-			background-color: darkred
-			color: #fff
-
-		// disabled
-		&:disabled, &.disabled, &[data-disabled]
-			+media('<tab-lg')
-				cursor: default
-				background-color: #eaeaea !important
-
-		svg
-			width: 18px
-			height: 18px
-
-		.for-mob
-			display: none
-
-			+media('<tab-lg')
-				display: inline-block
-				padding-left: 0
-
-		.for-desk
-			+media('<tab-lg')
-				display: none
-
-		svg
-			+media('<tab-lg')
-				display: none
-
-	.btn-shutter-close
+	+media('>=tab-lg')
 		display: none
 
-		+media('<tab-lg')
-			z-index: 20
-			display: block
-			flex: 0 0 #{$header-height--sm}
+// filters close
+.btn-filters-close
+	display: block
+	position: absolute
+	+size($header-height--sm)
+	top: 0
+	right: 0
+	color: $text-color
+	background-color: white
+	// transition
+	$prop: color
+	transition:
+		property: $prop
+		duration: $animation-speed
 
+	+media('<mob-lg')
+		+padding-horizontal(15px)
+
+	svg
+		display: block
+		+size(24px)
+		position: absolute
+		left: 50%
+		top: 50%
+		transform: translate(-50%, -50%)
+
+	path
+		fill: currentColor
+
+	// hover
+	.no-touchevents &:hover
+		color: $link-color
+
+// overlay for device
+
+// m-content
 .m-content
 	display: flex
 	flex-direction: column
 	justify-content: space-between
-	width: calc(100% - #{$p-filters-width})
+	flex-shrink: 0
+	flex-grow: 0
+	flex-basis: calc(100% - #{$p-filters-width})
+	//width: calc(100% - #{$p-filters-width})
 	padding-left: nth($page-layout-space, 2)
+	padding-bottom: nth($content-space, 3)
+	margin-top: -43px
 
 	+media('<tab-lg')
-		width: auto
-		display: block
+		padding-left: 0
+		margin-top: 0
+		padding-bottom: 0
+
+	.heading
+		margin-bottom: 10px
+
+		& > *
+			margin-bottom: 10px
 
 .m-content__body
 	position: relative
-	flex: 1 1
-
-.m-content__body__options
-	position: relative
-	padding: nth($text-layout-space, 1) nth($text-layout-space, 2) 10px
-	background-color: #fff
-	border-bottom: 1px solid transparent
-	transition:
-		property: border-color
-		duration: $animation-speed
-
-	+media('<desk-md')
-		padding: nth($text-layout-space--md, 1) nth($text-layout-space--md, 2) 10px
-
-	+media('>=tab-lg')
-		position: relative !important
-		top: auto !important
-
-	+media('<tab-lg')
-		padding: 10px nth($text-layout-space--sm, 2)
-		position: sticky
-		top: $header-height--sm
-
-		.options-stuck-js &
-			z-index: 6
-			border-bottom-color: $border-color
-
-	+media('<mob-lg')
-		padding: 0
-
-.m-content__body__tags
-	position: sticky
-	top: 0
-	padding: 10px nth($text-layout-space, 2)
-	background-color: #fff
-	border: solid transparent
-	border-width: 0 0 1px
-	display: none
-	transition:
-		property: border-color
-		duration: $animation-speed
-
-	.filters-results-show &
-		display: block
-
-	.tags-stuck-js &
-		+media('>=tab-lg')
-			z-index: 6
-			border-bottom-color: $border-color
-
-	+media('<desk-md')
-		padding: 10px nth($text-layout-space--md, 2)
-
-	+media('<tab-lg')
-		padding: 0 nth($text-layout-space--sm, 2) 10px
-		position: relative !important
-		top: auto !important
-
-	+media('<mob-lg')
-		padding: 0
-
-.m-content__body__layout
-	padding: 0 nth($text-layout-space, 2)
-
-	+media('<desk-md')
-		padding: 0 nth($text-layout-space--md, 2)
-
-	+media('<tab-lg')
-		padding: 0 nth($text-layout-space--sm, 2)
-
-	+media('<mob-lg')
-		padding: 0 nth($text-layout-space--mob, 2)
+	flex-shrink: 1
+	flex-grow: 1
+	padding-bottom: 40px
 
 .m-content__footer
 	position: relative
 
-// filters-results
-.p-filters-results
+/* m-container end
+
+/* options panel
+.p-options
+	position: relative
+	margin-bottom: 20px
+
+	+media('<tab-lg')
+		display: flex
+
+	&:last-child
+		margin-bottom: 0
+
+	& > *
+		margin-right: 10px
+
+		+media('<mob-lg')
+			flex-shrink: 1
+			flex-grow: 1
+			flex-basis: 50%
+
+// filters opener
+.btn-filters
+	display: block
+	text-transform: none
+	+font-alt-bold
+	box-shadow: none
+
+	+media('>=tab-lg')
+		display: none
+
+	+media('<mob-lg')
+		min-width: 0
+
+	& > em
+		position: relative
+		top: -5px
+		+font-bold
+		+font(14px, 18px)
+		color: $base-color-alt
+
+		&.hide
+			display: none
+
+// added / other filters
+.p-filters-add
+	margin: 0 -1px -10px
+	+clear-spacing
+	max-width: 210px
+
+	+media('<tab-lg')
+		display: none
+
+	+media('<mob-lg')
+		max-width: none
+
+	a
+		display: inline-block
+		vertical-align: top
+		padding: 2px 20px
+		margin: 0 2px 10px
+		border: 2px solid transparent
+		text-decoration: none
+		+font(1.8rem, 22px)
+		letter-spacing: normal
+		color: $link-color
+		text-align: center
+		border-radius: 10px
+		// transition
+		$prop: border-color, background-color
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+		// hover
+		.no-touchevents &:hover
+			border-color: $link-color
+
+		// active
+		&.active
+			background-color: $link-color
+			color: white
+			cursor: default
+
+// added / other filters for mobile
+.select.p-filters-add
+	margin: 0
+	display: none
+
+	+media('<tab-lg')
+		display: block
+
+	&::before
+		+triangle(bottom, $text-color, 5px, 1)
+		right: 12px
+		transform: none
+		background: none
+		margin-top: -3px
+
+	&::after
+		content: none
+
+	select
+		height: 40px
+		border-radius: 10px
+		font-size: 18px
+		line-height: 20px
+		padding: 8px 30px 8px 8px
+
+/* options panel end
+
+/* products filters
+// filters list
+.p-filters-list
+	margin-bottom: $bottom-space
+	padding-bottom: 20px
+
+	+media('<tab-lg')
+		padding: $page-layout-space
+
+	&:last-child
+		margin-bottom: 0
+
+// filters item
+.p-filters-item
+	position: relative
+	margin-bottom: 20px
+
+	&:last-child
+		margin-bottom: 0
+
+// filter head
+.p-filters-select
+	margin-bottom: 20px
+
+.p-filters-head
+	position: relative
+	cursor: pointer
+	padding: $p-filters-space
+	padding-right: nth($p-filters-space, 2) + $p-filters-angle-size + 10
+	+font-alt-bold
+	+font(1.8rem, round-float(24/18, 2))
+	color: white
+	background-color: $base-color
+	border-radius: 10px
+	user-select: none
+	-webkit-tap-highlight-color: transparent
+
+// angle
+.p-filters-angle
+	display: block
+	position: absolute
+	right: nth($p-filters-space, 2)
+	top: 50%
+	+size($p-filters-angle-size)
+	border-radius: $p-filters-angle-size
+	margin-top: -#{round($p-filters-angle-size/2)}
+	background-color: white
+	box-shadow: 0 3px 3px rgba(black, 0.15)
+
+	&::before, &::after
+		+pseudo()
+		left: 50%
+		top: 50%
+		+size(nth($p-filters-angle-lines-size, 1), nth($p-filters-angle-lines-size, 2))
+		margin: -#{round(nth($p-filters-angle-lines-size, 2)/2)} 0 0 -#{round(nth($p-filters-angle-lines-size, 1)/2)}
+		background-color: $p-filters-angle-lines-color
+		will-change: transform
+		transition:
+			property: transform
+			duration: $animation-speed
+
+	&::before
+		transform: rotate(-0.25turn)
+		transform: rotate(-0.25turn) translateZ(0)
+
+	// active
+	.is-open &
+		&::before, &::after
+			transform: rotate(0)
+			transform: rotate(0) translateZ(0)
+
+.p-filters-drop
+	position: relative
+	display: none
+
+.p-filters-drop-list
+	&, .#{$user-content} &
+		margin: 0
+
+		li
+			position: relative
+			padding-left: 0
+			margin: 0 0 8px
+
+			&::before
+				content: none
+
+			&:last-child
+				margin-bottom: 0
+
+			&.has-slider
+				margin-bottom: 20px
+
+			&.add-slider
+				padding-right: 80px
+
+				label
+					display: inline-block
+					vertical-align: top
+
+	label
+		display: block
+		margin: 0
+
+		[type="checkbox"]:checked
+			& ~ span
+				+font-bold
+				color: #000
+
+		.no-touchevents &:hover
+			& > span
+				color: $link-color
+
+/* products filters end
+
+/* filters-results
+.p-filters__results
+	display: flex
+	flex-direction: column
+	justify-content: space-between
 	position: absolute
 	bottom: 0
-	height: 50px
-	width: $p-filters-width
-	background-color: $header-bg
-	//border: solid $header-bg
-	//background-color: #eee
-	//border: solid $border-color
-	//border-width: 1px 0
-	color: white
-	display: flex
-	justify-content: space-between
+	height: $p-filters-result-height
+	width: calc(#{$p-filters-width} + #{nth($page-layout-space, 2)})
+	margin-left: -#{#{nth($page-layout-space, 2)}}
+	padding: $p-filters-space
+	background-color: #fff
 	opacity: 0
 	visibility: hidden
 	pointer-events: none
+	$prop: opacity, visibility
+	will-change: $prop
 	transition:
-		property: opacity, visibility
+		property: $prop
 		duration: $animation-speed
-		delay: 0.5s
+		//delay: 0.5s
+
+	+media('<tab-lg')
+		position: absolute
+		margin-left: 0
+		width: $nav-width
+		padding: 10px nth($page-layout-space, 2)
 
 	+media('<mob-lg')
-		width: 100%
+		width: 100vw
 
 	.filters-results-show &
 		opacity: 1
@@ -1375,26 +1650,17 @@
 			delay: 0s
 
 	.filters-result-fixed &
-		height: 75px
-		padding-bottom: 25px
 		position: fixed
-		bottom: -1px
-
-	&, .filters-result-fixed &
-		+media('<tab-lg')
-			z-index: 10100
-			position: fixed
-			left: 0
-			bottom: 0
-	//overflow: hidden
 
 	.results-loading
-		+size(calc(100% + 2px))
+		+size(100%)
+		display: flex
+		align-items: center
+		justify-content: center
 		position: absolute
-		left: -1px
-		top: -1px
-		+font-bold
-		+font(1.6rem, 50px)
+		left: 0
+		top: 0
+		+font(1.8rem, round-float(24/18, 2))
 		color: white
 		text-align: center
 		z-index: 5
@@ -1409,106 +1675,39 @@
 			opacity: 1
 			visibility: visible
 
-// selected
-.p-filters-results__selected
-	+padding-horizontal(10px)
-	+clear-spacing
-	line-height: 1
+// filters results buttons
+.p-filters__results__btns
+	display: flex
+	justify-content: stretch
+
+	[class*="btn-"]
+		flex-shrink: 1
+		flex-grow: 1
+		min-width: 0
+		+font(1.6rem, round-float(20/16, 2))
+		padding: 9px 12px 7px
+
+		&:first-child
+			margin-right: 15px
+
+			+media('>=tab-lg')
+				display: none
+
+// filters results counter
+.p-filters-results__count
+	+font(12px, round-float(16/12, 2))
 	text-align: center
 
-	flex: 1 1
+	+media('<tab-lg')
+		text-align: left
+		padding-left: 22.5%
 
-	&::before
-		content: ""
-		+display-inline-block-middle
-		height: 100%
+/* filters-results end
 
-.p-filters-results__selected__align
-	+display-inline-block-middle
-	max-width: calc(100% - 2px)
-	text-align: left
-
-.p-filters-results__selected__label
-	+font-normal
-	+font(1.2rem, round-float(16/12, 2))
-	letter-spacing: 0.05em
-	text-transform: uppercase
-
-.p-filters-results__selected__count
-	+font-alt-bold
-	+font(1.4rem, round-float(16/14, 2))
-	letter-spacing: normal
-
-	.cur
-		color: $base-color
-
-// apply btn
-.p-filters-results__apply
-	+display-inline-block-top
-	padding: 5px 2px 5px 0
-
-	.btn-filters-apply
-		+display-inline-block-top
-		//height: calc(100% + 2px)
-		height: 100%
-		//margin: -1px 0
-		padding: 0 10px
-		+font-bold
-		+clear-spacing
-		line-height: 1
-		color: white
-		text-transform: uppercase
-		background-color: $header-bg
-		border: 2px solid white
-		z-index: 1
-
-		flex: 1 1
-
-		&::before
-			content: ""
-			+display-inline-block-middle
-			height: 100%
-
-		span
-			+display-inline-block-middle
-			+font(13px, 20px)
-			letter-spacing: 0.05em
-			max-width: calc(100% - 2px)
-
-		// hover
-		.no-touchevents &:hover
-			color: $header-bg
-			background-color: white
-//background-color: tint($btn-bg-hover-color, 80)
-
-// btn-clear-filters
-.btn-clear-filters
-	+size(52px)
-	padding: 0
-	background-color: $header-bg
-	border: 2px solid $header-bg
-	color: white
-
-	svg
-		+size(36px)
-
-	path
-		fill: currentColor
-
-	// hover
-	.no-touchevents &:hover
-		background-color: white
-		border-color: red
-		color: darkred
-
-	// focus
-	&:disabled
-		background-color: $header-bg !important
-		border-color: $header-bg !important
-		color: white !important
-
+/* filters preloader
 .loader-cover
-	+size(100%)
+	height: 100%
+	width: 100%
 	position: absolute
 	left: 0
 	top: 0
@@ -1543,594 +1742,4 @@
 		background-position: center
 		background-size: contain
 
-/* sticky-sidebar
-.m-aside-sticky-js,
-.m-content-sticky-js
-	// for sticky-sidebar js
-	will-change: min-height, trasform
-
-.m-aside-sticky__layout-js,
-.m-content-sticky__layout-js
-	// for sticky-sidebar js
-	transform: translate(0, 0) /* For browsers don't support translate3d. */
-	transform: translate3d(0, 0, 0)
-	will-change: position, transform
-
-.m-aside-sticky__layout-js
-	height: 100%
-
-/* sticky-sidebar end
-/* m-container end
-
-/* options panel
-.p-options
-	position: relative
-	margin-bottom: 20px
-	//background-color: #fff
-
-	+media('<mob-lg')
-	//position: absolute
-	//top: 0
-	//width: 100%
-	//min-width: 320px
-	//margin-bottom: 0
-	//height: $p-options-height--mob
-	//box-shadow: 0 1px 5px transparent
-	//transition:
-		property: box-shadow
-		duration: $animation-speed
-
-	//.options-fixed &
-		position: fixed
-		z-index: 5
-		top: $header-height--sm
-		box-shadow: 0 1px 5px $border-color
-
-	&:last-child
-		margin-bottom: 0
-
-.p-options__list
-	position: relative
-	+clear
-
-	+media('<mob-lg')
-		display: flex
-		justify-content: space-between
-		flex-wrap: nowrap
-		//padding-top: 1px
-
-		&::after
-			content: none
-
-.p-options__item
-	//&:first-child
-		text-align: left
-		flex: 1 1
-	float: left
-	line-height: 1
-	margin-right: 20px
-
-	+media('<mob-lg')
-		margin-right: 0
-		float: none
-
-	&.p-options__item--filters
-		display: none
-
-		+media('<tab-lg')
-			display: block
-
-.btn-filters-toggle
-	position: relative
-	+display-inline-block-top
-	color: currentColor
-	user-select: none
-	+font-bold
-	+font(1.4rem, 20px)
-	letter-spacing: 0.1em
-	text-transform: uppercase
-	border: 1px solid $border-color
-	padding: 9px 20px 9px 40px
-	background-color: #fff
-
-	+media('<mob-lg')
-		+padding-vertical(14px)
-		border-color: transparent
-
-	.p-filters-activated
-		position: absolute
-		right: 5px
-		top: 5px
-		+font-bold
-		font-size: 10px
-		line-height: 1
-		letter-spacing: normal
-		color: $base-color
-		z-index: 2
-
-		&.hide
-			display: none
-
-	svg
-		display: block
-		position: absolute
-		left: 12px
-		top: 50%
-		+size(18px)
-		margin-top: -9px
-
-	path
-		fill: currentColor
-
-	// hover
-	.no-touchevents &:hover
-		+media('>=mob-lg')
-			border-color: $form-border-focus-color
-
-.p-sorting
-	position: relative
-	width: 300px
-
-	+media('<mob-lg')
-		width: auto
-
-	select
-		+media('<mob-lg')
-			border-color: transparent !important
-			+padding-vertical(14px)
-			height: $p-options-height--mob
-
-/* options panel end
-
-/* products filters
-.shutter--filters
-	+media('<tab-lg')
-		overflow: hidden // необходим для скрытия скролла
-		position: fixed !important // !important нужен, чтобы перебить стили назначенные скриптом
-		width: 100%
-		left: 0
-		top: $header-height--sm !important // !important нужен, чтобы перебить стили назначенные скриптом
-		bottom: 0
-		background-color: white
-		z-index: 10000
-
-	&, & .m-aside__holder
-		+media('<tab-lg')
-			// ширину устанавливаем на основной
-			// и вложенный контейнер,
-			// чтобы корректно обрезать скролл
-			width: $nav-width
-
-		+media('<mob-lg')
-			width: 100%
-
-	.m-aside__align
-		+media('<tab-lg')
-			overflow-x: hidden
-			overflow-y: auto
-			height: 100%
-
-			.no-touchevents &
-				overflow: hidden
-
-			.no-touchevents &:hover
-				overflow-y: auto
-
-		+media('<mob-lg')
-			height: calc(100% - #{$header-height--sm})
-
-			.no-touchevents &
-				overflow-y: auto
-
-	form .m-aside__align
-		+media('<mob-lg')
-			height: 100%
-
-.shutter--filters__options
-	height: $header-height--sm
-	display: none
-
-	+media('<mob-lg')
-		display: block
-
-.btn-filters-close
-	display: block
-	position: relative
-	background-color: #1a1a1a
-	+font-bold
-	+font(14px, $header-height--sm)
-	letter-spacing: 0.1em
-	text-align: left
-	color: #fff
-	text-transform: uppercase
-	padding: 0 nth($p-filters-space, 2)
-	border: 1px solid #666
-	z-index: 5
-
-	+media('<mob-lg')
-		+padding-horizontal(15px)
-
-	& > div
-		position: relative
-		display: inline-block
-
-	.p-filters-activated
-		+font-bold
-		color: $base-color
-		+font(10px, 1)
-		position: absolute
-		top: 50%
-		left: 100%
-		margin: -10px 0 0 5px
-
-	.svg-ico-close
-		display: block
-		+size(20px)
-		position: absolute
-		right: 15px
-		top: 50%
-		margin-top: -10px
-
-		path
-			fill: currentColor
-
-.shutter--filters, .p-filters-results
-	+media('<tab-lg')
-		//opacity: 0
-		//visibility: hidden
-		will-change: transform
-		transform: translate(-100%, 0)
-		transform: translateX(-100%)
-		transition:
-			property: transform
-			duration: $animation-speed
-
-		&.active
-			transform: translate(0, 0)
-			transform: translateX(0)
-
-.p-filters-list
-	margin-bottom: $bottom-space
-
-	&:last-child
-		margin-bottom: 0
-
-.p-filters-item
-	position: relative
-	border: solid $border-color
-	border-width: 1px 0
-	margin-bottom: -1px
-
-	&:first-child
-		border-top: 0
-
-	&:last-child
-		margin-bottom: 0
-
-.p-filters-inner
-	text-decoration: none
-	color: inherit
-
-.p-filters-select
-	position: relative
-	cursor: pointer
-	padding: nth($p-filters-space, 1) nth($p-filters-space, 2)+20 nth($p-filters-space, 1) nth($p-filters-space, 2)
-	+font(1.6rem, round-float(20/16, 2))
-	user-select: none
-	-webkit-tap-highlight-color: transparent
-
-	+media('<mob-lg')
-		padding-left: 15px
-
-.p-filters-selected
-	position: absolute
-	right: 5px
-	top: 3px
-	z-index: 2
-	+font-bold
-	+font(1.2rem, round-float(18/14, 2))
-	opacity: 0
-	pointer-events: none
-	//===================
-	$param: transform, opacity
-	will-change: $param
-	transition:
-		property: $param
-
-	display: none
-
-	&.filters-selected-show
-		opacity: 1
-		transition:
-			duration: $animation-speed
-
-// angle
-.p-filters-angle
-	position: absolute
-	right: nth($p-filters-space, 2)
-	top: 50%
-	+size(nth($p-filters-angle-lines-size, 1), nth($p-filters-angle-lines-size, 2))
-	margin-top: -#{round(nth($p-filters-angle-lines-size, 2)*0.5)}
-	user-select: none
-	-webkit-tap-highlight-color: transparent
-	transition:
-		property: transform
-		duration: $animation-speed
-
-	&::before, &::after
-		+pseudo()
-		left: 0
-		+size(nth($p-filters-angle-lines-size, 1), nth($p-filters-angle-lines-size, 2))
-		background-color: $p-filters-angle-lines-color
-		transition:
-			property: transform
-			duration: $animation-speed
-
-	&::before
-		top: 0
-
-	&::after
-		top: 0
-		transform: rotate(90deg) translateZ(0)
-
-		.ie9 &
-			transform: rotate(90deg)
-
-.p-filters__title
-	+font-alt-bold
-	color: inherit
-
-.p-filters-drop
-	position: relative
-	display: none
-
-.p-filters-drop-list
-
-	&, .#{$user-content} &
-		margin: 0
-		padding: 0 nth($p-filters-space, 2) nth($p-filters-space, 1)
-
-		+media('<mob-lg')
-			+padding-horizontal(15px)
-
-		li
-			position: relative
-			padding-left: 0
-			margin: 0 0 10px
-
-			&::before
-				content: none
-
-			&:last-child
-				margin-bottom: 0
-
-			&.has-slider
-				margin-bottom: 20px
-
-			&.add-slider
-				padding-right: 80px
-
-				label
-					display: inline-block
-					vertical-align: top
-
-	label
-		display: block
-		font-size: 16px
-
-		[type="checkbox"]:checked
-			& ~ span
-				+font-bold
-				color: #000
-
-		.no-touchevents &:hover
-			& > span
-				color: $link-color
-
-.p-filters-drop-list, .p-card__sizes
-	// filter colors
-	.p-filters--color &
-		+margin-horizontal(-2px)
-		+clear
-
-		li
-			float: left
-			margin: 0 2px 5px
-			line-height: 1
-
-	// filter sizes
-	.p-filters--size &
-		+margin-horizontal(-2px)
-		+clear
-
-		li
-			float: left
-			margin: 0 2px 5px
-			line-height: 1
-
-label.checkbox--color
-	i, span, span::before, span::after
-		display: none
-
-	img
-		border-radius: 50%
-		+size(32px)
-		max-width: none
-		border: 1px solid transparent
-
-	input[type="checkbox"]:checked ~ img,
-	input[type="radio"]:checked ~ img
-		//border-color: black
-		box-shadow: 0 0 1px 1px rgba(0, 0, 0, 1)
-
-	.no-touchevents &:hover img
-		box-shadow: 0 0 1px 1px rgba(0, 0, 0, 1)
-
-label.checkbox--size
-
-	& > i, & > span::before, & > span::after
-		display: none
-
-	& > span
-		display: inline-block
-		vertical-align: top
-		min-width: 48px
-		height: 34px
-		border-radius: 17px
-		border: 1px solid #ccc
-		text-align: center
-		padding: 0 5px
-		+font(1.6rem, 32px)
-		background-color: white
-
-	input[type="checkbox"]:checked ~ span
-		background-color: #999
-		border-color: #999
-		color: white
-
-	.no-touchevents &:hover > span
-		border-color: $link-color
-
-// hover, active, has checked filters
-.no-touchevents .p-filters-select:hover,
-.p-filters-item.p-filters-on .p-filters-select
-	color: $base-color
-
-	.p-filters-angle
-		&::before, &::after
-			background-color: $base-color
-
-// drop open
-//.p-filters-item.p-filters-is-open
-	.p-filters-angle
-		transform: rotate(0.5turn) translateZ(0)
-
-		&::after
-			transform: rotate(0) translateZ(0)
-
-		.ie9 &
-			transform: rotate(0.5turn)
-
-			&::after
-				transform: rotate(0)
-
-	.p-filters-drop
-		display: block
-
-/* range-slider
-.range-slider
-	opacity: 0
-	visibility: hidden
-
-.p-filters-share-range
-	&, input[type] ~ &
-		display: inline-block
-		vertical-align: top
-		width: 80px
-		padding: 0
-		position: absolute
-		right: 0
-		top: 0
-		//opacity: 0.1
-		visibility: hidden
-		pointer-events: none
-
-	.irs
-		margin-top: 8px
-
-	li.is-active &, .no-js &
-		//opacity: 1
-		visibility: visible
-		pointer-events: auto
-
-.p-filters-price-value, .p-filters-share-value
-	text-align: center
-	+font(1.6rem, round-float(20/16, 2))
-
-/* range-slider end
-
-/* filters tags
-.m-content__body__tags
-	position: relative
-
-.p-filters-tags
-	position: relative
-	overflow: hidden
-	margin-bottom: $bottom-space
-	user-select: none
-	display: none
-
-	.filters-results-show &
-		display: block
-
-	+media('<mob-lg')
-		padding: round(nth($text-layout-space--mob, 2)/2) nth($text-layout-space--mob, 2)
-		border-top: 1px solid $border-color
-
-	&:last-child
-		margin-bottom: 0
-
-.p-filters-tags__frame
-	cursor: default
-	line-height: 1
-	margin-bottom: -10px
-
-	+media('<mob-lg')
-		margin-bottom: -5px
-
-.p-filters-tags__item
-	+display-inline-block-top
-	position: relative
-	margin: 0 10px 10px 0
-	cursor: pointer
-	padding: 5px 10px 5px 35px
-	+font(13px, 20px)
-	color: #333
-	letter-spacing: normal
-	text-transform: uppercase
-	background-color: #ddd
-
-	+media('<mob-lg')
-		margin: 0 5px 5px 0
-
-	& > span
-		+display-inline-block-top
-		+truncate(140px)
-
-	&:last-child::after
-		content: none
-
-	& > i
-		$this-icon-lines-width: 18px
-		$this-icon-lines-height: 2px
-
-		position: absolute
-		left: 10px
-		top: 50%
-		+size(#{round($this-icon-lines-width)})
-		margin-top: -#{round($this-icon-lines-width*0.5)}
-		border-radius: 0
-		background-color: transparent
-		+font(0, 0)
-
-		&::before, &::after
-			+pseudo()
-			left: 50%
-			top: 50%
-			backface-visibility: hidden
-			+size($this-icon-lines-width, $this-icon-lines-height)
-			margin: -#{round($this-icon-lines-height*0.5)} 0 0 -#{round($this-icon-lines-width*0.5)}
-			background-color: currentColor
-
-		&::before
-			transform: rotate(-45deg)
-
-		&::after
-			transform: rotate(45deg)
-
-	.no-touchevents &:hover
-		background-color: $base-color
-		color: white
-
-/* filters tags end
-/* products filters end
+/* filters preloader end

@@ -1017,7 +1017,7 @@ function accordionInit() {
 })(jQuery);
 
 function toggleShutters() {
-	var nav, search;
+	var nav, filters, search;
 
 	var $nav = $('.nav-opener-js');
 	if ($nav.length) {
@@ -1031,6 +1031,25 @@ function toggleShutters() {
 			, removeOutsideClick: true
 			, beforeAdded: function () {
 				search.tClass('remove');
+				filters.tClass('remove');
+			}
+		});
+	}
+
+	// filters
+	var $filters = $('.filters-opener-js');
+	if ($filters.length) {
+		filters = $filters.tClass({
+			toggleClassTo: ['html', '.filters-overlay-js', '.shutter--filters-js']
+			, switchBtn: '.filter-closer-js'
+			, modifiers: {
+				currentClass: 'filters-is-open open-only-mob'
+			}
+			, cssScrollFixed: true
+			, removeOutsideClick: true
+			, beforeAdded: function () {
+				search.tClass('remove');
+				nav.tClass('remove');
 			}
 		});
 	}
@@ -1048,6 +1067,7 @@ function toggleShutters() {
 			, switchBtn: '.search-closer-js'
 			, beforeAdded: function () {
 				nav.tClass('remove');
+				filters.tClass('remove');
 			}
 			, afterAdded: function () {
 				setTimeout(function () {
@@ -1422,34 +1442,12 @@ function tabSwitcher() {
  * !Sticky element on page
  */
 function stickyInit() {
-	var offsetTop = (window.innerWidth < 1366) ? 50 : 70;
+	var offsetTop = (window.innerWidth < 992) ? 80 : 90;
 
 	// aside sticky
-	var $mAside = $('.m-aside-sticky-js');
-
-	if ($mAside.length) {
-		stickybits('.m-aside', {
+	if ($('.m-aside').length) {
+		stickybits('.m-aside__layout', {
 			useStickyClasses: true,
-			stickyBitStickyOffset: offsetTop
-		});
-	}
-
-	// tags sticky
-	var $tags = $('.tags-sticky-js');
-
-	if ($tags.length) {
-		stickybits('.tags-sticky-js', {
-			useStickyClasses: false,
-			stickyBitStickyOffset: offsetTop
-		});
-	}
-
-	// options sticky
-	var $tags = $('.options-sticky-js');
-
-	if ($tags.length) {
-		stickybits('.options-sticky-js', {
-			useStickyClasses: false,
 			stickyBitStickyOffset: offsetTop
 		});
 	}
@@ -1457,65 +1455,9 @@ function stickyInit() {
 // if sticky is stuck
 
 /**
- * !Add class if a sticky is stuck
- * */
-$(function () {
-	var $optionsPanel = $('.m-content__body__options');
-
-	var optionsOffset = 0,
-		parentOffset = 0,
-		currentScrollTop,
-		optionsFixedClass = 'options-stuck-js';
-
-	if ($optionsPanel.length) {
-		$(window).on('load scroll resize', function () {
-			addClassFixed();
-		});
-	}
-
-	function addClassFixed() {
-		optionsOffset = $optionsPanel.offset().top;
-		// console.log("optionsOffset: ", optionsOffset);
-		parentOffset = $optionsPanel.parent().offset().top;
-		// console.log("parentOffset: ", parentOffset);
-		currentScrollTop = $(window).scrollTop();
-
-		var cond = optionsOffset > parentOffset;
-
-		$('html').toggleClass(optionsFixedClass, cond);
-	}
-});
-
-$(function () {
-	var $optionsTags = $('.m-content__body__tags');
-	var $products = $('.products');
-
-	var optionsOffset = 0,
-		productsOffset = 0,
-		currentScrollTop,
-		optionsFixedClass = 'tags-stuck-js';
-
-	if ($optionsTags.length) {
-		$(window).on('load scroll resize', function () {
-			addClassFixed();
-		});
-	}
-
-	function addClassFixed() {
-		optionsOffset = $optionsTags.offset().top + $optionsTags.outerHeight();
-		// console.log("optionsOffset: ", optionsOffset);
-		productsOffset = $products.offset().top;
-		// console.log("productsOffset: ", productsOffset);
-		currentScrollTop = $(window).scrollTop();
-
-		var cond = optionsOffset > productsOffset;
-
-		$('html').toggleClass(optionsFixedClass, cond);
-	}
-});
-
-/**
- * !Fixed filters result
+ * !Show, fixed filters result
+ * !Clear filters
+ * !Filters count
  * */
 $(function () {
 	// fixed filters result
@@ -1524,22 +1466,56 @@ $(function () {
 
 	if ($mContainer.length) {
 		$(window).on('load scroll resize', function () {
-			addClassFixed();
+			toggleClassFixed();
 		});
 	}
 
-	var mContainerOffset = 0,
+	var $html = $('html'),
+		mContainerOffset = 0,
 		currentScrollTop,
 		filterResultFixedClass = 'filters-result-fixed';
 
-	function addClassFixed() {
+	function toggleClassFixed() {
 		mContainerOffset = $mContainer.offset().top + $mContainer.outerHeight();
 		currentScrollTop = $(window).scrollTop() + window.innerHeight;
 
 		var cond = mContainerOffset < currentScrollTop;
 
-		$('html').toggleClass(filterResultFixedClass, !cond);
+		$html.toggleClass(filterResultFixedClass, !cond);
 	}
+
+	$('.p-filters-list-js').on('change', '.p-filters-drop-list input:checkbox', function () {
+		var _ = $(this);
+		var cond = $('.p-filters-drop-list input:checked', _.closest('.p-filters-list-js')).length > 0;
+
+		$html.toggleClass('filters-results-show', cond);
+
+		// toggle disabled clear button
+		$('.clear-filters-js', _.closest('.p-filters-js')).prop('disabled', !cond);
+
+		// filters count
+		var $items = $('.p-filters-item-js', _.closest('.p-filters-js')), count = 0;
+		$.each($items, function () {
+			var $curItem = $(this);
+			if($('.p-filters-drop-list input:checked', $curItem).length) {
+				++count;
+			}
+		});
+		$('.filters-count-js', _.closest('.p-filters-js')).html(count).toggleClass('hide', !count);
+	});
+
+	// clear filters
+	$('.p-filters-js').on('click', '.clear-filters-js', function (e) {
+		e.preventDefault();
+		var _ = $(this);
+
+		$('.p-filters-drop-list input:checked', _.closest('.p-filters-js')).prop('checked', false).trigger('change');
+	});
+
+	// trigger change after load
+	$(window).on('load', function () {
+		$('.p-filters-drop-list input:checked', $('.p-filters-list-js')).trigger('change');
+	});
 });
 
 /**

@@ -203,8 +203,8 @@ body
 		padding-top: $header-height--sm
 
 .content
-	padding-top: 17px
-	padding-bottom: 40px
+	padding-top: nth($content-space, 1)
+	padding-bottom: nth($content-space, 3)
 
 .sheet
 	flex-shrink: 1
@@ -591,6 +591,9 @@ $nav-is-open-class: 'nav-is-open'
 			$x: 0
 			transform: translate($x, 0) // for old browser
 			transform: translateX($x)
+
+	+media('<mob-lg')
+		width: 100%
 
 .nav__layout
 	position: relative
@@ -1013,10 +1016,10 @@ a.nav-opener
 // overlay
 // в html добавить
 // <div class="nav-overlay nav-overlay-js">&nbsp;</div>
-.nav-overlay
+.overlay
 	position: fixed
 	left: 0
-	top: $header-height--sm
+	top: 0
 	width: 100%
 	height: 100%
 	background-color: rgba(black, 0.35)
@@ -1029,11 +1032,18 @@ a.nav-opener
 		property: $prop
 		duration: $animation-speed
 
+	&.nav-overlay
+		top: $header-height--sm
+
 	&.open-only-mob
 		+media('>=tab-lg')
 			display: none
 
 	&.#{$nav-is-open-class}
+		opacity: 1
+		visibility: visible
+
+	&.filters-is-open
 		opacity: 1
 		visibility: visible
 
@@ -1342,6 +1352,7 @@ a.nav-opener
 
 	+media('<mob-lg')
 		font-size: 1.2rem
+		margin-right: 5px
 
 .developer__logo
 	+display-inline-block-middle

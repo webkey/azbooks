@@ -1,35 +1,21 @@
 <div class="p-options">
-	<div class="p-options__list">
-		<div class="p-options__item p-options__item--filters">
-			<div class="p-options__inner">
-				<a href="#" class="btn-filters-toggle btn-filters-js" title="Показать фильтры">
-					<div class="p-filters-activated p-filters-activated-js hide">0</div>
-					@@include("includes/svg/icon-filters.svg")
-					<span>Фильтр</span>
-				</a>
-			</div>
-		</div>
-		<div class="p-options__item">
-			<div class="p-options__inner">
-				<div class="">
-					<div class="p-options-label">Filter by:</div>
-					<ul>
-						<li><a href="#">All</a></li>
-						<li><a href="#">New</a></li>
-						<li><a href="#">Bestsellers</a></li>
-						<li><a href="#">Series</a></li>
-					</ul>
-				</div>
-				<div class="select p-sorting">
-					<select class="field-effects-js" name="sorting">
-						<option value="">Filter by:</option>
-						<option value="1">All</option>
-						<option value="2">New</option>
-						<option value="1">Bestsellers</option>
-						<option value="2">Series</option>
-					</select>
-				</div>
-			</div>
-		</div>
+	<a href="#" class="btn-default-alt btn-filters filters-opener-js" title="Open filters">
+		Filter
+		<!--add class .hide is count = 0-->
+		<em class="filters-count-js hide">0</em>
+	</a>
+	<div class="p-filters-add">
+		<a href="#" class="active">All</a>
+		<a href="#">New</a>
+		<a href="#">Bestsellers</a>
+		<a href="#">Series</a>
+	</div>
+	<div class="select p-filters-add">
+		<select class="field-effects-js" name="filter">
+			<option value="1" selected>All</option>
+			<option value="2">New</option>
+			<option value="1">Bestsellers</option>
+			<option value="2">Series</option>
+		</select>
 	</div>
 </div>

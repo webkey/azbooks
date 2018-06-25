@@ -1,0 +1,30 @@
+@@if (context.inCart) {
+<div class="products__item products--in-cart">
+}
+@@if (!context.inCart) {
+<div class="products__item">
+}
+	<a href="#" class="product">
+		@@if (context.labels) {
+		<div class="product__labels">
+			@@if (context.labels.new) {
+			<div class="product__label product__label--new">New</div>
+			}
+			@@if (context.labels.bestseller) {
+			<div class="product__label product__label--bestseller">Best seller</div>
+			}
+		</div>
+		}
+		@@if (context.src) {
+		<figure class="product__img">
+			<img src="img/@@src" alt="@@title" />
+		</figure>
+		}
+		@@if (context.title) {
+		<div class="product__content">
+			<div class="product__title">@@title</div>
+		</div>
+		}
+	</a>
+
+</div>

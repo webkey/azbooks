@@ -1,11 +1,11 @@
 <!--(1) START @@bsKey FIRST level-->
 <ul class="@@bsKey__list @@bsKey__list-js">
 	<li class="@@if(currentItem === 'Home'){current}">
-	@@include('_tpl_nav-LINK--full.html', { "txt": "Home", "href": "#", "key": "@@bsKey" })
+	@@include('_tpl_nav-LINK--full.html', { "txt": "Home", "href": "index.html", "key": "@@bsKey" })
 	</li>
 
 	<li class="@@if(currentItem === 'Books'){current}">
-	@@include('_tpl_nav-LINK--full.html', { "txt": "Books", "href": "#", "key": "@@bsKey" })
+	@@include('_tpl_nav-LINK--full.html', { "txt": "Books", "href": "catalog.html", "key": "@@bsKey" })
 	</li>
 
 	<li class="has-drop @@if(currentItem === 'News'){current}">

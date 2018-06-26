@@ -1,0 +1,138 @@
+@import ../utils/variables
+@import ../utils/mixins
+@import ../../libs/include-media/dist/include-media
+
+/* fotorama
+.fotorama__arr
+	background: transparent
+	+size(43px, 44px)
+	color: #ccc
+
+	&::before, &::after
+		+pseudo()
+		+size(18px, 4px)
+		top: 50%
+		border-radius: 2px
+		background-color: #ccc
+		// transition
+		$prop: background-color
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+	.no-touchevents &:hover
+		&::before, &::after
+			background-color: $base-color
+
+.fotorama__arr--prev
+	left: 0
+
+	&::before, &::after
+		left: 16px
+
+	&::before
+		transform-origin: left bottom
+		transform: rotate(-45deg)
+
+	&::after
+		transform-origin: left top
+		transform: rotate(45deg)
+
+.fotorama__arr--next
+	right: 0
+
+	&::before, &::after
+		right: 16px
+
+	&::before
+		transform-origin: right bottom
+		transform: rotate(45deg)
+
+	&::after
+		transform-origin: right top
+		transform: rotate(-45deg)
+
+.fotorama__arr--disabled
+	pointer-events: auto
+
+.fotorama__fullscreen-icon
+	+size(40px)
+	top: -1px
+	right: -1px
+	overflow: hidden
+	background: url(../../img/zoom.svg) no-repeat center
+	background-size: 35px 34px
+	border-radius: 0
+
+	.no-touchevents &:hover
+		color: $base-color
+
+	.fullscreen &
+		$btn-space: 12px
+		$btn-lines-width: 22px
+		$btn-lines-height: 2px
+		$btn-lines-color: black
+
+		=line-style()
+			+size($btn-lines-width, $btn-lines-height)
+
+		padding: 0
+		top: 0
+		right: 0
+		background: rgba(255, 255, 255, 0.2)
+		transition-property: background-color, opacity, visibility
+		transition-duration: $animation-speed
+		z-index: 9999
+
+		&::before, &::after
+			+pseudo()
+			left: 50%
+			top: 50%
+			margin: -#{round($btn-lines-height*0.5)} 0 0 -#{round($btn-lines-width*0.5)}
+			backface-visibility: hidden
+			+line-style
+			background: $btn-lines-color
+			transition-property: background-color
+			transition-duration: $animation-speed
+
+		//first line menu
+		&::before
+			transform: rotate(-45deg)
+
+		//third line menu
+		&::after
+			transform: rotate(45deg)
+
+.fotorama__wrap--css3.fotorama__wrap--no-controls.fotorama__wrap--slide.fotorama__wrap--toggle-arrows .fotorama__fullscreen-icon:not(:focus)
+	transform: none
+	opacity: 1
+
+.fotorama__wrap--css3
+	.fotorama__arr:not(:focus),
+	.fotorama__fullscreen-icon:not(:focus),
+	.fotorama__video-close:not(:focus),
+	.fotorama__video-play:not(:focus)
+		transition-property: transform ,opacity, background-color
+		transition-duration: $animation-speed
+
+.fotorama__stage, .fotorama__thumb
+	border: 1px solid $border-color
+
+.fotorama__thumb
+	background-color: white
+	border-radius: 0
+
+.fotorama__thumb-border
+	border-color: $base-color
+	border-radius: 0
+
+.fotorama--fullscreen
+	&, & .fotorama__nav, & .fotorama__stage
+		background: white
+		border: none
+
+.p-card__gallery.fotorama--fullscreen .fotorama__thumb-border
+	border-radius: 0
+
+/* fotorama end

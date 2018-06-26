@@ -14,26 +14,6 @@ html
 		+media('<tab-lg')
 			+scroll-blocked
 
-body
-	position: relative
-	+font-normal
-	+font($font-size, $line-height)
-	color: $text-color
-	height: 100%
-	min-width: 320px
-	background: $bg-color url(../../img/empty.png) no-repeat left top fixed
-
-	+media('<mob-lg')
-		+font($font-size--mob, $line-height--mob)
-
-	// выделение текста
-	*::selection
-		background-color: $base-color-alt
-		color: $base-color
-
-	a::selection
-		color: $link-color
-
 /* === LAYOUT ===
 .max-wrap
 	max-width: $page-layout-width
@@ -156,6 +136,32 @@ body
 	p, ul, ol, h1, h2, h3, h4, h5, h6, hr
 		max-width: none
 
+/* === layout over ===
+// Если необходимо вытянуть элемент к краям сонтейнера
+//[class*="layout-over"][class*="--bottom"]
+	.content &
+		margin-bottom: -#{nth($content-space, 3)}
+
+//[class*="layout-over"][class*="--top"]
+	.content &
+		margin-top: -#{nth($content-space, 1)}
+
+[class*="layout-over"][class*="--left"]
+	.layout &, .layout-space &
+		margin-left: -#{nth($page-layout-space, 2)}
+
+		+media('<mob-lg')
+			margin-left: -#{nth($page-layout-space--mob, 2)}
+
+[class*="layout-over"][class*="--right"]
+	.layout &, .layout-space &
+		margin-right: -#{nth($page-layout-space, 2)}
+
+		+media('<mob-lg')
+			margin-right: -#{nth($page-layout-space--mob, 2)}
+
+/* === layout over end ===
+
 // layout страницы
 .wrapper
 	position: relative
@@ -206,6 +212,9 @@ body
 	padding-top: nth($content-space, 1)
 	padding-bottom: nth($content-space, 3)
 
+	.card-page &
+		background-color: white
+
 .sheet
 	flex-shrink: 1
 	flex-grow: 1
@@ -214,7 +223,12 @@ body
 	box-shadow: 0 3px 3px rgba(black, 0.1)
 	max-width: 1010px
 	margin: 0 auto
-	padding: 38px nth($grid-space, 2)
+	padding: 38px nth($page-layout-space, 2)
+
+	+media('<mob-lg')
+		padding: 20px nth($page-layout-space--mob, 2)
+		border-radius: 0
+		margin: -#{nth($content-space, 1)} -#{nth($page-layout-space--mob, 2)} -#{nth($content-space, 3)}
 
 /* === CONTENT end ===
 
@@ -226,7 +240,7 @@ body
 	width: 100%
 	height: $header-height
 	min-width: $page-layout-min
-	z-index: $header-z
+	z-index: $z-i-header
 
 	+media('<tab-lg')
 		height: $header-height--sm
@@ -566,7 +580,7 @@ $nav-is-open-class: 'nav-is-open'
 	position: fixed
 	width: 100%
 	min-width: $page-layout-min
-	z-index: $header-z
+	z-index: $z-i-header
 	left: 0
 	top: 0
 	$prop: transform, opacity
@@ -1054,7 +1068,7 @@ a.nav-opener
 /* === FOOTER ===
 .footer
 	position: relative
-	z-index: $footer-z
+	z-index: $z-i-footer
 	background-color: white
 	overflow: hidden
 	+font(1.4rem, round-float(18/14, 2))

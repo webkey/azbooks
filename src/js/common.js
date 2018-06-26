@@ -1017,9 +1017,14 @@ function accordionInit() {
 })(jQuery);
 
 function toggleShutters() {
-	var nav, filters, search;
+	var $nav = $('.nav-opener-js'),
+		$filters = $('.filters-opener-js'),
+		$search = $('.search-opener-js'),
+		searchForm = '.search-form-js',
+		nav,
+		filters,
+		search;
 
-	var $nav = $('.nav-opener-js');
 	if ($nav.length) {
 		nav = $nav.tClass({
 			toggleClassTo: ['html', '.nav-overlay-js', '.shutter--nav-js']
@@ -1030,14 +1035,13 @@ function toggleShutters() {
 			, cssScrollFixed: true
 			, removeOutsideClick: true
 			, beforeAdded: function () {
-				search.tClass('remove');
-				filters.tClass('remove');
+				$search.length && search.tClass('remove');
+				$filters.length && filters.tClass('remove');
 			}
 		});
 	}
 
 	// filters
-	var $filters = $('.filters-opener-js');
 	if ($filters.length) {
 		filters = $filters.tClass({
 			toggleClassTo: ['html', '.filters-overlay-js', '.shutter--filters-js']
@@ -1048,14 +1052,12 @@ function toggleShutters() {
 			, cssScrollFixed: true
 			, removeOutsideClick: true
 			, beforeAdded: function () {
-				search.tClass('remove');
-				nav.tClass('remove');
+				$search.length && search.tClass('remove');
+				$nav.length && nav.tClass('remove');
 			}
 		});
 	}
 
-	var $search = $('.search-opener-js'),
-		searchForm = '.search-form-js';
 	if ($search.length) {
 		search = $search.tClass({
 			toggleClassTo: ['html', searchForm]
@@ -1066,8 +1068,8 @@ function toggleShutters() {
 			, removeOutsideClick: true
 			, switchBtn: '.search-closer-js'
 			, beforeAdded: function () {
-				nav.tClass('remove');
-				filters.tClass('remove');
+				$nav.length && nav.tClass('remove');
+				$filters.length && filters.tClass('remove');
 			}
 			, afterAdded: function () {
 				setTimeout(function () {
@@ -1519,6 +1521,42 @@ $(function () {
 });
 
 /**
+ * fotorama init
+ * */
+function fotoramaInit() {
+	var $gallery = $('.gallery-js'),
+		thumbwidth = 100,
+		thumbheight = 100,
+		ratio = 598/410;
+
+	if (window.innerWidth < 640) {
+		thumbwidth = 50;
+		thumbheight = 50;
+		ratio = 1 / 1;
+	}
+
+	$.each($gallery, function () {
+		var $this = $(this);
+		$this.fotorama({
+			click: false,
+			width: '100%',
+			fit: 'scaledown',
+			nav: 'thumbs',
+			navposition: 'bottom',
+			allowfullscreen: true,
+			// arrows: 'always',
+			thumbmargin: 10,
+			thumbwidth: thumbwidth,
+			thumbheight: thumbheight,
+			thumbfit : 'scaledown',
+			thumbborderwidth: 2,
+			ratio: ratio
+		});
+	})
+}
+/** fotorama init end */
+
+/**
  * !Testing form validation (for example). Do not use on release!
  * */
 function formSuccessExample() {
@@ -1598,6 +1636,7 @@ $(document).ready(function () {
 	slidersInit();
 	tabSwitcher();
 	stickyInit();
+	fotoramaInit();
 	objectFitImages(); // object-fit-images initial
 
 	formSuccessExample();

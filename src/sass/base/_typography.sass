@@ -2,14 +2,31 @@
 @import ../utils/mixins
 @import ../../libs/include-media/dist/include-media
 
+body
+	position: relative
+	+font-normal
+	+font($font-size, $line-height)
+	color: $text-color
+	height: 100%
+	min-width: 320px
+	background: $bg-color url(../../img/empty.png) no-repeat left top fixed
+
+	+media('<mob-lg')
+		+font($font-size--mob, $line-height--mob)
+
+	// выделение текста
+	*::selection
+		background-color: $base-color-alt
+		color: $base-color
+
+	a::selection
+		color: $link-color
+
 h1, h2, h3, h4, h5, h6
 	padding: 0
 	+font-alt-bold
 	color: $title-color
-	margin: 0 0 $bottom-space
-
-	+media('<mob-lg')
-		margin-bottom: round-float($bottom-space*0.85, 1)
+	margin: 0 0 0.8em
 
 	&:last-child
 		margin-bottom: 0
@@ -53,7 +70,10 @@ h6
 
 p
 	padding: 0
-	margin: 0 0 $bottom-space
+	margin: 0 0 round-float($font-size*$line-height, 1)
+
+	+media('<mob-lg')
+		margin-bottom: round-float($font-size--mob*$line-height--mob, 1)
 
 	small
 		font-size: 0.78em
@@ -145,8 +165,15 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 		line-height: 32px
 		margin-bottom: round-float($bottom-space/2, 1)
 
+		+media('<mob-lg')
+			margin-right: 10px
+			line-height: 24px
+
 	& > h1, & > h2
 		line-height: 40px
+
+		+media('<mob-lg')
+			line-height: 28px
 
 /* content img
 
@@ -223,7 +250,7 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em
 		p + #{$tags},
 		ul + #{$tags},
 		ol + #{$tags}
-			margin-top: round-float($bottom-space--md, 1)
+			margin-top: 1.6em
 
 /* list
 .#{$user-content}

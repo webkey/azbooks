@@ -27,7 +27,8 @@
     "select2": "^4.0.3",
     "normalize-scss": "normalize.scss#^7.0.1",
     "matchHeight": "matchheight#^0.7.0",
-    "stickybits": "^3.2.3"
+    "stickybits": "^3.2.3",
+    "fotorama": "^4.6.4"
   },
   "devDependencies": {
     "mathsass": "^0.9.5"

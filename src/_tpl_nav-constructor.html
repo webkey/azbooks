@@ -9,7 +9,7 @@
 	</li>
 
 	<li class="has-drop @@if(currentItem === 'News'){current}">
-	@@include('_tpl_nav-LINK--full.html', { "txt": "News", "href": "#", "key": "@@bsKey" })
+	@@include('_tpl_nav-LINK--full.html', { "txt": "News", "href": "news.html", "key": "@@bsKey" })
 	@@include('_tpl_nav-DROP-WRAP.html', { "dropLevel": "(==========2==========)", "pos": "start", "key": "@@bsKey"})
 	<li class="has-drop">
 	@@include('_tpl_nav-LINK--full.html', { "txt": "Shipping retail", "href": "#", "key": "@@bsKey" })
@@ -27,11 +27,11 @@
 	</li>
 
 	<li class="@@if(currentItem === 'About us'){current}">
-		@@include('_tpl_nav-LINK--full.html', { "txt": "About us", "href": "#", "key": "@@bsKey" })
+		@@include('_tpl_nav-LINK--full.html', { "txt": "About us", "href": "about.html", "key": "@@bsKey" })
 	</li>
 
 	<li class="@@if(currentItem === 'Contacts'){current}">
-		@@include('_tpl_nav-LINK--full.html', { "txt": "Contacts", "href": "#", "key": "@@bsKey" })
+		@@include('_tpl_nav-LINK--full.html', { "txt": "Contacts", "href": "contacts.html", "key": "@@bsKey" })
 	</li>
 </ul>
 <!--(1) END @@bsKey FIRST level-->

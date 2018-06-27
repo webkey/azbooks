@@ -1,0 +1,115 @@
+@@include('_tpl_layout_head.html', {
+	"title": "Contacts",
+	"pageClass": ""
+})
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
+
+<!--HEADER-->
+@@include('_tpl_layout_header.html', {
+	"currentItem": "Contacts"
+})
+<!--HEADER end-->
+
+<!--MAIN-->
+<div class="main">
+	<div class="content layout user-content">
+		<!--===============breadcrumbs===============-->
+		@@include('_tpl_breadcrumbs.html', {
+			"items": ["Home"],
+			"last": "Contacts"
+		})
+		<!--===============breadcrumbs end===============-->
+		<!--locate-->
+		<section class="locate">
+			<div class="contacts">
+				<h1>Contacts</h1>
+				<h3>AzBooks International OÜ</h3>
+				<address>
+					Valukoja 8, <br>
+					Tallinn 11415, <br>
+					Estonia
+				</address>
+				<a href="mailto:info@az-books.com">info@az-books.com</a>
+			</div>
+			<script>
+				var largePinMap = 'img/map-pin.png';
+				var localObjects = [
+					[
+						{lat: 59.4200831, lng: 24.8047861}, //coordinates of marker
+						{latBias: 0.0020, lngBias: 0}, //bias coordinates for center map
+						largePinMap, //image pin
+						13,
+						{
+							title: 'AzBooks International OÜ',
+							address: '<b>Address:</b> <div>Valukoja 8, Tallinn 11415, Estonia</div>',
+							email: '<b>Email:</b> <div><a href="mailto:info@az-books.com">info@az-books.com</a></div>'
+						}
+					]
+				];
+			</script>
+			<div id="local-01-map" class="local-map local-map-js"></div>
+		</section>
+		<!--locate end-->
+	</div>
+	<section class="section enquiry">
+		<form action="#" method="post" class="layout-text">
+			<h2 class="align-center">Enquiry form</h2>
+			<div class="form-cols">
+				<div class="form-col">
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label for="ef_01">Name*</label>
+						</div>
+						<div class="input-holder">
+							<input class="field-effects-js" type="text" id="ef_01"/>
+							@@include('_tpl_forms_form-validation.html')
+						</div>
+					</div>
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label for="ef_02">Name*</label>
+						</div>
+						<div class="input-holder">
+							<input class="field-effects-js" type="text" id="ef_02"/>
+							@@include('_tpl_forms_form-validation.html')
+						</div>
+					</div>
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label for="ef_03">Name*</label>
+						</div>
+						<div class="input-holder">
+							<input class="field-effects-js" type="text" id="ef_03"/>
+							@@include('_tpl_forms_form-validation.html')
+						</div>
+					</div>
+				</div>
+				<div class="form-col">
+					<div class="input-wrap type--float-label">
+						<div class="label-holder">
+							<label for="ef_10">Message*</label>
+						</div>
+						<div class="input-holder">
+							<textarea class="field-effects-js" id="ef_10"></textarea>
+							@@include('_tpl_forms_form-validation.html')
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="align-center">
+				<button class="btn-default">Send</button>
+			</div>
+		</form>
+	</section>
+</div>
+<!--MAIN end-->
+
+<!--FOOTER-->
+@@include('_tpl_layout_footer.html')
+<!--FOOTER end-->
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "END" })
+
+@@include('_tpl_layout_foot.html', {"hasMap": "true"})

@@ -1,0 +1,19 @@
+<article class="news__item">
+	<a href="news-inner.html" class="news__item__inner">
+		@@if(context.src){
+		<figure class="news__item__figure">
+			<img src="@@src" alt="@@title" />
+		</figure>
+		}
+		<div class="news__item__body">
+			<time datetime="@@datetime">@@date</time>
+			<h3 class="news__item__title">@@title</h3>
+			@@if(context.text){
+			<div class="news__item__cont">
+				<p>@@text</p>
+			</div>
+			}
+		</div>
+		<footer class="news__item__footer"><span class="news__item__more">Read more</span></footer>
+	</a>
+</article>

@@ -99,7 +99,7 @@
 					</li>
 					<li class="has-drop ">
 						<div class="nav__tab nav__tab-js">
-							<a href="#"><span>News</span></a>
+							<a href="news.html"><span>News</span></a>
 							<span class="nav__angle nav-handler-js"><i>&nbsp;</i></span>
 						</div>
 						<!--(2) START nav SECOND level-->
@@ -159,13 +159,13 @@
 					</li>
 					<li class="">
 						<div class="nav__tab nav__tab-js">
-							<a href="#"><span>About us</span></a>
+							<a href="about.html"><span>About us</span></a>
 							<span class="nav__angle nav-handler-js"><i>&nbsp;</i></span>
 						</div>
 					</li>
 					<li class="">
 						<div class="nav__tab nav__tab-js">
-							<a href="#"><span>Contacts</span></a>
+							<a href="contacts.html"><span>Contacts</span></a>
 							<span class="nav__angle nav-handler-js"><i>&nbsp;</i></span>
 						</div>
 					</li>
@@ -1671,72 +1671,119 @@
 					<div class="user-spacer"></div>
 					<!--===============user form===============-->
 					<h3 class="hashTitle"><a href="#hash-userFormExample" id="hash-userFormExample" class="hashAnchor"><span class="mark">Форма обратной связи</span></a></h3>
-					<div class="user-form">
-						<div class="layout-text">
-							<div class="form-title">Задать вопрос</div>
-							<form action="#" method="post">
-								<div class="input-wrap">
+					<div class="user-form layout-text">
+						<form action="#" method="post">
+							<div class="form-row">
+								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="user-form-example__name-field">Имя<span class="form-mark">*</span></label>
+										<label for="uf_01">Name*</label>
 									</div>
 									<div class="input-holder">
-										<input type="text" id="user-form-example__name-field">
+										<input class="field-effects-js" type="text" id="uf_01" />
 										<div class="error-note">Required field</div>
 										<div class="success-note">Confirmed</div>
 									</div>
 								</div>
-								<div class="input-wrap">
+								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="user-form-example__email-field">E-mail<span class="form-mark">*</span></label>
+										<label for="uf_02">Password*</label>
 									</div>
 									<div class="input-holder">
-										<input type="email" id="user-form-example__email-field">
+										<input class="field-effects-js" type="password" id="uf_02" />
 										<div class="error-note">Required field</div>
 										<div class="success-note">Confirmed</div>
 									</div>
 								</div>
-								<div class="input-wrap">
+							</div>
+							<div class="form-row">
+								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="user-form-example__message-field">Сообщение<span class="form-mark">*</span></label>
+										<label for="uf_03">E-mail*</label>
 									</div>
 									<div class="input-holder">
-										<textarea id="user-form-example__message-field"></textarea>
+										<input class="field-effects-js" type="email" id="uf_03" />
 										<div class="error-note">Required field</div>
 										<div class="success-note">Confirmed</div>
 									</div>
 								</div>
-								<div class="input-wrap">
+								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<span class="label">Прикрепить файл</span>
-									</div>
-									<div class="input-holder upload-file__container">
-										<input class="upload-file" name="files[]" type="file" multiple="multiple" data-jfiler-limit="2">
-									</div>
-								</div>
-								<div class="input-wrap">
-									<div class="label-holder">
-										<label for="user-form-example__captcha-field">Защита от спама:<span class="form-mark">*</span></label>
+										<label for="uf_04">Password*</label>
 									</div>
 									<div class="input-holder">
-										<div class="captcha">
-											<img src="img/captcha.jpg" alt="captcha" />
-											<input type="text" id="user-form-example__captcha-field">
-											<span class="error-note">Введите текст на картинке для защиты от спама</span>
-											<div class="error-note">Введите текст на картинке для защиты от спама</div>
-											<div class="success-note">Confirmed</div>
-										</div>
+										<input class="field-effects-js" type="password" id="uf_04" />
+										<div class="error-note">Required field</div>
+										<div class="success-note">Confirmed</div>
 									</div>
 								</div>
-								<div class="form-footer">
-									<div class="form-buttons">
-										<button class="btn-default btn-submit">Отправить</button>
+							</div>
+							<div class="form-row">
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label for="uf_05">Name</label>
 									</div>
-									<div class="form-note">
-										<div class="form-note__item"><span class="form-mark">*</span> Поля обязательны для заполнения</div>
+									<div class="input-holder">
+										<input class="field-effects-js" type="text" id="uf_05" />
 									</div>
 								</div>
-							</form>
-						</div>
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label for="uf_06">Organization</label>
+									</div>
+									<div class="input-holder">
+										<input class="field-effects-js" type="text" id="uf_06" />
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="input-wrap">
+									<a href="#">I’m interested in*</a>
+								</div>
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label for="uf_08">Region*</label>
+									</div>
+									<div class="input-holder">
+										<input class="field-effects-js" type="text" id="uf_08" />
+										<div class="error-note">Required field</div>
+										<div class="success-note">Confirmed</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="input-wrap type--float-label">
+									<div class="label-holder">
+										<label for="uf_15">Message*</label>
+									</div>
+									<div class="input-holder">
+										<textarea class="field-effects-js" id="uf_15"></textarea>
+										<div class="error-note">Required field</div>
+										<div class="success-note">Confirmed</div>
+									</div>
+								</div>
+							</div>
+							<!--<div class="captcha">
+			<img src="img/captcha.jpg" alt="captcha" />
+			<div class="input-wrap type&#45;&#45;float-label">
+				<div class="label-holder">
+					<label for="uf_20">Protection code*</label>
+				</div>
+				<div class="input-holder">
+					<input class="field-effects-js" type="text" id="uf_20"/>
+					<div class="error-note">Enter the text in the picture</div>
+<div class="success-note">Confirmed</div>
+				</div>
+			</div>
+		</div>-->
+							<div class="form-row form-footer">
+								<div class="input-wrap">
+									<button class="btn-default">Send</button>
+								</div>
+								<div class="input-wrap">
+									<a href="catalog.html" class="btn-default">ALL PRODUCTS</a>
+								</div>
+							</div>
+						</form>
 					</div>
 					<!--===============user form end===============-->
 				</div>

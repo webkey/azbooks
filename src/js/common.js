@@ -1521,7 +1521,7 @@ $(function () {
 });
 
 /**
- * fotorama init
+ * !fotorama init
  * */
 function fotoramaInit() {
 	var $gallery = $('.gallery-js'),
@@ -1554,7 +1554,155 @@ function fotoramaInit() {
 		});
 	})
 }
-/** fotorama init end */
+
+/**
+ * !map initial
+ * */
+var styleMap = [
+	{"featureType": "landscape.man_made", "elementType": "geometry", "stylers": [{"color": "#f7f1df"}]}, {
+		"featureType": "landscape.natural",
+		"elementType": "geometry",
+		"stylers": [{"color": "#d0e3b4"}]
+	}, {"featureType": "landscape.natural.terrain", "elementType": "geometry", "stylers": [{"visibility": "off"}]}, {
+		"featureType": "poi",
+		"elementType": "labels",
+		"stylers": [{"visibility": "off"}]
+	}, {"featureType": "poi.business", "elementType": "all", "stylers": [{"visibility": "off"}]}, {"featureType": "poi.medical", "elementType": "geometry", "stylers": [{"color": "#fbd3da"}]}, {
+		"featureType": "poi.park",
+		"elementType": "geometry",
+		"stylers": [{"color": "#bde6ab"}]
+	}, {"featureType": "road", "elementType": "geometry.stroke", "stylers": [{"visibility": "off"}]}, {"featureType": "road", "elementType": "labels"}, {
+		"featureType": "road.highway",
+		"elementType": "geometry.fill",
+		"stylers": [{"color": "#ffe15f"}]
+	}, {"featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#efd151"}]}, {
+		"featureType": "road.arterial",
+		"elementType": "geometry.fill",
+		"stylers": [{"color": "#ffffff"}]
+	}, {"featureType": "road.local", "elementType": "geometry.fill", "stylers": [{"color": "black"}]}, {
+		"featureType": "transit.station.airport",
+		"elementType": "geometry.fill",
+		"stylers": [{"color": "#cfb2db"}]
+	}, {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#a2daf2"}]}
+];
+
+function mapInit(){
+	if (!$('[id*="-map"]').length) {return;}
+
+	function mapCenter(index){
+		var localObject = localObjects[index];
+
+		return{
+			lat: localObject[0].lat + localObject[1].latBias,
+			lng: localObject[0].lng + localObject[1].lngBias
+		};
+	}
+
+	var mapOptions = {};
+
+	var markers = [],
+		elementById = [
+			document.getElementById('local-01-map')
+		];
+
+	if($(elementById[0]).length){
+		mapOptions = {
+			zoom: localObjects[0][3],
+			center: mapCenter(0),
+			styles: styleMap,
+			mapTypeControl: false,
+			scaleControl: false,
+			scrollwheel: false
+		};
+
+		var map0 = new google.maps.Map(elementById[0], mapOptions);
+		addMarker(0,map0);
+
+		/*aligned after resize*/
+		var resizeTimer0;
+		$(window).on('debouncedresize', function () {
+			clearTimeout(resizeTimer0);
+			resizeTimer0 = setTimeout(function () {
+				moveToLocation(0,map0);
+			}, 500);
+		});
+	}
+
+	// if($(elementById[1]).length){
+	// 	mapOptions = {
+	// 		zoom: 15,
+	// 		center: mapCenter(1),
+	// 		styles: styleMap,
+	// 		mapTypeControl: false,
+	// 		scaleControl: false,
+	// 		scrollwheel: false
+	// 	};
+	//
+	// 	var map1 = new google.maps.Map(elementById[1], mapOptions);
+	// 	addMarker(1,map1);
+	//
+	// 	/*aligned after resize*/
+	// 	var resizeTimer1;
+	// 	$(window).on('resize', function () {
+	// 		clearTimeout(resizeTimer1);
+	// 		resizeTimer1 = setTimeout(function () {
+	// 			moveToLocation(1,map1);
+	// 		}, 500);
+	// 	});
+	// }
+
+	/*move to location*/
+	function moveToLocation(index, map){
+		var object = localObjects[index];
+		var center = new google.maps.LatLng(mapCenter(index));
+		map.panTo(center);
+		map.setZoom(object[3]);
+	}
+
+	var infoWindow = new google.maps.InfoWindow({
+		maxWidth: 220
+	});
+
+	function addMarker(index,map) {
+		var object = localObjects[index];
+
+		var marker = new google.maps.Marker({
+			position: object[0],
+			//animation: google.maps.Animation.DROP,
+			map: map,
+			icon: object[2],
+			title: object[4].title
+		});
+
+		markers.push(marker);
+
+		function onMarkerClick() {
+			var marker = this;
+
+			infoWindow.setContent(
+				'<div class="map-popup">' +
+				'<h4>'+object[4].title+'</h4>' +
+				'<div class="map-popup__list">' +
+				'<div class="map-popup__row">'+object[4].address+'</div>' +
+				'<div class="map-popup__row">'+object[4].email+'</div>' +
+				// '<div class="map-popup__row">'+object[4].works+'</div>' +
+				'</div>' +
+				'</div>'
+			);
+
+			infoWindow.close();
+
+			infoWindow.open(map, marker);
+		}
+
+		map.addListener('click', function () {
+			infoWindow.close();
+		});
+
+		marker.addListener('click', onMarkerClick);
+	}
+}
+/*map init end*/
 
 /**
  * !Testing form validation (for example). Do not use on release!
@@ -1637,6 +1785,7 @@ $(document).ready(function () {
 	tabSwitcher();
 	stickyInit();
 	fotoramaInit();
+	mapInit();
 	objectFitImages(); // object-fit-images initial
 
 	formSuccessExample();

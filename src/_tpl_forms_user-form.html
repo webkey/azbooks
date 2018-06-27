@@ -1,63 +1,109 @@
-<div class="user-form">
-	<div class="layout-text">
-		<div class="form-title">@@title</div>
-		<form action="#" method="post">
-			<div class="input-wrap">
+<div class="user-form layout-text">
+	<form action="#" method="post">
+		<div class="form-row">
+			<div class="input-wrap type--float-label">
 				<div class="label-holder">
-					<label for="user-form-example__name-field">Имя<span class="form-mark">*</span></label>
+					<label for="uf_01">Name*</label>
 				</div>
 				<div class="input-holder">
-					<input type="text" id="user-form-example__name-field">
+					<input class="field-effects-js" type="text" id="uf_01"/>
 					@@include('_tpl_forms_form-validation.html')
 				</div>
 			</div>
-			<div class="input-wrap">
+			<div class="input-wrap type--float-label">
 				<div class="label-holder">
-					<label for="user-form-example__email-field">E-mail<span class="form-mark">*</span></label>
+					<label for="uf_02">Password*</label>
 				</div>
 				<div class="input-holder">
-					<input type="email" id="user-form-example__email-field">
+					<input class="field-effects-js" type="password" id="uf_02"/>
 					@@include('_tpl_forms_form-validation.html')
 				</div>
 			</div>
-			<div class="input-wrap">
+		</div>
+		<div class="form-row">
+			<div class="input-wrap type--float-label">
 				<div class="label-holder">
-					<label for="user-form-example__message-field">Сообщение<span class="form-mark">*</span></label>
+					<label for="uf_03">E-mail*</label>
 				</div>
 				<div class="input-holder">
-					<textarea id="user-form-example__message-field"></textarea>
+					<input class="field-effects-js" type="email" id="uf_03"/>
 					@@include('_tpl_forms_form-validation.html')
 				</div>
 			</div>
-			<div class="input-wrap">
+			<div class="input-wrap type--float-label">
 				<div class="label-holder">
-					<span class="label">Прикрепить файл</span>
-				</div>
-				<div class="input-holder upload-file__container">
-					<input class="upload-file" name="files[]" type="file" multiple="multiple" data-jfiler-limit="2">
-				</div>
-			</div>
-			<div class="input-wrap">
-				<div class="label-holder">
-					<label for="user-form-example__captcha-field">Защита от спама:<span class="form-mark">*</span></label>
+					<label for="uf_04">Password*</label>
 				</div>
 				<div class="input-holder">
-					<div class="captcha">
-						<img src="img/captcha.jpg" alt="captcha" />
-						<input type="text" id="user-form-example__captcha-field">
-						<span class="error-note">Введите текст на картинке для защиты от спама</span>
-						@@include('_tpl_forms_form-validation.html', {"errorNote": "Введите текст на картинке для защиты от спама"})
-					</div>
+					<input class="field-effects-js" type="password" id="uf_04"/>
+					@@include('_tpl_forms_form-validation.html')
 				</div>
 			</div>
-			<div class="form-footer">
-				<div class="form-buttons">
-					<button class="btn-default btn-submit">Отправить</button>
+		</div>
+		<div class="form-row">
+			<div class="input-wrap type--float-label">
+				<div class="label-holder">
+					<label for="uf_05">Name</label>
 				</div>
-				<div class="form-note">
-					<div class="form-note__item"><span class="form-mark">*</span> Поля обязательны для заполнения</div>
+				<div class="input-holder">
+					<input class="field-effects-js" type="text" id="uf_05"/>
 				</div>
 			</div>
-		</form>
-	</div>
+			<div class="input-wrap type--float-label">
+				<div class="label-holder">
+					<label for="uf_06">Organization</label>
+				</div>
+				<div class="input-holder">
+					<input class="field-effects-js" type="text" id="uf_06"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="input-wrap">
+				<a href="#">I’m interested in*</a>
+			</div>
+			<div class="input-wrap type--float-label">
+				<div class="label-holder">
+					<label for="uf_08">Region*</label>
+				</div>
+				<div class="input-holder">
+					<input class="field-effects-js" type="text" id="uf_08"/>
+					@@include('_tpl_forms_form-validation.html')
+				</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="input-wrap type--float-label">
+				<div class="label-holder">
+					<label for="uf_15">Message*</label>
+				</div>
+				<div class="input-holder">
+					<textarea class="field-effects-js" id="uf_15"></textarea>
+					@@include('_tpl_forms_form-validation.html')
+				</div>
+			</div>
+		</div>
+
+		<!--<div class="captcha">
+			<img src="img/captcha.jpg" alt="captcha" />
+			<div class="input-wrap type&#45;&#45;float-label">
+				<div class="label-holder">
+					<label for="uf_20">Protection code*</label>
+				</div>
+				<div class="input-holder">
+					<input class="field-effects-js" type="text" id="uf_20"/>
+					@@include('_tpl_forms_form-validation.html', {"errorNote": "Enter the text in the picture"})
+				</div>
+			</div>
+		</div>-->
+
+		<div class="form-row form-footer">
+			<div class="input-wrap">
+				<button class="btn-default">Send</button>
+			</div>
+			<div class="input-wrap">
+				<a href="catalog.html" class="btn-default">ALL PRODUCTS</a>
+			</div>
+		</div>
+	</form>
 </div>

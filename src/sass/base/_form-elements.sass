@@ -3,7 +3,7 @@
 @import ../../libs/include-media/dist/include-media
 
 /* form layout
-.form-row, .input-wrap
+.form-row, .input-wrap, .captcha
 	position: relative // Важно! Для позицирования отметки подтверждения полей формы
 	margin-bottom: $form-bottom-space
 	z-index: 1 // Важно! Отметка подтверждения полей формы имеет z-index: -1
@@ -59,10 +59,62 @@ label, .label
 		+media('<mob-lg')
 			display: block
 			width: auto
-			margin-bottom: $form-bottom-space--sm
+			margin-bottom: $form-bottom-space
+
+	&:last-child
+		+media('<mob-lg')
+			.input-wrap
+				&:last-child
+					margin-bottom: 0
 
 	label
 		+truncate(100%)
+
+.form-cols
+	+clear
+
+.form-col
+	float: left
+	width: calc(100% / 2 - #{round($form-gap/2)})
+	+margin-horizontal(#{round($form-gap/2)})
+
+	+media('<mob-lg')
+		float: none
+		width: auto
+		+margin-horizontal(0)
+
+	&:first-child
+		margin-left: 0
+
+	&:last-child
+		margin-right: 0
+
+.captcha
+	+clear-spacing
+
+	img
+		display: inline-block
+		vertical-align: middle
+		+font($font-size, $line-height)
+		max-width: calc(50% - 20px)
+		margin-right: 20px
+
+		+media('<mob-lg')
+			+font($font-size--mob, $line-height--mob)
+			display: block
+			margin: 0 auto 20px
+
+	.input-wrap
+		display: inline-block
+		vertical-align: middle
+		max-width: 50%
+		letter-spacing: normal
+		margin-bottom: 0
+
+		+media('<mob-lg')
+			display: block
+			width: 100%
+			max-width: none
 
 .form-columnize
 	column-count: 2
@@ -197,8 +249,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
 		margin-left: #{round(((nth($text-layout-space--sm, 2)) - $this-icon-size)*0.1)}
 
 	// нужно выбрать тольк ближайший элемент подтверждения формы ((нельзя использовать ~))
-	form .success + .error-note + &,
-	form .success + .select2 + .error-note + &
+	//form .success + .error-note + &,
+	//form .success + .select2 + .error-note + &
 		display: block
 
 	&::before, &::after
@@ -698,8 +750,8 @@ input[type="radio"]
 
 /* inputs states
 =form-success()
-	color: $form-success-color
-	border-color: $form-success-color !important
+	//color: $form-success-color
+	//border-color: $form-success-color !important
 
 =form-error()
 	color: $form-error-color

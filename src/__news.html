@@ -1,0 +1,45 @@
+@@include('_tpl_layout_head.html', {
+	"title": "News",
+	"pageClass": ""
+})
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
+
+<!--HEADER-->
+@@include('_tpl_layout_header.html', {
+	"currentItem": "News"
+})
+<!--HEADER end-->
+
+<!--MAIN-->
+<div class="main">
+	<div class="content layout user-content">
+		<!--===============breadcrumbs===============-->
+		@@include('_tpl_breadcrumbs.html', {
+			"items": ["Home"],
+			"last": "News"
+		})
+		<!--===============breadcrumbs end===============-->
+		<div class="layout-article">
+			<h1 class="align-center">News</h1>
+			<!--news-->
+			<section class="news layout-flood">
+				<h2 class="hide">News</h2>
+				<div class="news__list">
+					@@loop("_tpl_news--items.html", "includes/json/news--items.json")
+				</div>
+			</section>
+			<!--news end-->
+			@@include('_tpl_pagination.html')
+		</div>
+	</div>
+</div>
+<!--MAIN end-->
+
+<!--FOOTER-->
+@@include('_tpl_layout_footer.html')
+<!--FOOTER end-->
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "END" })
+
+@@include('_tpl_layout_foot.html')

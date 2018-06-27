@@ -3,107 +3,32 @@
 @import ../../libs/include-media/dist/include-media
 
 /* user form
-.form-title
-	display: block
-	+font-alt-bold
-	+font($font-size-h2, $line-height-h2)
-	color: $title-color
-	text-align: center
-	margin-bottom: $bottom-space--md
-
 .user-form
-	background: $bg-color-alt
-	+padding-vertical((nth($text-layout-space, 1)))
 	margin-bottom: $bottom-space
-	border: solid $border-color
-	border-width: 1px 0
 
 	&:last-child
 		margin-bottom: 0
 
-	+media('<tab-lg')
-		+padding-vertical((nth($text-layout-space--md, 1)))
-
-	+media('<mob-lg')
-		+padding-vertical((nth($text-layout-space--sm, 1)))
-
 	form
 		display: block
-
-	.input-wrap
-		margin-bottom: 50px
 
 	textarea
 		height: 130px
 		max-height: 130px
 		resize: none
 
-	.captcha
-		+display-inline-block-top
-		+clear-spacing
-		position: relative // Важно! Для позицирования отметки подтверждения полей формы
-		z-index: 1 // Важно! Отметка подтверждения полей формы имеет z-index: -1
-
-		+clear
-
-		img
-			$margin-right: 20px
-			display: inline-block
-			vertical-align: middle
-			max-width: calc(50%)
-			margin-right: $margin-right
-
-			& + input
-				display: inline-block
-				vertical-align: middle
-				width: 200px
-
-		+media('<tab-lg')
-			img
-				display: block
-				max-width: none
-				margin-bottom: $bottom-space--sm
-
-				& + input
-					display: block
-					max-width: none
-					width: 100%
-
 	.form-footer
 		+clear
 
-		+media('<mob-lg')
-			padding-top: $bottom-space--sm
+		.input-wrap
+			&:first-child
+				text-align: right
 
-	.form-buttons
-		float: left
-		margin-right: 30px
+				+media('<mob-lg')
+					text-align: center
 
-		+media('<mob-lg')
-			float: none
-			margin: 0
-
-		.btn-submit
-			width: 200px
-
-	.form-note
-		overflow: hidden
-		min-height: 50px
-		+clear-spacing
-		line-height: 25px
-
-		&::before
-			content: ''
-			display: inline-block
-			vertical-align: middle
-			min-height: inherit
-
-	.form-note__item
-		display: inline-block
-		vertical-align: middle
-		width: calc(100% - 6px)
-		+font($font-size--sm, $line-height--sm)
-		letter-spacing: normal
+			+media('<mob-lg')
+				text-align: center
 
 /* user form end
 
@@ -547,7 +472,7 @@
 			border-radius: 10px
 			border: 2px solid #ccc
 			font-size: $pagination-font-size
-			line-height: #{nth($pagination-item-size, 2) - $pagination-border-width*2}
+			line-height: #{nth($pagination-item-size, 2) - $pagination-border-width}
 			letter-spacing: normal
 			text-transform: uppercase
 			// transition
@@ -1992,3 +1917,207 @@
 		margin: 0
 
 /* section end
+
+/* news
+.news
+	margin-bottom: 4rem
+
+	&:last-child
+		margin-bottom: 0
+
+.news__list
+	position: relative
+
+.news__item
+	margin: 0 0 20px
+
+	&:last-child
+		margin-bottom: 0
+
+.news__item__inner
+	position: relative
+	display: block
+	padding: nth($grid-space, 1) nth($grid-space, 2)
+	text-decoration: none
+	background-color: white
+	border-radius: 10px
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1)
+	color: inherit
+	//+font(1.6rem, round-float(24/16, 2))
+
+	+media('<mob-lg')
+		padding: nth($grid-space--mob, 1) nth($grid-space--mob, 2)
+
+	+clear
+
+.news__item__figure
+	position: relative
+	overflow: hidden
+	float: left
+	width: 252px
+	margin: 0 nth($grid-space, 2) 0 0
+	padding: 0
+	border-radius: 10px
+
+	+media('<tab-lg')
+		width: 180px
+
+	+media('<mob-lg')
+		width: 120px
+		margin-right: nth($grid-space--mob, 2)
+
+	+media('<mob-md')
+		display: none
+
+	&::before
+		content: ""
+		display: block
+		+ratio(1, 1)
+
+	img
+		position: absolute
+		left: 0
+		top: 0
+		max-width: none
+		width: 100%
+		height: 100%
+		object-fit: scale-down
+
+.news__item__body
+	overflow: hidden
+	padding-bottom: 52px // line height footer (more link) + 20px
+
+	time
+		display: block
+		margin-bottom: 1.43em
+		+font-bold
+		+font(1.4rem, round-float(24/14, 2))
+		color: $text-color-light
+		text-transform: uppercase
+
+.news__item__title
+	+font-alt-bold
+	+font($font-size-h2, $line-height-h2)
+	color: $base-color
+	margin-bottom: 0.83em
+
+	+media('<mob-lg')
+		+font($font-size-h2--mob, $line-height-h2--mob)
+
+.news__item__cont
+	p
+		&:last-child
+			margin-bottom: 0
+
+.news__item__footer
+	position: absolute
+	right: 0
+	bottom: 0
+	padding: 0 nth($grid-space, 2) nth($grid-space, 1) 0
+	line-height: 32px
+
+	+media('<mob-lg')
+		padding: 0 nth($grid-space--mob, 2) nth($grid-space--mob, 1) 0
+
+.news__item__more
+	text-transform: uppercase
+	font-size: 1.6rem
+
+	+media('<mob-lg')
+		font-size: 1.4rem
+
+// hover
+.news__item__inner
+	&
+		// transition
+		$prop: box-shadow
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+	.news__item__more
+		// transition
+		$prop: color
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+	.no-touchevents &:hover
+		box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3)
+
+		.news__item__more
+			color: $base-color
+
+/* news end
+
+/* locate
+.locate
+	position: relative
+	overflow: hidden
+	min-height: 420px
+	border-radius: 10px
+	background-color: white
+
+.contacts
+	position: absolute
+	left: 0
+	top: 0
+	width: $contacts-aside-width
+	height: 100%
+	padding: $grid-space
+
+	+media('<tab-lg')
+		width: $contacts-aside-width--sm
+
+	+media('<mob-lg')
+		position: relative
+		left: auto
+		top: auto
+		width: auto
+		padding: $grid-space--mob
+
+	address
+		+font-normal
+		margin-bottom: 2rem
+
+.local-map
+	position: absolute
+	top: 0
+	left: $contacts-aside-width
+	width: calc(100% - #{$contacts-aside-width})
+	height: 100%
+	background: #a2daf2
+
+	+media('<tab-lg')
+		left: $contacts-aside-width--sm
+		width: calc(100% - #{$contacts-aside-width--sm})
+
+	+media('<mob-lg')
+		position: relative
+		left: auto
+		top: auto
+		width: auto
+
+	&:before
+		content: ""
+		display: none
+		+ratio(1, 1)
+
+		+media('<mob-lg')
+			display: block
+
+/* locate end
+
+/* enquiry
+.enquiry
+	background-color: $base-color
+	color: white
+
+	h2, h3
+		color: inherit
+
+	textarea
+		min-height: $form-input-height * 3 + $form-bottom-space * 2
+		height: $form-input-height * 3 + $form-bottom-space * 2
+
+/* enquiry end

@@ -1,0 +1,39 @@
+@@include('_tpl_layout_head.html', {
+	"title": "Request info",
+	"pageClass": ""
+})
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "START" })
+
+<!--HEADER-->
+@@include('_tpl_layout_header.html', {
+	"currentItem": "Request info"
+})
+<!--HEADER end-->
+
+<!--MAIN-->
+<div class="main">
+	<div class="content layout user-content">
+		<!--===============breadcrumbs===============-->
+		@@include('_tpl_breadcrumbs.html', {
+			"items": ["Home"],
+			"last": "Request info"
+		})
+		<!--===============breadcrumbs end===============-->
+		<!--CONTENT-->
+		<div class="sheet layout-article">
+			<h2 class="align-center">Request info</h2>
+			@@include('_tpl_forms_user-form.html')
+		</div>
+		<!--CONTENT end-->
+	</div>
+</div>
+<!--MAIN end-->
+
+<!--FOOTER-->
+@@include('_tpl_layout_footer.html')
+<!--FOOTER end-->
+
+@@include('_tpl_PAGE_WRAP.html', {"pageWrap": "END" })
+
+@@include('_tpl_layout_foot.html')

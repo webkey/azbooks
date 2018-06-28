@@ -3466,12 +3466,12 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .accordion__panel__content {
-	padding: 10px 30px 34.5px;
+	padding: 10px 30px 35px;
 }
 
 @media (max-width: 991px) {
 	.accordion__panel__content {
-		padding: 10px 20px 22.5px;
+		padding: 10px 20px 23px;
 	}
 }
 

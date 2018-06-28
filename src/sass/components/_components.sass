@@ -626,13 +626,13 @@
 		transition-delay: 0.08s
 
 .accordion__panel__content
-	padding: 10px nth($accordion-space, 2) nth($accordion-space, 1)*1.5
+	padding: 10px nth($accordion-space, 2) round(nth($accordion-space, 1)*1.5)
 
 	+media('<tab-lg')
-		padding: 10px nth($accordion-space--sm, 2) nth($accordion-space--sm, 1)*1.5
+		padding: 10px nth($accordion-space--sm, 2) round(nth($accordion-space--sm, 1)*1.5)
 
 	+media('<mob-lg')
-		padding: 10px nth($accordion-space--mob, 2) nth($accordion-space--mob, 1)*1.5
+		padding: 10px nth($accordion-space--mob, 2) round(nth($accordion-space--mob, 1)*1.5)
 
 	& > p, & > ul, & > li, & > h2, & > h3, & > h4
 		&:last-child

@@ -4191,6 +4191,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	-ms-flex-preferred-size: 290px;
 	    flex-basis: 290px;
 	position: relative;
+	will-change: transform;
 	transition-property: transform;
 	transition-duration: 0.2s;
 }
@@ -4641,7 +4642,31 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 
 .p-filters-drop {
 	position: relative;
-	display: none;
+	overflow: hidden;
+	will-change: max-height;
+	transition-property: max-height;
+	transition-duration: 0.2s;
+}
+
+.is-open .p-filters-drop {
+	max-height: 500px;
+}
+
+.p-filters-drop-list {
+	-ms-transform: translate(0, -20px);
+	    transform: translate(0, -20px);
+	opacity: 0;
+	max-height: 0;
+	will-change: transform, opacity, max-height;
+	transition-property: transform, opacity, max-height;
+	transition-duration: 0.2s;
+}
+
+.is-open .p-filters-drop-list {
+	opacity: 1;
+	max-height: inherit;
+	-ms-transform: translate(0, 0);
+	    transform: translate(0, 0);
 }
 
 .p-filters-drop-list, .user-content .p-filters-drop-list {

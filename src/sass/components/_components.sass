@@ -1186,6 +1186,7 @@
 	flex-grow: 0
 	flex-basis: $p-filters-width
 	position: relative
+	will-change: transform
 	transition:
 		property: transform
 		duration: $animation-speed
@@ -1525,9 +1526,33 @@
 
 .p-filters-drop
 	position: relative
-	display: none
+	overflow: hidden
+	// transition
+	$prop: max-height
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
+
+	.is-open &
+		max-height: 500px
 
 .p-filters-drop-list
+	transform: translate(0, -20px)
+	opacity: 0
+	max-height: 0
+	// transition
+	$prop: transform, opacity, max-height
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
+
+	.is-open &
+		opacity: 1
+		max-height: inherit
+		transform: translate(0, 0)
+
 	&, .#{$user-content} &
 		margin: 0
 

@@ -750,26 +750,62 @@ function accordionInit() {
 	}
 
 	// filters roll up
-	var $filtersRollUp = $('.p-filters-list-js');
-
-	if($filtersRollUp.length){
-		new JsAccordion({
-			accordionContainer: '.p-filters-list-js',
-			accordionItem: '.p-filters-item-js',
-			accordionHeader: '.p-filters-select-js',
-			accordionHand: '.p-filters-head-js',
-			// scrollToTop: true,
-			// scrollToTopSpeed: 300,
-			// scrollToTopOffset: $('.header').outerHeight(),
-			indexInit: false,
-			clickOutside: false,
-			animateSpeed: 200
-		});
-	}
+	// var $filtersRollUp = $('.p-filters-list-js');
+	//
+	// if($filtersRollUp.length){
+	// 	new JsAccordion({
+	// 		accordionContainer: '.p-filters-list-js',
+	// 		accordionItem: '.p-filters-item-js',
+	// 		accordionHeader: '.p-filters-select-js',
+	// 		accordionHand: '.p-filters-head-js',
+	// 		// scrollToTop: true,
+	// 		// scrollToTopSpeed: 300,
+	// 		// scrollToTopOffset: $('.header').outerHeight(),
+	// 		indexInit: false,
+	// 		clickOutside: false,
+	// 		animateSpeed: 200
+	// 	});
+	// }
 }
 
 /**
- * shutters
+ * Filter drop
+ * */
+function filterDrop() {
+	var $container = $('.p-filters-list-js'),
+		$item = $('.p-filters-item-js'),
+		select = '.p-filters-select-js',
+		activeClass = 'is-open';
+
+	function $setMaxHeight() {
+		$.each($item, function () {
+			var $curItem = $(this),
+				$drop = $(select, $curItem).next();
+
+			$drop.children().wrapInner('<div class="__"></div>');
+			$drop.css('max-height', $('.__', $drop).outerHeight());
+		})
+	}
+
+	if ($container.length) {
+		$setMaxHeight();
+
+		$(window).on('debouncedresize', function () {
+			$setMaxHeight();
+		})
+	}
+
+	$container.on('click', select, function (e) {
+		e.preventDefault();
+
+		var $currentItem = $(this).closest($item);
+
+		$currentItem.toggleClass(activeClass);
+	});
+}
+
+/**
+ * Shutters
  * */
 ;(function($){
 	'use strict';
@@ -1780,6 +1816,7 @@ $(document).ready(function () {
 	multiAccordionInit();
 	customSelect($('select.cselect'));
 	accordionInit();
+	filterDrop();
 	toggleShutters();
 	slidersInit();
 	tabSwitcher();

@@ -775,16 +775,24 @@ function filterDrop() {
 	var $container = $('.p-filters-list-js'),
 		$item = $('.p-filters-item-js'),
 		select = '.p-filters-select-js',
-		activeClass = 'is-open';
+		activeClass = 'is-open',
+		$drop = $(select).next(),
+		$wrap = $('<div/>');
+
+	if($drop.length) {
+		$.each($drop, function () {
+			var $curDrop = $(this);
+			$curDrop.children().wrapInner($wrap);
+		})
+	}
 
 	function $setMaxHeight() {
-		$.each($item, function () {
-			var $curItem = $(this),
-				$drop = $(select, $curItem).next();
-
-			$drop.children().wrapInner('<div class="__"></div>');
-			$drop.css('max-height', $('.__', $drop).outerHeight());
-		})
+		if($drop.length) {
+			$.each($drop, function () {
+				var $curDrop = $(this);
+				$curDrop.css('max-height', $curDrop.children().children().outerHeight());
+			})
+		}
 	}
 
 	if ($container.length) {

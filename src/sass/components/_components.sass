@@ -780,16 +780,82 @@
 	padding: 20px 100px 20px 20px
 	min-height: 105px
 	height: 100%
-	background-color: white
+	z-index: 1
+	//background-color: white
 	border-radius: 10px
 	box-shadow: 0 3px 3px rgba(black, 0.1)
-	//transition:
-		property: background-color, color
+	transition:
+		property: color
+		//duration: round-float($animation-speed*2, 1)
 		duration: $animation-speed
 
 	+media('<desk-sm')
 		min-height: 90px
 		padding-right: 80px
+
+	&::before
+		content: ""
+		display: block
+		position: absolute
+		$space: 50px
+		$size: 800px
+		$halfSize: #{round($size/2)}
+		right: $space
+		bottom: $space
+		+size($size)
+		margin: 0 -#{$halfSize} -#{$halfSize} 0
+		border-radius: $size
+		background-color: #f6493c
+		z-index: -1
+		opacity: 0
+		$prop: opacity, transform
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: round-float($animation-speed*2, 1)
+		$scale: 0
+		transform: scale($scale)
+		transform: scale3d($scale, $scale, 1)
+
+
+	.links__item:nth-child(1) &
+		$color: #2abb4b
+		&::before
+			background-color: $color
+		//path
+			fill: $color
+
+	.links__item:nth-child(2) &
+		&::before
+			background-color: #61b9f8
+
+	.links__item:nth-child(3) &
+		&::before
+			background-color: #9c55ba
+
+	.links__item:nth-child(4) &
+		&::before
+			background-color: #ffc000
+
+	.links__item:nth-child(5) &
+		&::before
+			background-color: #95ce31
+
+	.links__item:nth-child(6) &
+		&::before
+			background-color: #ff3900
+
+	.links__item:nth-child(7) &
+		&::before
+			background-color: #218ac2
+
+	.links__item:nth-child(8) &
+		&::before
+			background-color: #fc9720
+
+	.links__item:nth-child(9) &
+		&::before
+			background-color: #f863a3
 
 	svg
 		display: block
@@ -797,26 +863,42 @@
 		right: -10px
 		bottom: -10px
 		+size(102px)
-		will-change: opacity
-		//transition:
-			property: opacity
-			duration: $animation-speed
+		$prop: opacity, transform
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: round-float($animation-speed*2, 1)
 
 		+media('<desk-sm')
 			+size(86px)
 
-	//path
+	path
 		transition:
 			property: fill
-			duration: $animation-speed
+			duration: round-float($animation-speed*2, 1)
 
 	// hover
 	&:hover
-		background-color: #f6493c
+		//background-color: #f6493c
 		color: white
+		transition:
+			duration: round-float($animation-speed*2, 1)
+			//duration: $animation-speed
+
+		&::before
+			opacity: 1
+			$scale: 1
+			transform: scale($scale)
+			transform: scale3d($scale, $scale, 1)
+			//transition:
+				duration: round-float($animation-speed*2, 1)
 
 		svg
 			opacity: 0.3
+			$rotate: -15deg
+			$scale: 1.3
+			transform: rotate($rotate) scale($scale)
+			transform: rotate3d(0, 0, 1, $rotate) scale3d($scale, $scale, 1)
 
 		path
 			fill: white

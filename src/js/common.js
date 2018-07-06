@@ -1530,7 +1530,9 @@ $(function () {
 		$html.toggleClass(filterResultFixedClass, !cond);
 	}
 
-	$('.p-filters-list-js').on('change', '.p-filters-drop-list input:checkbox', function () {
+	var $filtersList = $('.p-filters-list-js');
+
+	function changeEvents() {
 		var _ = $(this);
 		var cond = $('.p-filters-drop-list input:checked', _.closest('.p-filters-list-js')).length > 0;
 
@@ -1543,11 +1545,15 @@ $(function () {
 		var $items = $('.p-filters-item-js', _.closest('.p-filters-js')), count = 0;
 		$.each($items, function () {
 			var $curItem = $(this);
-			if($('.p-filters-drop-list input:checked', $curItem).length) {
+			if ($('.p-filters-drop-list input:checked', $curItem).length) {
 				++count;
 			}
 		});
 		$('.filters-count-js', _.closest('.p-filters-js')).html(count).toggleClass('hide', !count);
+	}
+
+	$filtersList.on('change', '.p-filters-drop-list input:checkbox', function () {
+		changeEvents.call(this);
 	});
 
 	// clear filters
@@ -1559,8 +1565,15 @@ $(function () {
 	});
 
 	// trigger change after load
+	// $('.p-filters-drop-list input:checked', $('.p-filters-list-js')).trigger('change');
+
 	$(window).on('load', function () {
-		$('.p-filters-drop-list input:checked', $('.p-filters-list-js')).trigger('change');
+		if ($filtersList.length) {
+			var $fltr = $('.p-filters-drop-list input:checkbox', $filtersList);
+			$.each($fltr, function () {
+				changeEvents.call(this);
+			})
+		}
 	});
 });
 

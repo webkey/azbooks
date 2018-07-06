@@ -3,7 +3,7 @@
 @@for (var key in checkboxes) {
 <li>
 	<label class="check-label@@if(context.addClass){ @@addClass}">
-		<input type="checkbox" name="`+key+`" />
+		<input type="checkbox" name="`+key+`"@@if(context.checked == "true"){ checked} />
 		<i>&nbsp;</i>
 		<span class="p-filters-label-text-js">`+checkboxes[key]+`</span>
 	</label>

@@ -207,7 +207,7 @@ gulp.task('buildDist', ['cleanDist', 'htmlCompilation', 'copyImgToDist', 'sassCo
 		.pipe(beautify({  // Причесываем код
 			"indent_with_tabs": true,
 			"space_after_anon_function": true,
-			"max_preserve_newlines": 2
+			"max_preserve_newlines": 1
 		}))
 		.pipe(gulp.dest('dist/js'));
 

@@ -4570,6 +4570,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 .p-filters-item {
 	position: relative;
 	margin-bottom: 20px;
+	will-change: transform;
 }
 
 .p-filters-item:last-child {

@@ -29,6 +29,10 @@ var gulp = require('gulp'), // Подключаем Gulp
 	beautify = require('gulp-beautify') // Причесать js
 	;
 
+var path = {
+	'dist': '1'
+};
+
 gulp.task('htmlCompilation', function () { // Таск формирования ДОМ страниц
 	return gulp.src(['src/__*.html'])
 		.pipe(fileinclude({
@@ -180,23 +184,23 @@ gulp.task('copyImgToDist', function () {
 			optimizationLevel: 7, //степень сжатия от 0 до 7
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest('dist/img')); // Выгружаем на продакшен
+		.pipe(gulp.dest(path.dist + '/img')); // Выгружаем на продакшен
 });
 
 gulp.task('buildDist', ['cleanDist', 'htmlCompilation', 'copyImgToDist', 'sassCompilation', 'mergeCssLibs', 'createCustomModernizr', 'copyLibsScriptsToJs'], function () {
 
 	gulp.src(['src/ajax/**/*'])
-		.pipe(gulp.dest('dist/ajax')); // Переносим ajax-файлы в продакшен
+		.pipe(gulp.dest(path.dist + '/ajax')); // Переносим ajax-файлы в продакшен
 
 	gulp.src(['src/video/**/*']) // Переносим видеофайлы в продакшен
-		.pipe(gulp.dest('dist/video'));
+		.pipe(gulp.dest(path.dist + '/video'));
 
 	gulp.src(['!src/css/_temp_*.css', 'src/css/*.css']) // Переносим стили в продакшен
 		.pipe(removeEmptyLines()) // Удаляем пустые строки
-		.pipe(gulp.dest('dist/css'));
+		.pipe(gulp.dest(path.dist + '/css'));
 
 	gulp.src('src/fonts/**/*') // Переносим шрифты в продакшен
-		.pipe(gulp.dest('dist/fonts'));
+		.pipe(gulp.dest(path.dist + '/fonts'));
 
 	gulp.src('src/js/common.js') // Переносим common.js в продакшен
 		.pipe(strip({
@@ -209,25 +213,25 @@ gulp.task('buildDist', ['cleanDist', 'htmlCompilation', 'copyImgToDist', 'sassCo
 			"space_after_anon_function": true,
 			"max_preserve_newlines": 1
 		}))
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest(path.dist + '/js'));
 
 	gulp.src(['!src/js/temp/**/*.js', '!src/js/**/_temp_*.js', '!src/js/common.js', 'src/js/*.js']) // Переносим остальные скрипты в продакшен
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest(path.dist + '/js'));
 
 	gulp.src('src/assets/**/*') // Переносим дополнительные файлы в продакшен
-		.pipe(gulp.dest('dist/assets'));
+		.pipe(gulp.dest(path.dist + '/assets'));
 
 	gulp.src(['!src/__*.html', '!src/_tpl_*.html', '!src/_temp_*.html', 'src/*.html']) // Переносим HTML в продакшен
 		.pipe(revts()) // Добавить версии подключаемых файлов. В html добавить ключ ?rev=@@hash в место добавления версии
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest(path.dist));
 
 	gulp.src(['src/*.png', 'src/*.ico', 'src/.htaccess']) // Переносим favicon и др. файлы в продакшин
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest(path.dist));
 
 });
 
 gulp.task('cleanDist', function () {
-	return del.sync(['dist/']); // Удаляем папку dist
+	return del.sync([path.dist + '/']); // Удаляем папку dist
 });
 
 gulp.task('clearCache', function () { // Создаем такс для очистки кэша

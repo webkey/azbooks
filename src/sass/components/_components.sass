@@ -995,7 +995,7 @@
 		will-change: $prop
 		transition:
 			property: $prop
-			duration: $animation-speed*3
+			duration: $animation-speed*4
 			timing-function: ease-in-out
 
 	&:hover
@@ -1007,7 +1007,7 @@
 			transform: rotate($rotate) scale($scale)
 			transform: rotate3d(0, 0, 1, $rotate) scale3d($scale, $scale, 1)
 			transition:
-				duration: $animation-speed
+				duration: $animation-speed*3
 
 /* products preview / product end
 
@@ -1342,7 +1342,7 @@
 		display: none
 
 // filters close
-.btn-filters-close
+.btn-filters-close, .btn-shutter-close
 	display: block
 	position: absolute
 	+size($header-height--sm)
@@ -1350,6 +1350,7 @@
 	right: 0
 	color: $text-color
 	background-color: white
+	z-index: 10100
 	// transition
 	$prop: color
 	transition:
@@ -2229,3 +2230,57 @@
 		height: $form-input-height * 3 + $form-bottom-space * 2
 
 /* enquiry end
+
+/* request
+.shutter--request
+	display: none
+	position: fixed
+	left: 0
+	top: 0
+	z-index: 10000
+	width: 100%
+	height: 100%
+
+	&.request-is-open
+		display: block
+
+.shutter__layout
+	height: 100%
+	padding: 0 nth($page-layout-space, 2)
+	overflow-x: hidden
+	overflow-y: auto
+	text-align: center
+
+	+media('<mob-lg')
+		padding: 0 nth($page-layout-space--mob, 2)
+
+	&::before, &::after
+		content: ""
+		display: inline-block
+		vertical-align: middle
+		height: 100%
+		width: 0
+
+.shutter__align
+	display: inline-block
+	width: calc(100% - 10px)
+	position: relative
+	margin: nth($page-layout-space, 1) 0
+	text-align: left
+	vertical-align: middle
+
+	+media('<mob-lg')
+		margin: nth($page-layout-space--mob, 1) 0
+
+.shutter__holder
+	position: relative
+	padding: 40px 0
+	background-color: #fff
+	width: $page-layout-width
+	max-width: 100%
+	margin: 0 auto
+
+	+media('<mob-lg')
+		padding-bottom: 20px
+
+/* request end

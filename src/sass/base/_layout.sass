@@ -7,8 +7,7 @@ html
 
 	// блокировка скролла
 	&.css-scroll-fixed:not(.open-only-mob)
-		+media('>=tab-lg')
-			+scroll-blocked
+		+scroll-blocked
 
 	&.css-scroll-fixed.open-only-mob
 		+media('<tab-lg')
@@ -1057,7 +1056,7 @@ a.nav-opener
 		opacity: 1
 		visibility: visible
 
-	&.filters-is-open
+	&.filters-is-open, &.request-is-open
 		opacity: 1
 		visibility: visible
 

@@ -1720,7 +1720,7 @@
 							<div class="form-row">
 								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="uf_05">Name</label>
+										<label for="uf_05">Name*</label>
 									</div>
 									<div class="input-holder">
 										<input class="field-effects-js" type="text" id="uf_05" />
@@ -1728,7 +1728,7 @@
 								</div>
 								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="uf_06">Organization</label>
+										<label for="uf_06">Organization*</label>
 									</div>
 									<div class="input-holder">
 										<input class="field-effects-js" type="text" id="uf_06" />
@@ -1740,11 +1740,22 @@
 									<a href="#">I’m interested in*</a>
 								</div>
 								<div class="input-wrap type--float-label">
-									<div class="label-holder">
-										<label for="uf_08">Region*</label>
-									</div>
+									<!--<div class="label-holder">
+					<label for="uf_08"></label>
+				</div>-->
 									<div class="input-holder">
-										<input class="field-effects-js" type="text" id="uf_08" />
+										<select class="field-effects-js" name="uf__08" id="uf_08">
+						<option value="">Region*</option>
+						<option value="1">Eastern Europe</option>
+						<option value="2">Baltic countries</option>
+						<option value="3">CIS countries</option>
+						<option value="4">The Arab States</option>
+						<option value="5">Asian countries</option>
+						<option value="6">Canada</option>
+						<option value="7">Latin American countries</option>
+						<option value="8">Western and Southern European countries</option>
+						<option value="9">Scandinavian countries</option>
+					</select>
 										<div class="error-note">Required field</div>
 										<div class="success-note">Confirmed</div>
 									</div>
@@ -1753,7 +1764,7 @@
 							<div class="form-row">
 								<div class="input-wrap type--float-label">
 									<div class="label-holder">
-										<label for="uf_15">Message*</label>
+										<label for="uf_15">Message</label>
 									</div>
 									<div class="input-holder">
 										<textarea class="field-effects-js" id="uf_15"></textarea>

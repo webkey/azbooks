@@ -1062,12 +1062,15 @@ function filterDrop() {
 
 function toggleShutters() {
 	var $nav = $('.nav-opener-js'),
-		$filters = $('.filters-opener-js'),
-		$search = $('.search-opener-js'),
-		searchForm = '.search-form-js',
 		nav,
+		$filters = $('.filters-opener-js'),
 		filters,
-		search;
+		$search = $('.search-opener-js'),
+		search,
+		searchForm = '.search-form-js',
+		$request = $('.request-opener-js'),
+		$requestForm = $('form', $request),
+		request;
 
 	if ($nav.length) {
 		nav = $nav.tClass({
@@ -1081,6 +1084,7 @@ function toggleShutters() {
 			, beforeAdded: function () {
 				$search.length && search.tClass('remove');
 				$filters.length && filters.tClass('remove');
+				$request.length && request.tClass('remove');
 			}
 		});
 	}
@@ -1098,6 +1102,7 @@ function toggleShutters() {
 			, beforeAdded: function () {
 				$search.length && search.tClass('remove');
 				$nav.length && nav.tClass('remove');
+				$request.length && request.tClass('remove');
 			}
 		});
 	}
@@ -1106,7 +1111,7 @@ function toggleShutters() {
 		search = $search.tClass({
 			toggleClassTo: ['html', searchForm]
 			, modifiers: {
-				currentClass: 'search-is-open'
+				currentClass: 'request-is-open'
 			}
 			, cssScrollFixed: false
 			, removeOutsideClick: true
@@ -1114,6 +1119,7 @@ function toggleShutters() {
 			, beforeAdded: function () {
 				$nav.length && nav.tClass('remove');
 				$filters.length && filters.tClass('remove');
+				$request.length && request.tClass('remove');
 			}
 			, afterAdded: function () {
 				setTimeout(function () {
@@ -1123,6 +1129,31 @@ function toggleShutters() {
 			, afterRemoved: function () {
 				$(searchForm).find('input[type=search]').blur();
 			}
+		});
+	}
+
+	if ($request.length) {
+		request = $request.tClass({
+			toggleClassTo: ['html', '.filters-overlay-js', '.shutter--request-js']
+			, modifiers: {
+				currentClass: 'request-is-open'
+			}
+			, cssScrollFixed: true
+			, removeOutsideClick: true
+			, switchBtn: '.request-closer-js'
+			, beforeAdded: function () {
+				$nav.length && nav.tClass('remove');
+				$filters.length && filters.tClass('remove');
+				$search.length && search.tClass('remove');
+			}
+			// , afterAdded: function () {
+			// 	setTimeout(function () {
+			// 		$requestForm.find('input[type=search]').focus();
+			// 	}, 100)
+			// }
+			// , afterRemoved: function () {
+			// 	$(searchForm).find('input[type=search]').blur();
+			// }
 		});
 	}
 }

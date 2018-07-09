@@ -30,9 +30,29 @@
 					<a href="img/img-products-03.jpg" data-full="img/img-products-03-full.jpg" data-thumb="img/img-products-03-thumb.jpg"></a>
 				</div>
 				<div class="align-center">
-					<a href="#" class="btn-default">Request info</a>
+					<a href="#" class="btn-default request-opener-js">Request info</a>
 				</div>
 			</div>
+
+			<!--request popup-->
+			<div class="shutter--request shutter--request-js">
+
+				<div class="shutter__layout">
+					<div class="shutter__align">
+						<div class="shutter__holder" data-tc-stop>
+							<a href="#" class="btn-filters-close request-closer-js" title="Закрыть форму">
+								@@include('includes/svg/icon-cross.svg')
+							</a>
+							<h2 class="align-center">Request info</h2>
+							@@include('_tpl_forms_user-form.html')
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="overlay request-overlay filters-overlay-js">&nbsp;</div>
+			<!--request popup end-->
+
 			<div class="p-card__content">
 				<div class="p-card__title">
 					<h2>About Dinosaurs (Sold Out)</h2>

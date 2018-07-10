@@ -1288,7 +1288,11 @@ function slidersInit() {
 				// Анимирование высоты табов
 				$panels.animate({
 					'height': $activePanel.outerHeight()
-				}, config.animationSpeed);
+				}, config.animationSpeed, function () {
+					$panels.css({
+						'height': ''
+					});
+				});
 
 				// Скрыть все табы, кроме активного
 				hideTab($otherPanel);
@@ -1307,6 +1311,10 @@ function slidersInit() {
 							'left': 'auto',
 							'top': 'auto'
 						}).attr('tabindex', 0);
+
+						$panels.css({
+							'height': ''
+						});
 
 						// Анимация полностью завершена
 						isOpen = true;
@@ -1334,6 +1342,10 @@ function slidersInit() {
 				}, config.animationSpeed);
 
 				hideTab($activePanel, function () {
+					$panels.css({
+						'height': ''
+					});
+
 					isOpen = false;
 					isAnimated = false;
 				});

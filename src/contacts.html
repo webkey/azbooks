@@ -208,11 +208,11 @@
 									lng: 24.8047861
 								}, //coordinates of marker
 								{
-									latBias: 0.0020,
+									latBias: 0.0010,
 									lngBias: 0
 								}, //bias coordinates for center map
 								largePinMap, //image pin
-								13,
+								15,
 								{
 									title: 'AzBooks International OÜ',
 									address: '<b>Address:</b> <div>Valukoja 8, Tallinn 11415, Estonia</div>',
@@ -227,7 +227,7 @@
 			</div>
 			<section class="section enquiry">
 				<form action="#" method="post" class="layout-text">
-					<h2 class="align-center">Enquiry form</h2>
+					<h2 class="align-center">Enquiry Form</h2>
 					<div class="form-cols">
 						<div class="form-col">
 							<div class="input-wrap type--float-label">
@@ -242,17 +242,17 @@
 							</div>
 							<div class="input-wrap type--float-label">
 								<div class="label-holder">
-									<label for="ef_02">Name*</label>
+									<label for="ef_02">E-mail*</label>
 								</div>
 								<div class="input-holder">
-									<input class="field-effects-js" type="text" id="ef_02" />
+									<input class="field-effects-js" type="email" id="ef_02" />
 									<div class="error-note">Required field</div>
 									<div class="success-note">Confirmed</div>
 								</div>
 							</div>
 							<div class="input-wrap type--float-label">
 								<div class="label-holder">
-									<label for="ef_03">Name*</label>
+									<label for="ef_03">Country*</label>
 								</div>
 								<div class="input-holder">
 									<input class="field-effects-js" type="text" id="ef_03" />
@@ -272,6 +272,14 @@
 									<div class="success-note">Confirmed</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="input-wrap error-resp">
+						<strong>The following required fields are left blank:</strong>
+						<div>
+							<span>Name</span>
+							<span>Email</span>
+							<span>Message</span>
 						</div>
 					</div>
 					<div class="align-center">

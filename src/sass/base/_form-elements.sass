@@ -570,7 +570,7 @@ input[type="radio"]
 	text-indent: 0
 	text-overflow: ''
 	border: #{$form-border-width} solid #{$form-border-color}
-	border-radius: 0
+	border-radius: 5px
 	background: $form-bg-color
 	box-shadow: none
 	outline: none
@@ -803,6 +803,25 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sea
 	@at-root label, &
 		&.input--focus
 			+form-on-focus
+
+.error-resp
+	color: $form-error-color
+	background-color: wheat
+	padding: 5px 10px
+	border-radius: 5px
+	font-size: 1.6rem
+
+	& > div
+		display: inline
+
+		span
+			&::after
+				content: ","
+				display: inline
+
+			&:last-child
+				&::after
+					content: none
 
 .select2
 	.select2-selection, .select2-selection__rendered, .select2-selection__placeholder

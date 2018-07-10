@@ -2136,7 +2136,7 @@ input[type="radio"]:disabled ~ i::after {
 	text-indent: 0;
 	text-overflow: '';
 	border: 2px solid #ccc;
-	border-radius: 0;
+	border-radius: 5px;
 	background: #f3f3f3;
 	box-shadow: none;
 	outline: none;
@@ -2365,6 +2365,27 @@ input[type="text"].error.placeholder, input[type="password"].error.placeholder, 
 
 label.input--focus, input[type="text"].input--focus, input[type="password"].input--focus, input[type="email"].input--focus, input[type="search"].input--focus, textarea.input--focus, .user-content select.input--focus, .select.input--focus {
 	border-color: #ffd400;
+}
+
+.error-resp {
+	color: #ef5350;
+	background-color: wheat;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 1.6rem;
+}
+
+.error-resp > div {
+	display: inline;
+}
+
+.error-resp > div span::after {
+	content: ",";
+	display: inline;
+}
+
+.error-resp > div span:last-child::after {
+	content: none;
 }
 
 .input--has-value + .select2 .select2-selection, .input--has-value + .select2 .select2-selection__rendered, .input--has-value + .select2 .select2-selection__placeholder {
@@ -3569,9 +3590,9 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .promo-slider__list .slick-arrow::before {
-	width: 64px;
-	height: 64px;
-	margin: -32px 0 0 -32px;
+	width: 24px;
+	height: 24px;
+	margin: -12px 0 0 -12px;
 }
 
 @media (max-width: 991px) {
@@ -3582,7 +3603,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	}
 }
 
-.promo-slider__list .slick-next::before {
+.promo-slider__list .slick-prev::before {
 	background-image: url(../img/slider-arr-left-shadow.svg);
 }
 
@@ -3703,11 +3724,11 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .links__item:nth-child(1) .links__item__inner::before {
-	background-color: #2abb4b;
+	background-color: #218ac2;
 }
 
 .links__item:nth-child(2) .links__item__inner::before {
-	background-color: #61b9f8;
+	background-color: #f863a3;
 }
 
 .links__item:nth-child(3) .links__item__inner::before {
@@ -3715,27 +3736,27 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .links__item:nth-child(4) .links__item__inner::before {
-	background-color: #ffc000;
-}
-
-.links__item:nth-child(5) .links__item__inner::before {
 	background-color: #95ce31;
 }
 
+.links__item:nth-child(5) .links__item__inner::before {
+	background-color: #ffc000;
+}
+
 .links__item:nth-child(6) .links__item__inner::before {
-	background-color: #ff3900;
-}
-
-.links__item:nth-child(7) .links__item__inner::before {
-	background-color: #218ac2;
-}
-
-.links__item:nth-child(8) .links__item__inner::before {
 	background-color: #fc9720;
 }
 
+.links__item:nth-child(7) .links__item__inner::before {
+	background-color: #ff3900;
+}
+
+.links__item:nth-child(8) .links__item__inner::before {
+	background-color: #61b9f8;
+}
+
 .links__item:nth-child(9) .links__item__inner::before {
-	background-color: #f863a3;
+	background-color: #2abb4b;
 }
 
 .links__item__inner svg {
@@ -3846,9 +3867,20 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	line-height: 1.5;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 767px) {
 	.product__title {
-		font-size: 1.2rem;
+		font-size: 1.3rem;
+	}
+}
+
+.similar-slider .product__title {
+	overflow: hidden;
+	height: 6rem;
+}
+
+@media (max-width: 767px) {
+	.similar-slider .product__title {
+		height: 3.9rem;
 	}
 }
 
@@ -3969,6 +4001,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 /* categories */
 .main-section--categories {
 	background-color: #00abc5;
+	color: white;
 	padding-top: 40px;
 	padding-bottom: calc(50px - 10px);
 }
@@ -3978,6 +4011,10 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 		padding-top: 35px;
 		padding-bottom: calc(40px - 10px);
 	}
+}
+
+.main-section--categories .similar-slider__item {
+	color: #333;
 }
 
 .categories__tabs__nav {
@@ -4893,12 +4930,6 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 
 .p-filters__results__btns [class*="btn-"]:first-child {
 	margin-right: 15px;
-}
-
-@media (min-width: 992px) {
-	.p-filters__results__btns [class*="btn-"]:first-child {
-		display: none;
-	}
 }
 
 .p-filters-results__count {

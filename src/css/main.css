@@ -2516,6 +2516,12 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 /* with float label end */
+.form-success {
+	text-align: center;
+	color: green;
+	font-size: 2rem;
+}
+
 /* === FORM STYLES DEFAULT end === */
 /*======================================================*/
 /* COMMON */

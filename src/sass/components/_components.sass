@@ -9,6 +9,12 @@
 	&:last-child
 		margin-bottom: 0
 
+	&.layout-text
+		max-width: 600px
+
+		+media('<tab-lg')
+			max-width: 600px
+
 	form
 		display: block
 
@@ -2292,6 +2298,9 @@
 	width: $page-layout-width
 	max-width: 100%
 	margin: 0 auto
+
+	.shutter--request &
+		width: 800px
 
 	+media('<mob-lg')
 		padding-bottom: 20px

@@ -1111,7 +1111,7 @@ function toggleShutters() {
 		search = $search.tClass({
 			toggleClassTo: ['html', searchForm]
 			, modifiers: {
-				currentClass: 'request-is-open'
+				currentClass: 'search-is-open'
 			}
 			, cssScrollFixed: false
 			, removeOutsideClick: true

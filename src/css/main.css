@@ -2698,6 +2698,16 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	margin-bottom: 0;
 }
 
+.user-form.layout-text {
+	max-width: 600px;
+}
+
+@media (max-width: 991px) {
+	.user-form.layout-text {
+		max-width: 600px;
+	}
+}
+
 .user-form form {
 	display: block;
 }
@@ -5602,6 +5612,10 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	width: 1260px;
 	max-width: 100%;
 	margin: 0 auto;
+}
+
+.shutter--request .shutter__holder {
+	width: 800px;
 }
 
 @media (max-width: 639px) {

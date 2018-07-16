@@ -343,6 +343,9 @@
 		&.youtube
 			background-color: $youtube-color
 
+		&.instagram
+			background-color: $instagram-color-end
+
 		span
 			+hide-text
 
@@ -680,10 +683,7 @@
 		+ratio(1260, 450)
 
 		+media('<mob-lg')
-			padding-top: 50%
-
-		+media('<mob-md')
-			padding-top: 75%
+			padding-top: round-float(482 / 640 * 100%, 2)
 
 	.slick-initialized &
 		// after slide load
@@ -701,6 +701,16 @@
 		max-width: none
 		margin: 0 auto
 		+object-fit(cover)
+
+		&.img-mob
+			display: none
+
+		+media('<mob-md')
+			&
+				display: none
+
+			&.img-mob
+				display: block
 
 .promo-slider__list
 	// dots
@@ -1287,7 +1297,6 @@
 	flex-grow: 0
 	flex-basis: $p-filters-width
 	position: relative
-	will-change: transform
 	transition:
 		property: transform
 		duration: $animation-speed

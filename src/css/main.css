@@ -3119,6 +3119,10 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	background-color: #e62117;
 }
 
+.social-networks__item a.instagram {
+	background-color: #a43b97;
+}
+
 .social-networks__item a span {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -3556,13 +3560,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 
 @media (max-width: 639px) {
 	.promo-slider__item::before {
-		padding-top: 50%;
-	}
-}
-
-@media (max-width: 479px) {
-	.promo-slider__item::before {
-		padding-top: 75%;
+		padding-top: 75.31%;
 	}
 }
 
@@ -3583,6 +3581,19 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	-o-object-fit: cover;
 	   object-fit: cover;
 	font-family: "object-fit: cover";
+}
+
+.promo-slider__item img.img-mob {
+	display: none;
+}
+
+@media (max-width: 479px) {
+	.promo-slider__item img {
+		display: none;
+	}
+	.promo-slider__item img.img-mob {
+		display: block;
+	}
 }
 
 .promo-slider__list .slick-dots {
@@ -4320,7 +4331,6 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	-ms-flex-preferred-size: 290px;
 	    flex-basis: 290px;
 	position: relative;
-	will-change: transform;
 	transition-property: transform;
 	transition-duration: 0.2s;
 }

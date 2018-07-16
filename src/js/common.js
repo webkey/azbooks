@@ -1175,9 +1175,11 @@ function slidersInit() {
 				slidesToShow: 1,
 				slidesToScroll: 1,
 				// lazyLoad: 'ondemand',
+				autoplay: true,
+				autoplaySpeed: 3000,
 				infinite: true,
 				dots: true,
-				arrows: true,
+				arrows: true
 				// responsive:[
 				// 	{
 				// 		breakpoint: 768,

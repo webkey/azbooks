@@ -5,9 +5,9 @@
 	"title": "Facebook"
   },
   {
-	"class": "twitter",
-	"svg": "@@include('includes/svg/icon-soc--twitter.svg')",
-	"title": "Twitter"
+	"class": "instagram",
+	"svg": "@@include('includes/svg/icon-soc--instagram.svg')",
+	"title": "Instagram"
   },
   {
 	"class": "youtube",

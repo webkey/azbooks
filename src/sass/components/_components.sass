@@ -2023,6 +2023,8 @@
 		width: 30px
 		height: 30px
 		margin-right: 5px
+		border: 1px solid $border-color
+		border-radius: 15px
 
 //.p-card__sep
 	height: 2px
@@ -2315,3 +2317,159 @@
 		padding-bottom: 20px
 
 /* request end
+
+/* search
+.search-page
+	margin: 0 auto
+	max-width: $text-layout-width
+
+	img
+		display: block
+		max-width: 100%
+		width: 160px
+		margin: 10px 0
+
+/* search end
+
+/* projects page
+.projects-page
+	background-color: $base-color
+
+	.wrapper
+		background-color: $base-color
+		box-shadow: none
+
+	.main
+		padding: 0
+
+.projects
+	overflow: hidden
+	color: #fff
+	text-align: center
+	background-color: $base-color
+
+	h1, h2, h3
+		padding: 0
+		+font-alt-bold
+		color: #fff
+		margin: 0 0 0.8em
+
+		&:last-child
+			margin-bottom: 0
+
+		a
+			text-decoration: none
+			color: currentColor
+
+			.no-touchevents &:hover
+				color: $base-color
+				text-decoration: underline
+
+	h1
+		+font(6.4rem, round-float(82/64, 2))
+		margin-bottom: 2rem
+
+		+media('<tab-sm')
+			+font(3.6rem, 1.2)
+
+	h2
+		+font(3.0rem, round-float(38/30, 2))
+
+		+media('<tab-sm')
+			+font(2.4rem, 1.3)
+
+	h3
+		+font($font-size-h3, $line-height-h3)
+
+		+media('<mob-lg')
+			+font($font-size-h3--mob, $line-height-h3--mob)
+
+.projects__layout
+	width: $page-layout-width
+	max-width: 100%
+	+push-auto
+	padding: nth($content-space, 1) nth($page-layout-space, 2) nth($content-space, 3)
+
+	+media('<mob-lg')
+		padding: nth($content-space, 1) nth($page-layout-space--mob, 2) nth($content-space, 3)
+
+.projects__caption
+	margin-bottom: 8rem
+
+	+media('<desk-sm')
+		margin-bottom: 6rem
+
+	+media('<mob-lg')
+		margin-bottom: 4rem
+
+.projects__list
+	+clear-spacing
+	margin: 0 -3rem
+	box-sizing: border-box
+
+	+media('<desk-sm')
+		margin: 0 -2rem
+
+	+media('<mob-lg')
+		margin: 0 -1.5rem
+
+.projects__item
+	display: inline-block
+	vertical-align: top
+	width: 50%
+	box-sizing: border-box
+	padding: 0 3rem 8rem
+	font-size: $font-size
+	letter-spacing: normal
+
+	perspective: 1000px
+
+	+media('<desk-sm')
+		padding: 0 2rem 6rem
+
+	+media('<tab-lg')
+		padding: 0 1.5rem 4rem
+
+.projects__inner
+	display: block
+	text-decoration: none
+	color: inherit
+	// transition
+	$prop: transform
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
+		timing-function: cubic-bezier(0.65, 0.05, 0.36, 1)
+	transform-style: preserve-3d
+
+	img
+		display: block
+		width: 100%
+
+.projects__title
+	min-height: 100px
+	padding: 0 20%
+
+	+media('<mob-lg')
+		min-height: 90px
+
+	+media('<mob-md')
+		min-height: 65px
+
+	img
+		width: auto
+		max-width: 100%
+		margin: 0 auto
+
+// hover
+.projects__inner:hover
+	$angle: 15deg
+
+	.projects__item:nth-child(n) &
+		transform: rotateY($angle)
+
+	.projects__item:nth-child(2n) &
+		transform: rotateY(-$angle)
+
+/* projects page end

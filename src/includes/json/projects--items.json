@@ -1,0 +1,12 @@
+[
+  {
+	"imgSrc": "img/img-project-01.jpg",
+	"title": "AZ Toys",
+	"logoSrc": "img/az-toys.png"
+  },
+  {
+	"imgSrc": "img/img-project-02.jpg",
+	"title": "AZ Books",
+	"logoSrc": "img/az-books.png"
+  }
+]

@@ -115,6 +115,9 @@
 			padding: 4px 10px
 			margin: 0
 
+			+media('<mob-md')
+				padding: 2px 3px
+
 			&::before
 				content: none
 
@@ -394,6 +397,9 @@
 	cursor: default
 	+push-auto
 	+clear
+
+	+media('<mob-lg')
+		margin-bottom: $bottom-space
 
 	&:last-child
 		margin-bottom: 0
@@ -2323,11 +2329,35 @@
 	margin: 0 auto
 	max-width: $text-layout-width
 
+	form
+		margin-bottom: $bottom-space
+
+.search-page__item
+	+clear
+
 	img
+		float: left
 		display: block
 		max-width: 100%
 		width: 160px
-		margin: 10px 0
+		margin: 5px 20px 5px 0
+
+		+media('<mob-md')
+			width: 120px
+
+		+media('<360px')
+			float: none
+			margin: 20px 0 10px
+
+		& ~ *:not(a)
+			display: block
+			margin-left: 180px
+
+			+media('<mob-md')
+				margin-left: 140px
+
+			+media('<360px')
+				margin-left: 0
 
 /* search end
 

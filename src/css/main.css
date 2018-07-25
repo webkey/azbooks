@@ -4172,6 +4172,15 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 /* similar slider */
 .similar-slider {
 	position: relative;
+	margin-bottom: 2rem;
+}
+
+.similar-slider:last-child {
+	margin-bottom: 0;
+}
+
+.similar-slider + div {
+	padding-bottom: 10px;
 }
 
 .similar-slider__list {
@@ -5716,6 +5725,16 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 
 .projects-page .main {
 	padding: 0;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-negative: 1;
+	    flex-shrink: 1;
+	-ms-flex-positive: 1;
+	    flex-grow: 1;
+	-ms-flex-direction: column;
+	    flex-direction: column;
+	-ms-flex-pack: center;
+	    justify-content: center;
 }
 
 .projects {
@@ -5749,7 +5768,7 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .projects h1 {
-	font-size: 6.4rem;
+	font-size: 6rem;
 	line-height: 1.28;
 	margin-bottom: 2rem;
 }
@@ -5762,13 +5781,13 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .projects h2 {
-	font-size: 3rem;
+	font-size: 2.6rem;
 	line-height: 1.27;
 }
 
 @media (max-width: 767px) {
 	.projects h2 {
-		font-size: 2.4rem;
+		font-size: 2.2rem;
 		line-height: 1.3;
 	}
 }
@@ -5786,33 +5805,42 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 .projects__layout {
-	width: 1260px;
+	width: 860px;
 	max-width: 100%;
 	margin-right: auto;
 	margin-left: auto;
-	padding: 20px 20px 40px;
+	padding: 20px 20px;
+	margin-bottom: 4rem;
 }
 
 @media (max-width: 639px) {
 	.projects__layout {
-		padding: 20px 10px 40px;
+		padding: 20px 10px;
 	}
 }
 
+.projects__layout:last-child {
+	margin-bottom: 0;
+}
+
 .projects__caption {
-	margin-bottom: 8rem;
+	margin-bottom: 6rem;
 }
 
 @media (max-width: 1199px) {
 	.projects__caption {
-		margin-bottom: 6rem;
+		margin-bottom: 4rem;
 	}
 }
 
 @media (max-width: 639px) {
 	.projects__caption {
-		margin-bottom: 4rem;
+		margin-bottom: 3rem;
 	}
+}
+
+.projects__caption:last-child {
+	margin-bottom: 0;
 }
 
 .projects__list {
@@ -5839,38 +5867,44 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	vertical-align: top;
 	width: 50%;
 	box-sizing: border-box;
-	padding: 0 3rem 8rem;
+	padding: 4rem 3rem 0;
 	font-size: 1.8rem;
 	letter-spacing: normal;
-	perspective: 1000px;
 }
 
 @media (max-width: 1199px) {
 	.projects__item {
-		padding: 0 2rem 6rem;
+		padding: 3rem 2rem 0;
 	}
 }
 
 @media (max-width: 991px) {
 	.projects__item {
-		padding: 0 1.5rem 4rem;
+		padding: 2rem 1.5rem 0;
 	}
+}
+
+.projects__item:nth-child(-n+2) {
+	padding-top: 0;
 }
 
 .projects__inner {
 	display: block;
 	text-decoration: none;
 	color: inherit;
-	will-change: transform;
-	transition-property: transform;
-	transition-duration: 0.2s;
-	transition-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
-	transform-style: preserve-3d;
+	perspective: 1000px;
 }
 
 .projects__inner img {
 	display: block;
 	width: 100%;
+}
+
+.projects__inner__holder {
+	will-change: transform;
+	transition-property: transform;
+	transition-duration: 0.6s;
+	transform-style: preserve-3d;
 }
 
 .projects__title {
@@ -5896,11 +5930,11 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	margin: 0 auto;
 }
 
-.projects__item:nth-child(n) .projects__inner:hover {
+.projects__item:nth-child(n) .projects__inner:hover .projects__inner__holder {
 	transform: rotateY(15deg);
 }
 
-.projects__item:nth-child(2n) .projects__inner:hover {
+.projects__item:nth-child(2n) .projects__inner:hover .projects__inner__holder {
 	transform: rotateY(-15deg);
 }
 

@@ -5499,6 +5499,12 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	background-color: white;
 }
 
+@media (max-width: 639px) {
+	.locate {
+		min-height: 50px;
+	}
+}
+
 .contacts {
 	position: absolute;
 	left: 0;
@@ -5556,17 +5562,13 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 	}
 }
 
-.local-map:before {
-	content: "";
-	display: none;
-	height: 0;
-	padding-top: 100%;
-}
-
-@media (max-width: 639px) {
-	.local-map:before {
-		display: block;
-	}
+.local-map img {
+	max-width: none;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	font-family: "object-fit: cover";
 }
 
 /* locate end */

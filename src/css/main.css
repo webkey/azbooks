@@ -5942,6 +5942,57 @@ label.input--focus, input[type="text"].input--focus, input[type="password"].inpu
 }
 
 /* projects page end */
+/* go-to */
+.go-to {
+	background-color: #64c6d7;
+	padding: 11px 20px 14px;
+	text-align: center;
+}
+
+@media (max-width: 639px) {
+	.go-to {
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+}
+
+.go-to a {
+	display: inline-block;
+	vertical-align: top;
+	padding: 20px 16px 20px 167px;
+	font-family: "Museo Sans Cyrl 700", sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2.2rem;
+	line-height: 2.4rem;
+	color: #333;
+	text-align: center;
+	border-radius: 10px;
+	text-decoration: none;
+	border: 2px solid white;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+	background-image: url(../img/logo-aztoys.png);
+	background-position: 16px 50%;
+	background-repeat: no-repeat;
+	background-size: 137px auto;
+	background-color: white;
+}
+
+@media (max-width: 479px) {
+	.go-to a {
+		padding: 15px 10px 15px 120px;
+		font-size: 1.8rem;
+		line-height: 2.2rem;
+		background-position: 10px 50%;
+		background-size: 100px auto;
+	}
+}
+
+.go-to a:hover {
+	border-color: #00abc5;
+}
+
+/* go-to end */
 /*======================================================*/
 /* PARTIALS */
 /*======================================================*/

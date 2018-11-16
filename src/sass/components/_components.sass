@@ -2538,3 +2538,45 @@
 		transform: rotateY(-$angle)
 
 /* projects page end
+
+/* go-to
+.go-to
+	background-color: #64c6d7
+	padding: 11px nth($page-layout-space, 2) 14px
+	text-align: center
+
+	+media('<mob-lg')
+		+padding-horizontal(nth($page-layout-space--mob, 2))
+
+	a
+		display: inline-block
+		vertical-align: top
+		padding: 20px 16px 20px 167px
+		+font-bold
+		font-size: 2.2rem
+		line-height: 2.4rem
+		color: $text-color
+		text-align: center
+		border-radius: 10px
+		text-decoration: none
+		border: 2px solid white
+		box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2)
+		background:
+			image: url(../../img/logo-aztoys.png)
+			position: 16px 50%
+			repeat: no-repeat
+			size: 137px auto
+			color: white
+
+		+media('<mob-md')
+			padding: 15px 10px 15px 120px
+			font-size: 1.8rem
+			line-height: 2.2rem
+			background:
+				position: 10px 50%
+				size: 100px auto
+
+		&:hover
+			border-color: $link-color
+
+/* go-to end
